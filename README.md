@@ -321,32 +321,3 @@ Period {
 ​
 }
 ​
-![](vertopal_2f9011ff4f684fb087ef3e345f359fec/media/image1.png){width="5.458333333333333in"
-height="6.104166666666667in"}
-​
-SWR
-​
-Database:
-​
-On registration the mongoose should find the Username or email of the
-user.
-​
-Pt1. Inside that School
-​
-Database
-​
-Pt2 school separation
-​
-Pt3 access cannot mess
-​
-Login to School 123 as Admin Teacher Student
-​
-Login /dskasjhgdfas
-​
-School Logo
-​
-Login to .................
-​
-LogIn as Teachers
-​
-LogIn as Students
