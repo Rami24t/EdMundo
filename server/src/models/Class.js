@@ -1,49 +1,69 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-const classSchema = new Schema({
+const classSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
-    schedule: [{
-            enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-            type: String,
-            required: true
-        }]
-        [{
-            type: Schema.Types.ObjectId,
-            // Ask Alkis about this
-            ref: 'Session',
-            required: true
-        }],
+    schedule: [
+      {
+        day: {
+          enum: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          type: String,
+          required: true,
+        },
+        session: {
+          type: Schema.Types.ObjectId,
+          ref: "Session",
+          required: true,
+        },
+      },
+    ],
     notes: {
-        type: String,
+      type: String,
     },
-    students: [{
+    students: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Student'
-    }],
+        ref: "Student",
+      },
+    ],
     schoolYear: {
-        type: Schema.Types.ObjectId,
-        ref: 'SchoolYear',
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "SchoolYear",
+      required: true,
     },
     liveMeetingLink: {
-        type: String,
+      type: String,
     },
     liveMeetingPassword: {
-        type: String,
+      type: String,
     },
-    lessons: [{
+    lessons: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Lesson'
-    }],
-    tests: [{
+        ref: "Lesson",
+      },
+    ],
+    tests: [
+      {
         type: String,
-    }],
-}, {
-    timestamps: true
-})
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export default mongoose.model('Class', classSchema)
+export default mongoose.model("Class", classSchema);
