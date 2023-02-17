@@ -1,4 +1,9 @@
-# OnlineSchoolingSystemWebApp
+# Team
+
+Rami Al-Saadi, Julia Kobzar, and Alina Cuznetov
+
+## Project
+ EdMundo, an Online Schooling System Web App
 
 
 **Our mission:**
@@ -6,6 +11,15 @@
 -   Build a **digital school platform for educational institutions**
     > that require a sudden transition to online learning in instances
     > such as pandemics, inclement weather, and natural disasters.
+
+**Tasks:**
+​
+
+- Projet task: https://trello.com/b/JE5FpQhf/school
+
+
+
+
 ​
 **Specifics:**
 ​
@@ -16,12 +30,6 @@
 -   Design the platform to be as **user-friendly, straightforward, and
     > intuitive** as possible for individuals with limited computer
     > proficiency.
-​
-**Terminology:**
-​
--   Class = Group of students
-​
--   Period = start and end time of a lesson
 ​
 **Functionalities:**
 ​
@@ -39,12 +47,9 @@
 ​
     -   Student
 ​
-```{=html}
-<!-- -->
-```
 -   Admin dashboard:
 ​
-    -   Add and edit info about the school (1)
+    -   (Add and) edit info about the school (1)
 ​
     -   Create and edit student/teachers accounts (2)
 ​
