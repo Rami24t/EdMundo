@@ -1,6 +1,6 @@
 # Team
 
-Rami Al-Saadi, Julia Kobzar, and Alina Cuznetov , jhgfdrtzhjkiuzt
+Rami Al-Saadi, Julia Kobzar, and Alina Cuznetov
 
 ## Project
 
