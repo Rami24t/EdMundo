@@ -16,7 +16,7 @@ EdMundo, an Online Schooling System Web App
 **Tasks:**
 ​
 
-- Projet task: https://trello.com/b/JE5FpQhf/school
+- Project tasks: https://trello.com/b/JE5FpQhf/school
 
 ​
 **Specifics:**
