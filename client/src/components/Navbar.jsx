@@ -42,12 +42,7 @@ export default function Navbar({ theme }) {
             <MDBNavbarItem>
               <NavLink to="/teacher/profile">
                 {({ isActive }) => (
-                  <MDBNavbarLink
-                    active={isActive}
-                    className={theme === "home" && " d-none "}
-                  >
-                    Profile
-                  </MDBNavbarLink>
+                  <MDBNavbarLink active={isActive}>Profile</MDBNavbarLink>
                 )}
               </NavLink>
             </MDBNavbarItem>
