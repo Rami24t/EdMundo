@@ -19,13 +19,13 @@ root.render(
     <ContextProvider>
       <Routes>
         <Route path="/" element={<Home />}>
-          <Route path="/login" element={<Login />} />
           <Route path="/teacher/profile" element={<TeacherProfile />} />
           <Route path="/teacher/lessons" element={<TeacherLessons />} />
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/lessons" element={<StudentLessons />} />
           <Route path="/student/schedule" element={<StudentSchedule />} />
         </Route>
+        <Route path="/login" element={<Login />} />
 
         <Route path="*" element={<h1>404: Not Found</h1>} />
       </Routes>
