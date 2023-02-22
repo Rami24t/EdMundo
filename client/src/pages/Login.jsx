@@ -6,11 +6,9 @@ import Footer from "../components/Footer.jsx";
 const Login = () => {
   return (
     <>
-
-      <Navbar theme={'login'} />
+      <Navbar theme={"login"} />
       <LoginForm />
       <Footer />
-
     </>
   );
 };
