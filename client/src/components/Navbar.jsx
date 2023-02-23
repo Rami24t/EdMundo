@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   MDBContainer,
   MDBNavbar,
@@ -8,52 +9,72 @@ import {
   MDBNavbarNav,
   MDBNavbarItem,
   MDBNavbarLink,
-  MDBCollapse, MDBBtn,
-  MDBIcon
-} from 'mdb-react-ui-kit';
+  MDBCollapse,
+  MDBBtn,
+  MDBIcon,
+} from "mdb-react-ui-kit";
 
-export default function Navbar({theme}) {
+export default function Navbar() {
   const [showNav, setShowNav] = useState(false);
 
+  const location = useLocation();
+  const theme = location.pathname;
+  // alert(theme);
+
   return (
-    <MDBNavbar expand='lg' light bgColor='light'>
+    <MDBNavbar expand="lg" light bgColor="light">
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>Navbar</MDBNavbarBrand>
+        <NavLink to="/">
+          <MDBNavbarBrand>EdMundo</MDBNavbarBrand>
+        </NavLink>
         <MDBNavbarToggler
-          type='button'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
+          type="button"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
           onClick={() => setShowNav(!showNav)}
         >
-          <MDBIcon icon='bars' fas />
+          <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
-        <MDBCollapse navbar show={showNav}>
-          <MDBNavbarNav className='d-flex justify-content-end gap-4 '>
+<MDBCollapse navbar show={showNav}>
+{(theme!=="/login" ) &&
+          <MDBNavbarNav className="d-flex justify-content-end gap-4 ">
             <MDBNavbarItem>
-            <Link to='/'>
-              <MDBNavbarLink active aria-current='page' href='#'>
-                Home
+              <NavLink to="/">
+                {({ isActive }) => (
+                  <MDBNavbarLink className={theme === "/" && " d-none "} active={isActive} aria-current="page">
+                    Home
+                  </MDBNavbarLink>
+                )}
+              </NavLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <NavLink to="/teacher/profile">
+                {({ isActive }) => (
+                  <MDBNavbarLink
+                    className={(theme === "/" || theme==="/login" ) && " d-none "}
+                    active={isActive}
+                  >
+                    Profile
+                  </MDBNavbarLink>
+                )}
+              </NavLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarLink href="#" className={(theme === "/" || theme==="/login" ) && " d-none "}>
+                Lessons
               </MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem className={(theme === "/" || theme==="/login" )&& " d-none "}>
+              <MDBNavbarLink href="#">Schedule</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <Link to="/login"  className={(theme==="/login" ) && 'd-none'}>
+                <MDBBtn outline color="success" className="me-2" type="button">
+                  Log In/Out
+                </MDBBtn>
               </Link>
-            </MDBNavbarItem>          
-              <MDBNavbarItem>
-              <MDBNavbarLink href='#' className={theme==='home'&&' d-none '} >Profile</MDBNavbarLink>
             </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href='#' className={theme==='home'&&' d-none '} >Lessons</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem className={theme==='home'&&' d-none '}>
-              <MDBNavbarLink href='#'  >Schedule</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <Link to='/login'>
-            <MDBBtn outline color="success" className='me-2' type='button'>
-          Log In/Out
-          </MDBBtn>
-          </Link>
-          </MDBNavbarItem>
-        
-          </MDBNavbarNav>
+          </MDBNavbarNav>}
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
