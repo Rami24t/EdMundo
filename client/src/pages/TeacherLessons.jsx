@@ -7,8 +7,8 @@ const TeacherLessons = () => {
   return (
     <div>
       <div className="d-flex flex-row justify-content-between my-3">
-        <h2>My Lessons</h2>
-        <button>Create a new lesson</button>
+        <h2 style={{ margin: "1rem" }}>My Lessons</h2>
+        <button style={{ margin: "1rem" }}>Create a new lesson</button>
       </div>
       <LessonCard />
       <Footer />
