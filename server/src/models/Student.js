@@ -8,23 +8,21 @@ const studentSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        // unique: true
     },
-    username: {
-        type: String,
-        // required: true
-    },
+    // username: {
+    //     type: String,
+    //     // required: true
+    // },
     password: {
         type: String,
         required: true
     },
     phone: {
         type: String,
-        required: true
     },
     address: {
         type: String,
-        required: true
     },
     currentClass: {
         type: Schema.Types.ObjectId,
