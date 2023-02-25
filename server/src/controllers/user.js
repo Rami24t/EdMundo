@@ -171,8 +171,12 @@ export const getUserPublic = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const user = await User.findById(req.params.id).select("-password -__v");
-        if (!user) return res.json({ success: false, errorId: 404 }).status(404);
+        let user = await Admin.findById(req.params.id).select("-password -__v");
+        if (!user)
+            user = await Teacher.findById(req.params.id).select("-password -__v");
+        if (!user)
+            user = await Student.findById(req.params.id).select("-password -__v");
+        if(!user) return res.json({ success: false, errorId: 404 }).status(404);
         res.json({ success: true, user }).status(200);
     } catch (error) {
         console.log("getUser error:", error.message);
@@ -188,31 +192,34 @@ export const updateProfile = async(req, res) => {
     try {
         if (req.file) req.body.profileImage = req.file.path;
         req.body.likes = JSON.parse(req.body.likes);
-        const user = await User.findByIdAndUpdate(req.user, req.body, {
-            new: true,
-        }).select("-password -__v");
+        let user = await Admin.findById(req.user)
+        if (!user) user = await Teacher.findById(req.user)
+        if (!user) user = await Student.findById(req.user)
         if (!user) return res.send({ success: false, errorId: 404 });
+        user.set(req.body);
+        await user.save();
+        user = user.select("-password -__v");
         res.send({ success: true, user });
     } catch (error) {
         console.log("updateProfile error:", error.message);
-        res.send({ success: false, error: error.message });
+        res.status(500).send({ success: false, error: error.message });
     }
 };
 
-export const updateCover = async(req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    try {
-        if (req.file) req.body.coverImage = req.file.path;
-        const user = await User.findByIdAndUpdate(req.user, req.body, {
-            new: true,
-        }).select("-password -__v");
-        if (!user) return res.send({ success: false, errorId: 404 });
-        res.json({ success: true, coverImage: user.coverImage }).status(200);
-    } catch (error) {
-        console.log("updateProfile error:", error.message);
-        res.send({ success: false, error: error.message });
-    }
-};
+// export const updateCover = async(req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         return res.status(400).json({ errors: errors.array() });
+//     }
+//     try {
+//         if (req.file) req.body.coverImage = req.file.path;
+//         const user = await User.findByIdAndUpdate(req.user, req.body, {
+//             new: true,
+//         }).select("-password -__v");
+//         if (!user) return res.send({ success: false, errorId: 404 });
+//         res.json({ success: true, coverImage: user.coverImage }).status(200);
+//     } catch (error) {
+//         console.log("updateProfile error:", error.message);
+//         res.send({ success: false, error: error.message });
+//     }
+// };

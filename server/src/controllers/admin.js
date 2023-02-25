@@ -14,15 +14,15 @@ export const updateSchool = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const school = School.findById(req.body._id);
+        let school = School.findByIdAndUpdate(req.body._id, req.body, {
+            new: true,
+        });
         if (!school) {
             if (!req.body.name)
                 return res.status(400).json({ success: false, error: "School name is required" });
             const newSchool = await School.create(req.body);
             return res.status(200).json({ success: true, school: newSchool });
         }
-        school = req.body;
-        await school.save();
         return res.status(200).json({ success: true, school: school });
     } catch (error) {
         console.log("update school error:", error.message);

@@ -1,51 +1,68 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
+
+const PeriodSchema = new Schema({
+    number: {
+        enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        type: Number,
+        required: true
+    },
+    startTime: {
+        type: Number,
+        required: true
+    },
+    duration: {
+        type: Number,
+        required: true,
+        default: 40
+    },
+}, {
+    timestamps: true
+})
+
+
 const schoolSchema = new Schema({
-    Name: {
+    name: {
         type: String,
         required: true
     },
-    Address: {
+    address: {
         type: String,
         required: true
     },
-    City: {
+    city: {
         type: String,
     },
-    State: {
+    state: {
         type: String,
     },
-    Zip: {
+    zip: {
         type: String,
     },
-    Email: {
-        type: String,
-        required: true
-    },
-    Phone: {
+    email: {
         type: String,
         required: true
     },
-    Teachers: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Teacher'
-    }],
-    Students: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Student'
-    }],
-    Admins: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Admin'
-    }],
-    Classes: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Class'
-    }],
-    Periods: [{
-        type: Schema.Types.ObjectId,
-        ref: 'period'
-    }],
+    phone: {
+        type: String,
+    },
+    // teachers: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Teacher'
+    // }],
+    // students: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Student'
+    // }],
+    // admins: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Admin'
+    // }],
+    // classes: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Class'
+    // }],
+    periods: [PeriodSchema]
 }, {
     timestamps: true
 })
