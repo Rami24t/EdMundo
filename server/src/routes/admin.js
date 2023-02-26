@@ -1,5 +1,5 @@
 import express from 'express'
-import { updateSchool, updateTeacher, updateStudent, updateClass, updatePeriod, updateSession, deleteSchool, deleteTeacher, deleteStudent, deleteClass, deletePeriod, deleteSession, getSchool, getTeacher, getStudent, getClass, getPeriod, getSession, getTeachers, getStudents, getClasses, getPeriods, getSessions } from '../controllers/admin.js'
+import { updateSchool, updateTeacher, updateStudent, updateClass, updateSession, deleteSchool, deleteTeacher, deleteStudent, deleteClass, deleteSession, getSchool, getTeacher, getStudent, getClass, getSession, getTeachers, getStudents, getClasses, getSessions } from '../controllers/admin.js'
 import auth from '../middleware/auth.js'
 import multerMiddleware from '../config/multer-cloudinary.js'
 const router = express.Router()
@@ -17,9 +17,7 @@ multerMiddleware.single('image'), updateStudent)
 router.put('/class', 
 // auth, 
 multerMiddleware.single('image'), updateClass)
-router.put('/period', 
-// auth, 
-multerMiddleware.single('image'), updatePeriod)
+
 router.put('/session', 
 // auth, 
 multerMiddleware.single('image'), updateSession)
@@ -36,9 +34,6 @@ deleteStudent)
 router.delete('/class', 
 // auth, 
 deleteClass)
-router.delete('/period', 
-// auth, 
-deletePeriod)
 router.delete('/session', 
 // auth, 
 deleteSession)
@@ -55,9 +50,6 @@ getStudent)
 router.get('/class/:id', 
 // auth, 
 getClass)
-router.get('/period/:id', 
-// auth, 
-getPeriod)
 router.get('/session/:id', 
 // auth, 
 getSession)
@@ -71,9 +63,6 @@ getStudents)
 router.get('/classes', 
 // auth, 
 getClasses)
-router.get('/periods', 
-// auth, 
-getPeriods)
 router.get('/sessions', 
 // auth, 
 getSessions)
