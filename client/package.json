@@ -29,7 +29,7 @@
         "react-scripts": "5.0.1",
         "semantic-ui-css": "^2.5.0",
         "semantic-ui-react": "^2.1.4",
-        "swr": "^2.0.3",
+        "swr": "^2.0.4",
         "web-vitals": "^2.1.4"
     },
     "scripts": {

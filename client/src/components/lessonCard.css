@@ -10,53 +10,52 @@
     margin: 1rem;
 }
 
-.lesson-header {
+.lesson-card .lesson-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
 
-.title-container {
+.lesson-card .title-container {
     width: 80%;
     margin-right: 10px;
 }
 
-.buttons-container {
+.lesson-card .buttons-container {
     width: 20%;
 }
 
-.edit-delete-buttons {
+.lesson-card .edit-delete-buttons {
     background-color: transparent;
     border: none;
     float: right;
 }
 
-.delete-button {
- color:red;
+.lesson-card .delete-button {
+    color: red;
 }
 
-hr {
+.lesson-card hr {
     height: 1px;
     margin-top: 0rem;
 }
 
-.topic {
+.lesson-card .topic {
     margin-bottom: 20px;
 }
 
-.info-container {
+.lesson-card .info-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
 
-.column {
+.lesson-card .column {
     width: 50%;
 }
 
-
-p {
-    margin-bottom:5px;
+.lesson-card p {
+    margin-bottom: 5px;
 }

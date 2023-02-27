@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import userRoutes from './src/routes/user.js'
+import adminRoutes from './src/routes/admin.js'
 import dbConnect from './src/config/db.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -23,7 +24,7 @@ app.use(express.json())
 app.use(cookieParser())
 
     app.use('/api/users', userRoutes)
-    // app.use('api/posts', postRoutes)
+    app.use('/api/admin', adminRoutes)
     // app.use('api/comment', commentRoutes)
 
 
