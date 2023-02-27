@@ -16,6 +16,7 @@ import {
 const LessonCard = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+
   const [lessonDetails, setLessonDetails] = useState({
     name: "Math",
     topic: "Odd numbers",

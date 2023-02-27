@@ -10,31 +10,18 @@ import {
   MDBModalBody,
 } from "mdb-react-ui-kit";
 import { FormGroup, Input, Label, Col, Row, Form } from "reactstrap";
-import { CiEdit } from "react-icons/ci";
 
-export default function EditLessonModal() {
+export default function CreateLessonModal() {
   const [optModal, setOptModal] = useState(false);
   const toggleShow = () => setOptModal(!optModal);
 
-  const [lessonDetails, setLessonDetails] = useState({
-    name: "Math",
-    topic: "Odd numbers",
-    date: "04.04.23",
-    slot: "8.00am - 8.40am",
-    link: "google.come",
-    classwork: "Book pg. 24-29",
-  });
-
-  const handleEditConfirm = () => {
+  const handleCreateLessonConfirm = () => {
     setOptModal(true);
     // save changes
   };
 
   return (
     <>
-      <button className="edit-delete-buttons" onClick={toggleShow}>
-        <CiEdit />
-      </button>
       <MDBModal show={optModal} tabIndex="-1" setShow={setOptModal}>
         <MDBModalDialog size="lg" centered>
           <MDBModalContent>
@@ -168,8 +155,12 @@ export default function EditLessonModal() {
                   <Label for="meetingLink">Meeting link</Label>
                   <Input id="meetingLink" name="meetingLink" disabled />
                 </FormGroup>
-                <MDBBtn outline color="success" onClick={handleEditConfirm}>
-                  Save
+                <MDBBtn
+                  outline
+                  color="success"
+                  onClick={handleCreateLessonConfirm}
+                >
+                  Save new lesson
                 </MDBBtn>
               </Form>
             </MDBModalBody>
