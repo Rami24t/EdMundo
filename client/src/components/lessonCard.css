@@ -61,7 +61,7 @@
 }
 
 .lesson-card .lesson-card-label {
-    margin-bottom: 0px !important;
+    /* margin-bottom: 0px !important; */
     font-size: small !important;
     color: green;
 
@@ -77,8 +77,10 @@
 
 .lesson-card .lesson-card-icon {
     padding-top: 0px;
-    padding-bottom: 0px;
     line-height: normal;
     color: green; 
 }
 
+.form-label {
+    float: left;
+}

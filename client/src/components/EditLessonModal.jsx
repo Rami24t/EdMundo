@@ -49,7 +49,7 @@ export default function EditLessonModal() {
             <MDBModalBody>
               <Form>
                 <Row>
-                  <Col md={4}>
+                  <Col md={5}>
                     <FormGroup>
                       <Label for="exampleDate">Date</Label>
                       <Input
@@ -72,7 +72,7 @@ export default function EditLessonModal() {
                       </Input>
                     </FormGroup>
                   </Col>
-                  <Col md={4}>
+                  <Col md={3}>
                     <FormGroup>
                       <Label for="class">Class</Label>
                       <Input id="class" name="topic" type="select">

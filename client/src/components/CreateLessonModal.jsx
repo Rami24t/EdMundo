@@ -26,7 +26,7 @@ export default function CreateLessonModal() {
         <MDBModalDialog size="lg" centered>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Edit lesson</MDBModalTitle>
+              <MDBModalTitle>Create new lesson lesson</MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"

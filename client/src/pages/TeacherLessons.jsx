@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import LessonCard from "../components/LessonCard";
 import Footer from "../components/Footer";
 import { MDBBtn } from "mdb-react-ui-kit";
 import CreateLessonModal from "../components/CreateLessonModal";
+import BackToTop from "react-back-to-top";
 
 const TeacherLessons = () => {
   const [showCreateLessonModal, setShowCreateLessonModal] = useState(false);
@@ -23,8 +24,17 @@ const TeacherLessons = () => {
         >
           Create new lesson
         </MDBBtn>
+        {showCreateLessonModal && <CreateLessonModal />}
       </div>
       <LessonCard />
+      <BackToTop
+        showOnScrollUp
+        showAt={100}
+        speed={1500}
+        easing="easeInOutQuint"
+      >
+        <span>scroll up</span>
+      </BackToTop>
       <Footer />
     </div>
   );

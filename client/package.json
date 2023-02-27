@@ -21,6 +21,7 @@
         "luxon": "^3.2.1",
         "mdb-react-ui-kit": "^5.1.0",
         "react": "^18.2.0",
+        "react-back-to-top-button": "^0.0.14",
         "react-dnd": "^16.0.1",
         "react-dnd-html5-backend": "^16.0.1",
         "react-dom": "^18.2.0",
