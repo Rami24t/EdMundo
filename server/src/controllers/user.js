@@ -1,4 +1,6 @@
-import User from "../models/User.js";
+import Teacher from "../models/Teacher.js";
+import Student from "../models/Student.js";
+import Admin from "../models/Admin.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendEmail from "../utilities/email.js";
@@ -7,20 +9,32 @@ import { validationResult } from "express-validator";
 const SALT_ROUNDS = 10;
 export const register = async(req, res) => {
     try {
+        console.log('register req.body: ', req.body);
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
+        if (!errors.isEmpty())
+        {
             return res.status(400).json({ errors: errors.array() });
         }
-
         const salt = await bcrypt.genSalt(SALT_ROUNDS);
         const hashedPass = await bcrypt.hash(req.body.password, salt);
         req.body.password = hashedPass;
-        const user = await User.create(req.body);
-        console.log("register user: ", user);
+        let user;
+        if(req.body.role === 'teacher') {
+            console.log("register teacher: ", req.body);
+            user = await Teacher.create(req.body);
+            console.log("register teacher: ", user);
+        } else if(req.body.role === 'student') {
+            user = await Student.create(req.body);
+            console.log("register student: ", user);
+        }
+        else if(req.body.role === 'admin') {
+            user = await Admin.create(req.body);
+            console.log("register admin: ", user);
+        }
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: "1h",
         });
-        sendEmail(token);
+        // sendEmail(token);
         res.send({ success: true });
     } catch (error) {
         console.log("registration error:", error.message);
@@ -34,13 +48,34 @@ export const login = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const user = await User.findOne({
-            $or: [
-                { username: req.body.emailOrUsername },
-                { email: req.body.emailOrUsername },
-            ],
+        let user = await Teacher.findOne({
+            // $or: [
+                // { username: req.body.email },
+                // { 
+                    email: req.body.email 
+                // },
+            // ],
         }).select("-__v");
-
+        if (!user)
+            user = await Student.findOne({
+                // $or: [
+                    // { username: req.body.email },
+                    // { 
+                        email: req.body.email 
+                    // },
+                // ],
+            }).select("-__v");
+        else if(!user) {
+            user = await Admin.findOne({
+                // $or: [
+                    // { username: req.body.email },
+                    // { 
+                        email: req.body.email
+                    //  }
+                    // ,
+                // ],
+            }).select("-__v");
+        }
         console.log("logging in user:", user);
         if (!user) return res.send({ success: false, errorId: 404 });
         const passMatch = await bcrypt.compare(req.body.password, user.password);
@@ -85,8 +120,8 @@ export const forgotPass = async(req, res) => {
     try {
         const user = await User.findOne({
             $or: [
-                { username: req.body.emailOrUsername },
-                { email: req.body.emailOrUsername },
+                { username: req.body.email },
+                { email: req.body.email },
             ],
         });
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
