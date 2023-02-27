@@ -118,6 +118,7 @@ const LessonCard = () => {
                   name="date"
                   type="text"
                   value={lessonDetails.date}
+                  disabled
                 />
               </Col>
               <Label for="date" sm={1} className="lesson-card-icon">
@@ -130,6 +131,7 @@ const LessonCard = () => {
                   name="slot"
                   type="text"
                   value={lessonDetails.slot}
+                  disabled
                 />
               </Col>
               <Label for="date" sm={1} className="lesson-card-icon">
@@ -142,6 +144,7 @@ const LessonCard = () => {
                   name="class"
                   type="text"
                   value={lessonDetails.class}
+                  disabled
                 />
               </Col>
             </FormGroup>

@@ -51,11 +51,11 @@ export default function CreateLessonModal() {
                     <FormGroup>
                       <Label for="slot">Slot</Label>
                       <Input id="Slot" name="slot" type="select">
-                        <option>8.00am - 8.40am</option>
-                        <option>9.00am - 9.40am</option>
-                        <option>10.00am - 10.40am </option>
-                        <option>11.00am - 11.40am</option>
-                        <option>12.00 - 12.40pm</option>
+                        <option>8 - 8.40am</option>
+                        <option>9 - 9.40am</option>
+                        <option>10 - 10.40am </option>
+                        <option>11 - 11.40am</option>
+                        <option>12 - 12.40pm</option>
                       </Input>
                     </FormGroup>
                   </Col>
