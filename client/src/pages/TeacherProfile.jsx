@@ -1,7 +1,47 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ProfileForm from "../components/ProfileForm";
+import teacher_profile_image from "../images/teacher_profile_image.png";
+import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 
 const TeacherProfile = () => {
-  return <div>TeacherProfile</div>;
+  return (
+    <>
+      <MDBContainer fluid className="p-3 my-5 h-custom">
+        {" "}
+        <header className="text-center">
+          <h1>My Profile</h1>
+        </header>
+        <main>
+          <MDBRow
+            className="d-flex  align-items-center m-auto"
+            style={{ maxWidth: "1300px" }}
+          >
+            <MDBCol col="10" md="6" className="d-flex justify-content-center">
+              <img
+                src={teacher_profile_image}
+                alt="Teacher Profile Decorative "
+                className="my-5 rounded-circle object-cover"
+                style={{ width: "20rem", height: "20rem" }}
+              />
+            </MDBCol>
+            <MDBCol className="mt-4" col="4" md="6">
+              {/* <div> */}
+              {/* <div className="d-flex flex-column align-items-center my-3"> */}
+
+              <div className="  d-flex align-items-center justify-content-center">
+                <ProfileForm />
+              </div>
+              {/* </div> */}
+              {/* </div> */}
+            </MDBCol>
+          </MDBRow>
+        </main>
+        <Footer />
+      </MDBContainer>
+    </>
+  );
 };
 
 export default TeacherProfile;
