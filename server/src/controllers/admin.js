@@ -3,7 +3,6 @@ import School from "../models/School.js";
 import Teacher from "../models/Teacher.js";
 import Student from "../models/Student.js";
 import Class from "../models/Class.js";
-import Period from "../models/Period.js";
 import Session from "../models/Session.js";
 import sendEmail from "../utilities/email.js";
 import { validationResult } from "express-validator";
@@ -14,15 +13,15 @@ export const updateSchool = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const school = School.findById(req.body._id);
+        let school = School.findByIdAndUpdate(req.body._id, req.body, {
+            new: true,
+        });
         if (!school) {
             if (!req.body.name)
                 return res.status(400).json({ success: false, error: "School name is required" });
             const newSchool = await School.create(req.body);
             return res.status(200).json({ success: true, school: newSchool });
         }
-        school = req.body;
-        await school.save();
         return res.status(200).json({ success: true, school: school });
     } catch (error) {
         console.log("update school error:", error.message);
@@ -100,28 +99,6 @@ export const updateClass = async(req, res) => {
     }
 };
 
-export const updatePeriod = async(req, res) => {
-    if (!req.body.name)
-        return res.status(400).json({ success: false, error: "Period name is required" });
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    try {
-        if (req.body._id) {
-            const period = Period.findByIdAndUpdate(req.body._id, req.body, {
-                new: true,
-            });
-            return res.status(200).json({ success: true, period: period });
-        } else {
-            const newPeriod = await Period.create(req.body);
-            return res.status(200).json({ success: true, period: newPeriod });
-        }
-    } catch (error) {
-        console.log("update period error:", error.message);
-        res.send({ success: false, error: error.message });
-    }
-};
 
 export const updateSession = async(req, res) => {
     if (!req.body.name)
@@ -190,16 +167,6 @@ export const deleteClass = async(req, res) => {
     }
 }
 
-export const deletePeriod = async(req, res) => {
-    try {
-        const period = await Period.findByIdAndDelete(req.params.id);
-        if (!period) return res.send({ success: false, errorId: 404 });
-        return res.status(200).json({ success: true, period: period });
-    } catch (error) {
-        console.log("delete period error:", error.message);
-        res.send({ success: false, error: error.message });
-    }
-}
 
 export const deleteSession = async(req, res) => {
     try {
@@ -256,16 +223,6 @@ export const getClass = async(req, res) => {
     }
 }
 
-export const getPeriod = async(req, res) => {
-    try {
-        const period = await Period.findById(req.params.id);
-        if (!period) return res.send({ success: false, errorId: 404 });
-        return res.status(200).json({ success: true, period: period });
-    } catch (error) {
-        console.log("get period error:", error.message);
-        res.send({ success: false, error: error.message });
-    }
-}
 
 export const getSession = async(req, res) => {
     try {
@@ -309,15 +266,6 @@ export const getClasses = async(req, res) => {
     }
 }
 
-export const getPeriods = async(req, res) => {
-    try {
-        const periods = await Period.find();
-        return res.status(200).json({ success: true, periods: periods });
-    } catch (error) {
-        console.log("get periods error:", error.message);
-        res.send({ success: false, error: error.message });
-    }
-}
 
 export const getSessions = async(req, res) => {
     try {
