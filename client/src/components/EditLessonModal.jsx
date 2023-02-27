@@ -126,36 +126,22 @@ export default function EditLessonModal() {
                   <Col md={6}>
                     <FormGroup>
                       <Label for="classwork">Classwork</Label>
-                      <Input id="classwork" name="classwork" />
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="resourcesClasswork">
-                        Classwork resources
-                      </Label>
                       <Input
-                        id="resourcesClasswork"
-                        name="resourcesClasswork"
-                        type="file"
+                        id="classwork"
+                        name="classwork"
+                        placeholder="Classwork url"
+                        type="url"
                       />
                     </FormGroup>
                   </Col>
-                </Row>
-                <Row>
                   <Col md={6}>
                     <FormGroup>
                       <Label for="homework">Homework</Label>
-                      <Input id="homework" name="homework" />
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="homeworkResources">Homework resources</Label>
                       <Input
-                        id="homeworkResources"
-                        name="homeworkResources"
-                        type="file"
+                        id="homework"
+                        name="homework"
+                        placeholder="Homework url"
+                        type="url"
                       />
                     </FormGroup>
                   </Col>
