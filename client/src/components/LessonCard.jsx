@@ -23,9 +23,9 @@ const LessonCard = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const [lessonDetails, setLessonDetails] = useState({
-    date: "04.04.23",
+    date: "2023-02-02",
     slot: "8 - 8.40am",
-    class: "1A",
+    class: "1 A",
     subject: "Math",
     topic: "Odd numbers",
     objectives: "Learn arithmetic with odd numbers.",
