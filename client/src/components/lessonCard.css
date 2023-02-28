@@ -59,3 +59,28 @@
 .lesson-card p {
     margin-bottom: 5px;
 }
+
+.lesson-card .lesson-card-label {
+    /* margin-bottom: 0px !important; */
+    font-size: small !important;
+    color: green;
+
+}
+
+.lesson-card .lesson-card-input {
+    background-color: #ffffff !important;
+    border: none;
+    padding: 0px;
+    color: rgba(0, 0, 0, 0.788) !important;
+
+}
+
+.lesson-card .lesson-card-icon {
+    padding-top: 0px;
+    line-height: normal;
+    color: green; 
+}
+
+.lesson-card .form-label {
+    float: left;
+}
