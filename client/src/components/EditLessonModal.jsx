@@ -17,17 +17,30 @@ export default function EditLessonModal() {
   const toggleShow = () => setOptModal(!optModal);
 
   const [lessonDetails, setLessonDetails] = useState({
-    name: "Math",
+    date: "2023-02-02",
+    slot: "8 - 8.40am",
+    class: "1 A",
+    subject: "Math",
     topic: "Odd numbers",
-    date: "04.04.23",
-    slot: "8.00am - 8.40am",
-    link: "google.come",
+    objectives: "Learn arithmetic with odd numbers.",
     classwork: "Book pg. 24-29",
+    homework: "Book pg. 30-32",
+    notes: "Please review even numbers.",
+    link: "google.com",
   });
 
-  const handleEditConfirm = () => {
-    setOptModal(true);
-    // save changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setLessonDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log("lesson details saved", lessonDetails);
+    // save changes to database
   };
 
   return (
@@ -47,7 +60,7 @@ export default function EditLessonModal() {
               ></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>
-              <Form>
+              <Form onSubmit={handleFormSubmit}>
                 <Row>
                   <Col md={5}>
                     <FormGroup>
@@ -57,13 +70,21 @@ export default function EditLessonModal() {
                         name="date"
                         placeholder="date placeholder"
                         type="date"
+                        defaultValue={lessonDetails.date}
+                        onChange={(e) => handleInputChange(e)}
                       />
                     </FormGroup>
                   </Col>
                   <Col md={4}>
                     <FormGroup>
                       <Label for="slot">Slot</Label>
-                      <Input id="Slot" name="slot" type="select">
+                      <Input
+                        id="Slot"
+                        name="slot"
+                        type="select"
+                        defaultValue={lessonDetails.slot}
+                        onChange={(e) => handleInputChange(e)}
+                      >
                         <option>8 - 8.40am</option>
                         <option>9 - 9.40am</option>
                         <option>10 - 10.40am </option>
@@ -75,7 +96,13 @@ export default function EditLessonModal() {
                   <Col md={3}>
                     <FormGroup>
                       <Label for="class">Class</Label>
-                      <Input id="class" name="topic" type="select">
+                      <Input
+                        id="class"
+                        name="class"
+                        type="select"
+                        defaultValue={lessonDetails.class}
+                        onChange={(e) => handleInputChange(e)}
+                      >
                         <option>1 A</option>
                         <option>1 B</option>
                         <option>2 A</option>
@@ -102,7 +129,13 @@ export default function EditLessonModal() {
                   <Col md={6}>
                     <FormGroup>
                       <Label for="subject">Subject</Label>
-                      <Input id="subject" name="subject" type="select">
+                      <Input
+                        id="subject"
+                        name="subject"
+                        type="select"
+                        defaultValue={lessonDetails.subject}
+                        onChange={(e) => handleInputChange(e)}
+                      >
                         <option>Math</option>
                         <option>English</option>
                         <option>German</option>
@@ -114,13 +147,24 @@ export default function EditLessonModal() {
                   <Col md={6}>
                     <FormGroup>
                       <Label for="topic">Topic</Label>
-                      <Input id="topic" name="topic" />
+                      <Input
+                        id="topic"
+                        name="topic"
+                        defaultValue={lessonDetails.topic}
+                        onChange={(e) => handleInputChange(e)}
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
                 <FormGroup>
                   <Label for="objectives">Objectives</Label>
-                  <Input id="objectives" name="objectives" type="textarea" />
+                  <Input
+                    id="objectives"
+                    name="objectives"
+                    type="textarea"
+                    defaultValue={lessonDetails.objectives}
+                    onChange={(e) => handleInputChange(e)}
+                  />
                 </FormGroup>
                 <Row>
                   <Col md={6}>
@@ -131,6 +175,8 @@ export default function EditLessonModal() {
                         name="classwork"
                         placeholder="Classwork url"
                         type="url"
+                        defaultValue={lessonDetails.classwork}
+                        onChange={(e) => handleInputChange(e)}
                       />
                     </FormGroup>
                   </Col>
@@ -142,19 +188,33 @@ export default function EditLessonModal() {
                         name="homework"
                         placeholder="Homework url"
                         type="url"
+                        defaultValue={lessonDetails.homework}
+                        onChange={(e) => handleInputChange(e)}
                       />
                     </FormGroup>
                   </Col>
                 </Row>
                 <FormGroup>
                   <Label for="notes">Notes</Label>
-                  <Input id="notes" name="notes" type="textarea" />
+                  <Input
+                    id="notes"
+                    name="notes"
+                    type="textarea"
+                    defaultValue={lessonDetails.notes}
+                    onChange={(e) => handleInputChange(e)}
+                  />
                 </FormGroup>
                 <FormGroup>
-                  <Label for="meetingLink">Meeting link</Label>
-                  <Input id="meetingLink" name="meetingLink" disabled />
+                  <Label for="meetingLink">Classroom link</Label>
+                  <Input
+                    id="meetingLink"
+                    name="meetingLink"
+                    type="url"
+                    defaultValue={lessonDetails.link}
+                    disabled
+                  />
                 </FormGroup>
-                <MDBBtn outline color="success" onClick={handleEditConfirm}>
+                <MDBBtn outline color="success">
                   Save
                 </MDBBtn>
               </Form>
