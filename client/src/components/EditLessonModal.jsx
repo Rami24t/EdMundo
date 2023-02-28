@@ -64,11 +64,10 @@ export default function EditLessonModal() {
                 <Row>
                   <Col md={5}>
                     <FormGroup>
-                      <Label for="exampleDate">Date</Label>
+                      <Label for="date">Date</Label>
                       <Input
-                        id="exampleDate"
+                        id="date"
                         name="date"
-                        placeholder="date placeholder"
                         type="date"
                         defaultValue={lessonDetails.date}
                         onChange={(e) => handleInputChange(e)}
@@ -79,7 +78,7 @@ export default function EditLessonModal() {
                     <FormGroup>
                       <Label for="slot">Slot</Label>
                       <Input
-                        id="Slot"
+                        id="slot"
                         name="slot"
                         type="select"
                         defaultValue={lessonDetails.slot}
