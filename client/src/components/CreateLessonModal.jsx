@@ -11,14 +11,15 @@ import {
 } from "mdb-react-ui-kit";
 import { FormGroup, Input, Label, Col, Row, Form } from "reactstrap";
 
-export default function CreateLessonModal() {
-  const [optModal, setOptModal] = useState(false);
-  const toggleShow = () => setOptModal(!optModal);
-
-  const handleCreateLessonConfirm = () => {
-    setOptModal(true);
-    // save changes
-  };
+export default function CreateLessonModal({
+  optModal,
+  setOptModal,
+  toggleShow,
+  handleCreateLessonConfirm,
+}) {
+  // const handleCreateLesson = () => {
+  //   setShowCreateLessonModal(true);
+  // };
 
   return (
     <>
