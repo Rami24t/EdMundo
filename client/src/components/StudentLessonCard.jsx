@@ -6,7 +6,7 @@ import "./lessonCard.css";
 import { Form, Col, Row, FormGroup, Label, Input } from "reactstrap";
 
 const StudentLessonCard = () => {
-  const [lessonDetails, setLessonDetails] = useState({
+  const lessonDetails = {
     date: "2023-02-02",
     slot: "8 - 8.40am",
     teacherName: "Tina Turner",
@@ -17,7 +17,7 @@ const StudentLessonCard = () => {
     homework: "Book pg. 30-32",
     notes: "Please review even numbers.",
     link: "google.com",
-  });
+  };
 
   return (
     <>
