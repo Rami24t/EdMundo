@@ -13,7 +13,7 @@ export const updateSchool = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        let school = School.findByIdAndUpdate(req.body._id, req.body, {
+        let school = await School.findByIdAndUpdate(req.body._id, req.body, {
             new: true,
         });
         if (!school) {
