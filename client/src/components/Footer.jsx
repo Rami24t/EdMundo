@@ -84,10 +84,10 @@ export default function Footer() {
 
             <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Tech stack</h6>
-              <p>React JS</p>
-              <p>MongoDB</p>
-              <p>Express JS</p>
-              <p>Node JS</p>
+              <p className="mb-0">React JS</p>
+              <p className="mb-0">MongoDB</p>
+              <p className="mb-0">Express JS</p>
+              <p className="mb-0">Node JS</p>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
