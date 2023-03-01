@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import TeacherLessonCard from "../components/TeacherLessonCard";
-import Footer from "../components/Footer";
 import { MDBBtn } from "mdb-react-ui-kit";
 import CreateLessonModal from "../components/CreateLessonModal";
 import ScrollToTop from "react-scroll-up";
@@ -40,7 +39,6 @@ const TeacherLessons = () => {
           />
         </span>
       </ScrollToTop>
-      <Footer />
     </div>
   );
 };
