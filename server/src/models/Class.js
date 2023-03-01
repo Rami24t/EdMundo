@@ -22,11 +22,11 @@ const classSchema = new Schema(
           type: String,
           required: true,
         },
-        session: {
+        sessions: [{
           type: Schema.Types.ObjectId,
           ref: "Session",
           required: true,
-        },
+        }],
       },
     ],
     notes: {
@@ -39,8 +39,7 @@ const classSchema = new Schema(
       },
     ],
     schoolYear: {
-      type: Schema.Types.ObjectId,
-      ref: "SchoolYear",
+      type: Number,
       required: true,
     },
     liveMeetingLink: {
