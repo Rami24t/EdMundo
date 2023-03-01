@@ -3,8 +3,14 @@ import "./profileForm.css";
 import { MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const FormData = {
-  name: "Julia Kobzar",
-  email: "kobzar_school@school.com",
+  name: "Carol Peletier",
+  email: "peletier_school@school.com",
+  phone: "1256783746",
+  address: "Berlin, Berliner Plz., 1",
+};
+const FormDataStudent = {
+  name: "Daryl Dixon",
+  email: "dixon_school@school.com",
   phone: "1256783746",
   address: "Berlin, Berliner Plz., 1",
 };

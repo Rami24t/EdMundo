@@ -22,19 +22,14 @@ const TeacherProfile = () => {
               <img
                 src={teacher_profile_image}
                 alt="Teacher Profile Decorative "
-                className="my-5 rounded-circle object-cover"
+                className="my-5 rounded object-cover"
                 style={{ width: "20rem", height: "20rem" }}
               />
             </MDBCol>
             <MDBCol className="mt-4" col="4" md="6">
-              {/* <div> */}
-              {/* <div className="d-flex flex-column align-items-center my-3"> */}
-
               <div className="  d-flex align-items-center justify-content-center">
                 <ProfileForm />
               </div>
-              {/* </div> */}
-              {/* </div> */}
             </MDBCol>
           </MDBRow>
         </main>
