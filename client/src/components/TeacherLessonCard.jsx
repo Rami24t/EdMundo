@@ -17,7 +17,7 @@ import {
 } from "mdb-react-ui-kit";
 import { Form, Col, Row, FormGroup, Label, Input } from "reactstrap";
 
-const LessonCard = () => {
+const TeacherLessonCard = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -249,4 +249,4 @@ const LessonCard = () => {
   );
 };
 
-export default LessonCard;
+export default TeacherLessonCard;

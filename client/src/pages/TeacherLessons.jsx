@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LessonCard from "../components/LessonCard";
+import TeacherLessonCard from "../components/TeacherLessonCard";
 import Footer from "../components/Footer";
 import { MDBBtn } from "mdb-react-ui-kit";
 import CreateLessonModal from "../components/CreateLessonModal";
@@ -31,7 +31,7 @@ const TeacherLessons = () => {
         handleCreateLessonConfirm={handleCreateLessonConfirm}
       />
 
-      <LessonCard />
+      <TeacherLessonCard />
 
       <ScrollToTop showUnder={160}>
         <span>
