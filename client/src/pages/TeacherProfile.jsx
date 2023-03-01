@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import ProfileForm from "../components/ProfileForm";
 import teacher_profile_image from "../images/teacher_profile_image.png";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { MDBTypography } from "mdb-react-ui-kit";
 
 const TeacherProfile = () => {
   return (
@@ -11,7 +12,7 @@ const TeacherProfile = () => {
       <MDBContainer fluid className="p-3 my-5 h-custom">
         {" "}
         <header className="text-center">
-          <h1>My Profile</h1>
+          <MDBTypography variant="h1">My Profile</MDBTypography>
         </header>
         <main>
           <MDBRow

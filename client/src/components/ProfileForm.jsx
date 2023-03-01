@@ -1,6 +1,7 @@
 import React from "react";
 import "./profileForm.css";
 import { MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { MDBTypography } from "mdb-react-ui-kit";
 
 const FormData = {
   name: "Carol Peletier",
@@ -8,16 +9,14 @@ const FormData = {
   phone: "1256783746",
   address: "Berlin, Berliner Plz., 1",
 };
-const FormDataStudent = {
-  name: "Daryl Dixon",
-  email: "dixon_school@school.com",
-  phone: "1256783746",
-  address: "Berlin, Berliner Plz., 1",
-};
 
 export default function ProfileForm() {
   return (
     <form className="profileForm">
+      <MDBTypography variant="h2">
+        Hello,{FormData.name.split(" ")[0]}! Here you can edit your contact
+        information.
+      </MDBTypography>
       <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
