@@ -23,11 +23,6 @@ export const updateSchool = async(req, res) => {
             return res.status(200).json({ success: true, school: newSchool });
         }
         return res.status(200).json({ success: true, school: school });
-    } catch (error) {
-        console.log("update school error:", error.message);
-        res.send({ success: false, error: error.message });
-    }
-    return res.status(200).json({ success: true, school: school });
   } catch (error) {
     console.log("update school error:", error.message);
     res.send({ success: false, error: error.message });
