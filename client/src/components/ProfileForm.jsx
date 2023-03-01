@@ -36,6 +36,8 @@ export default function ProfileForm() {
         defaultValue={FormData.email}
         id="form6Example5"
         label="Email"
+        readonly
+        disabled
       />
       <MDBInput
         wrapperClass="mb-4"
