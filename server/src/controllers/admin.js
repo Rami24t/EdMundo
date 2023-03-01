@@ -91,7 +91,7 @@ export const updateClass = async (req, res) => {
   }
   try {
     if (req.body._id) {
-      const schoolClass = Class.findByIdAndUpdate(req.body._id, req.body, {
+      const schoolClass = await Class.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
       });
       return res.status(200).json({ success: true, schoolClass: schoolClass });
@@ -116,7 +116,7 @@ export const updateSession = async (req, res) => {
   }
   try {
     if (req.body._id) {
-      const session = Session.findByIdAndUpdate(req.body._id, req.body, {
+      const session = await Session.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
       });
       return res.status(200).json({ success: true, session: session });
