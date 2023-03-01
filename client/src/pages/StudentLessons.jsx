@@ -1,7 +1,6 @@
 import React from "react";
 import ScrollToTop from "react-scroll-up";
 import { BsArrowUpCircle } from "react-icons/bs";
-import Footer from "../components/Footer";
 import StudentLessonCard from "../components/StudentLessonCard";
 
 const StudentLessons = () => {
@@ -19,7 +18,6 @@ const StudentLessons = () => {
             />
           </span>
         </ScrollToTop>
-        <Footer />
       </div>
     </div>
   );

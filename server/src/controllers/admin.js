@@ -7,24 +7,22 @@ import Session from "../models/Session.js";
 import sendEmail from "../utilities/email.js";
 import { validationResult } from "express-validator";
 
-export const updateSchool = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  try {
-    let school = School.findByIdAndUpdate(req.body._id, req.body, {
-      new: true,
-    });
-    if (!school) {
-      if (!req.body.name)
-        return res
-          .status(400)
-          .json({ success: false, error: "School name is required" });
-      const newSchool = await School.create(req.body);
-      return res.status(200).json({ success: true, school: newSchool });
+export const updateSchool = async(req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
     }
-    return res.status(200).json({ success: true, school: school });
+    try {
+        let school = await School.findByIdAndUpdate(req.body._id, req.body, {
+            new: true,
+        });
+        if (!school) {
+            if (!req.body.name)
+                return res.status(400).json({ success: false, error: "School name is required" });
+            const newSchool = await School.create(req.body);
+            return res.status(200).json({ success: true, school: newSchool });
+        }
+        return res.status(200).json({ success: true, school: school });
   } catch (error) {
     console.log("update school error:", error.message);
     res.send({ success: false, error: error.message });
@@ -93,7 +91,7 @@ export const updateClass = async (req, res) => {
   }
   try {
     if (req.body._id) {
-      const schoolClass = Class.findByIdAndUpdate(req.body._id, req.body, {
+      const schoolClass = await Class.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
       });
       return res.status(200).json({ success: true, schoolClass: schoolClass });
@@ -118,7 +116,7 @@ export const updateSession = async (req, res) => {
   }
   try {
     if (req.body._id) {
-      const session = Session.findByIdAndUpdate(req.body._id, req.body, {
+      const session = await Session.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
       });
       return res.status(200).json({ success: true, session: session });

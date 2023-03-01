@@ -1,14 +1,12 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import ContactForm from "../components/ContactForm";
 
-const App = () => {
+const Home = () => {
   return (
     <div>
-      <Navbar />
-      <Outlet />
+      <ContactForm />
     </div>
   );
 };
 
-export default App;
+export default Home;
