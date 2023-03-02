@@ -20,11 +20,25 @@ import {
   getStudents,
   getClasses,
   getSessions,
+  updateClassStudentsCurrentClass,
+  updateClassSessionsClassRef
 } from "../controllers/admin.js";
 import auth from "../middleware/auth.js";
 import multerMiddleware from "../config/multer-cloudinary.js";
 const router = express.Router();
 import { check } from "express-validator";
+
+router.put(
+  "/class/current",
+  // auth,
+  updateClassStudentsCurrentClass
+)
+
+router.put(
+  "/class/passclassreftosessions",
+  // auth,
+  updateClassSessionsClassRef
+)
 
 router.put(
   "/school",
