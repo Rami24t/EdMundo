@@ -29,7 +29,7 @@ const StudentProfile = () => {
             </MDBCol>
             <MDBCol className="mt-4" col="4" md="6">
               <div className="  d-flex align-items-center justify-content-center">
-                <ProfileForm />
+                <ProfileForm role={"student"} />
               </div>
             </MDBCol>
           </MDBRow>
