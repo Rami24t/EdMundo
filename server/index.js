@@ -26,7 +26,7 @@ app.use(express.json())
 app.use(cookieParser())
 
     app.use('/api/users', userRoutes)
-    app.use('/api/admin', adminRoutes)
+    // app.use('/api/admin', adminRoutes)
     app.use('/api/teacher', teacherRoutes)
     app.use('/api/student', studentRoutes)
 
