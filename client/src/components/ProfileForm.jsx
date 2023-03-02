@@ -1,17 +1,23 @@
 import React from "react";
 import "./profileForm.css";
 import { MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { MDBTypography } from "mdb-react-ui-kit";
 
 const FormData = {
-  name: "Julia Kobzar",
-  email: "kobzar_school@school.com",
+  name: "Carol Peletier",
+  email: "peletier_school@school.com",
   phone: "1256783746",
   address: "Berlin, Berliner Plz., 1",
+  class: "9a-23",
 };
 
-export default function ProfileForm() {
+export default function ProfileForm({ role }) {
   return (
     <form className="profileForm">
+      <MDBTypography variant="h2" className="header-2">
+        Hello, {FormData.name.split(" ")[0]}! Here you can edit your
+        information.
+      </MDBTypography>
       <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
@@ -24,12 +30,25 @@ export default function ProfileForm() {
           />
         </MDBCol>
       </MDBRow>
+      {role === "student" ? (
+        <MDBInput
+          wrapperClass="mb-4"
+          type="text"
+          defaultValue={FormData.class}
+          id="form6Example5"
+          label="Class"
+          readonly
+          disabled
+        />
+      ) : null}
       <MDBInput
         wrapperClass="mb-4"
         type="email"
         defaultValue={FormData.email}
         id="form6Example5"
         label="Email"
+        readonly
+        disabled
       />
       <MDBInput
         wrapperClass="mb-4"

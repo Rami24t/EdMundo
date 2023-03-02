@@ -8,6 +8,7 @@ const TeacherSchema = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     // username: {
     //     type: String,
@@ -32,4 +33,4 @@ const TeacherSchema = new Schema({
 }, {
     timestamps: true
 })
-export default mongoose.model('teacher', TeacherSchema)
+export default mongoose.model('Teacher', TeacherSchema)
