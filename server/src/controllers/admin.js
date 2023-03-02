@@ -105,6 +105,64 @@ export const updateClass = async (req, res) => {
   }
 };
 
+// export const updateClassStudentsCurrentClass = async (req, res) => {
+//   if (!req.body._id)
+//   return res
+//     .status(400)
+//     .json({ success: false, error: "Class ID is required" });
+// const errors = validationResult(req);
+// if (!errors.isEmpty()) {
+//   return res.status(400).json({ errors: errors.array() });
+// }
+// try {
+//   if (req.body._id) {
+//     const classStudents = await Class.findById(req.body._id).populate("students");
+//     if(!classStudents) return res.send({ success: false, errorId: 404, error: "Class not found" });
+//     const students = classStudents.students;
+//     if(!students) return res.send({ success: false, errorId: 404 });
+//     students.forEach(async (student) => {
+//       student.currentClass = req.body._id;
+//       await student.save();
+//     });
+//     return res.status(200).json({ success: true, students: students });
+//   } else {
+//     res.send({ success: false, error: "Class not found" });
+//   }
+// } catch (error) {
+//   console.log("update class error:", error.message);
+//   res.send({ success: false, error: error.message });
+// }
+// };
+
+export const updateClassStudentsCurrentClass = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    if (!_id) {
+      throw new Error("Class ID is required");
+    }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const classStudents = await Class.findByIdOrFail(_id).populate("students");
+    const students = classStudents.students;
+    const updates = students.map(async (student) => {
+      student.currentClass = _id;
+      await student.save();
+      return student;
+    });
+    const updatedStudents = await Promise.all(updates);
+    return res.status(200).json({ success: true, students: updatedStudents });
+  } catch (error) {
+    console.log("update class error:", error.message);
+    if (error instanceof mongoose.Error.CastError) {
+      return res.sendStatus(404);
+    }
+    res.status(400).send({ success: false, error: error.message });
+  }
+};
+
+
 export const updateSession = async (req, res) => {
   if (!req.body.name)
     return res
@@ -126,6 +184,76 @@ export const updateSession = async (req, res) => {
     }
   } catch (error) {
     console.log("update session error:", error.message);
+    res.send({ success: false, error: error.message });
+  }
+};
+
+// export const updateClassSessionsClassRef = async (req, res) => {
+//   if (!req.body._id)
+//   return res
+//     .status(400)
+//     .json({ success: false, error: "Class ID is required" });
+// const errors = validationResult(req);
+// if (!errors.isEmpty()) {
+//   return res.status(400).json({ errors: errors.array() });
+// }
+// try {
+//   if (req.body._id) {
+//     const classSchedule = await Class.findById(req.body._id).populate({path: "schedule.sessions"}).select("schedule.sessions");
+//     if(!classSchedule) return res.send({ success: false, errorId: 404, error: "Class schedule not found" });
+//     console.log("classSchedule:", classSchedule);
+
+  
+//     if(!sessions) return res.send({ success: false, errorId: 404 });
+//     sessions.forEach(async (session) => {
+//       session.currentClass = req.body._id;
+//       await session.save();
+//     });
+//     return res.status(200).json({ success: true, sessions: sessions });
+//   } else {
+//     res.send({ success: false, error: "Class not found" });
+//   }
+// } catch (error) {
+//   console.log("updateClassSessionsClassRef error:", error.message);
+//   res.send({ success: false, error: error.message });
+// }
+// };
+
+export const updateClassSessionsClassRef = async (req, res) => {
+  if (!req.body._id)
+    return res
+      .status(400)
+      .json({ success: false, error: "Class ID is required" });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  try {
+    const classSchedule = await Class.findById(req.body._id).populate({
+      path: "schedule.sessions",
+    });
+    if (!classSchedule)
+      return res.send({
+        success: false,
+        errorId: 404,
+        error: "Class schedule not found",
+      });
+    console.log("classSchedule:", classSchedule);
+
+    const sessions = classSchedule.schedule.reduce(
+      (prev, curr) => [...prev, ...curr.sessions],
+      []
+    );
+    if (!sessions.length)
+      return res.send({ success: false, errorId: 404 });
+
+    for (const session of sessions) {
+      session.class = req.body._id;
+      await session.save();
+    }
+    return res.status(200).json({ success: true, sessions: sessions });
+  } catch (error) {
+    console.log("updateClassSessionsClassRef error:", error.message);
     res.send({ success: false, error: error.message });
   }
 };

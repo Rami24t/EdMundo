@@ -45,14 +45,10 @@ const lessonSchema = new Schema({
     attachments: {
         type: [String],
     },
-    attendance: {
-        type: [{
-            student: {
-                type: Schema.Types.ObjectId,
-                ref: 'Student',
-            }
-        }],
-    },
+    attendance: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Student'
+    }]
 }, {
     timestamps: true
 })
