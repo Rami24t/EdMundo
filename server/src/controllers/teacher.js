@@ -29,8 +29,9 @@ export const updateTeacher = async (req, res) => {
 };
 
 export const updateLesson = async (req, res) => {
-  if (req.user.role !== "teacher")
-    return res.status(401).json({ success: false, error: "Unauthorized" });
+  // if (req.user.role !== "teacher")
+  // add a middleware to populate the req.user object
+    // return res.status(401).json({ success: false, error: "Unauthorized" });
   if (!req.body.topic)
     return res.status(400).json({ success: false, error: "Topic is required" });
   try {
@@ -39,13 +40,13 @@ export const updateLesson = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
     if (req.body._id) {
-      const lesson = Lesson.findByIdAndUpdate(req.body._id, req.body, {
+      const lesson = await Lesson.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
       });
       if (!lesson) return res.send({ success: false, errorId: 404 });
       res.send({ success: true, lesson });
     } else {
-      const newLesson = new Lesson.create(req.body);
+      const newLesson = await Lesson.create(req.body);
       if (!newLesson) return res.send({ success: false, errorId: 404 });
       res.send({ success: true, newLesson });
     }
