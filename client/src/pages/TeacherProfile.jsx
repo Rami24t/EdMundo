@@ -34,7 +34,6 @@ const TeacherProfile = () => {
             </MDBCol>
           </MDBRow>
         </main>
-        <Footer />
       </MDBContainer>
     </>
   );
