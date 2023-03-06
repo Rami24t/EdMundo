@@ -34,7 +34,6 @@ const StudentProfile = () => {
             </MDBCol>
           </MDBRow>
         </main>
-        <Footer />
       </MDBContainer>
     </>
   );
