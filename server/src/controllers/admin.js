@@ -401,7 +401,13 @@ export const getStudents = async (req, res) => {
 
 export const getClasses = async (req, res) => {
   try {
-    const schoolClasses = await Class.find();
+    const schoolClasses = await Class.find().populate({
+      path: 'schedule.sessions',
+      populate: {
+        path: 'teacher',
+        model: 'Teacher'
+      }
+    });
     return res
       .status(200)
       .json({ success: true, schoolClasses: schoolClasses });
