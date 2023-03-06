@@ -57,7 +57,7 @@ const ContactForm = () => {
           className="contact-input"
           type="text"
           name="school_name"
-          placeholder="Write the school name here.."
+          placeholder="And the school name here.."
           required
         />
         <label className="contact-label">Email</label>

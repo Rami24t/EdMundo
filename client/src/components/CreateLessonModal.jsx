@@ -9,7 +9,7 @@ import {
   MDBModalTitle,
   MDBModalBody,
 } from "mdb-react-ui-kit";
-import { FormGroup, Input, Label, Col, Row, Form } from "reactstrap";
+import { FormGroup, Input, Label, Col, Row, Form, Badge } from "reactstrap";
 
 export default function CreateLessonModal({
   optModal,
@@ -43,7 +43,8 @@ export default function CreateLessonModal({
       topic: "",
       objectives: "",
       classwork: "",
-      homework: "",
+      homework:
+        "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
       notes: "",
       link: "",
     });
@@ -74,6 +75,7 @@ export default function CreateLessonModal({
                         type="date"
                         value={lessonDetails.date}
                         onChange={(e) => handleInputChange(e)}
+                        required
                       />
                     </FormGroup>
                   </Col>
@@ -86,6 +88,7 @@ export default function CreateLessonModal({
                         type="select"
                         value={lessonDetails.slot}
                         onChange={(e) => handleInputChange(e)}
+                        required
                       >
                         <option>8 - 8.40am</option>
                         <option>9 - 9.40am</option>
@@ -104,6 +107,7 @@ export default function CreateLessonModal({
                         type="select"
                         value={lessonDetails.class}
                         onChange={(e) => handleInputChange(e)}
+                        required
                       >
                         <option>1 A</option>
                         <option>1 B</option>
@@ -137,6 +141,7 @@ export default function CreateLessonModal({
                         type="select"
                         value={lessonDetails.subject}
                         onChange={(e) => handleInputChange(e)}
+                        required
                       >
                         <option>Math</option>
                         <option>English</option>
