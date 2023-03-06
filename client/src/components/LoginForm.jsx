@@ -1,4 +1,6 @@
-import React,{useState} from 'react';
+import React, { useState } from "react";
+import { useSWRConfig } from "swr";
+import axios from "axios";
 import {
   MDBContainer,
   MDBCol,
@@ -8,14 +10,16 @@ import {
 } from "mdb-react-ui-kit";
 
 function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { mutate } = useSWRConfig();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-//    console.log('email', email);
-
-  }
+    mutate("/login", () =>
+      axios.post("http://localhost:5001/api/users/login", { email, password })
+    );
+  };
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
@@ -35,7 +39,7 @@ function LoginForm() {
             id="formControlLg"
             type="email"
             size="lg"
-            name='email'
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -45,7 +49,7 @@ function LoginForm() {
             id="formControlLg"
             type="password"
             size="lg"
-            name='password'
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -56,9 +60,7 @@ function LoginForm() {
           </div> */}
 
           <div className="text-center text-md-start mt-4 pt-2">
-            <MDBBtn className="mb-0 px-5" size="lg"
-              onClick={handleSubmit}
-            >
+            <MDBBtn className="mb-0 px-5" size="lg" onClick={handleSubmit}>
               Login
             </MDBBtn>
             {/* <p className="d-none small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="#!" className="link-danger">Register</a></p> */}
