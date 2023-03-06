@@ -22,7 +22,7 @@ $animationSpeed: 40s;
 	border-radius: 1rem;
 	box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
 	height: 200px;
-	margin-top: 3rem;
+	margin-top: 1rem;
 	margin-right: auto;
 	margin-left: auto;
 	overflow: hidden;
@@ -32,7 +32,6 @@ $animationSpeed: 40s;
 	&::before,
 	&::after {
 		@include white-gradient;
-		content: "";
 		height: 140px;
 		position: relative;
 		width: 200px;
@@ -62,8 +61,14 @@ $animationSpeed: 40s;
 	}
 }
 
+ .slider-subtitle {
+ 	text-align: center;
+ 	margin-left: auto;
+ 	padding-top: 1rem;
+ 	margin-right: auto;
+ }
 .slide img {
 	margin: auto;
 	position: absolute;
-	top: 40%;
+
 }
