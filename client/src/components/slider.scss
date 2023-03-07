@@ -20,14 +20,14 @@ $animationSpeed: 40s;
 .slider {
 	background: lightblue;
 	border-radius: 1rem;
-	box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
+	// box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
 	height: 200px;
 	margin-top: 1rem;
 	margin-right: auto;
 	margin-left: auto;
 	overflow: hidden;
 	position: relative;
-	width: 960px;
+	width: 1160px;
 
 	&::before,
 	&::after {
@@ -62,7 +62,7 @@ $animationSpeed: 40s;
 }
 
  .slider-subtitle {
- 	text-align: center;
+
  	margin-left: auto;
  	padding-top: 1rem;
  	margin-right: auto;
@@ -70,5 +70,6 @@ $animationSpeed: 40s;
 .slide img {
 	margin: auto;
 	position: absolute;
+
 
 }
