@@ -6,14 +6,12 @@ import Logo2 from "../assets/logo2.png";
 
 const Slider = () => {
   return (
-    <div>
-      <MDBContainer className="text-center slider" breakpoint="sm">
+    <div className="slider-component">
+      <MDBContainer className="slider" breakpoint="sm">
         <MDBRow>
-          <MDBCol md="12">
-            <h5 className="slider-subtitle">
-              Trusted by over 90 schools across 30 countries.
-            </h5>
-          </MDBCol>
+          <p className="slider-subtitle">
+            Trusted by 90+ schools across 30 countries
+          </p>
         </MDBRow>
 
         <MDBRow className="slide-track">

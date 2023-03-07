@@ -2,12 +2,12 @@
 .hero {
     height: fit-content;
     background-color:khaki;
+    padding-top: 96px;
+    padding-bottom: 96px;
 }
 
 .hero-section {
     width: 1160px !important;
-    padding-top: 2rem;
-    padding-bottom: 5rem;
 }
 
 .hero-text {
@@ -34,7 +34,6 @@
     text-align: center;
     box-shadow: none !important;
     margin-top:1rem;
-
  
 }
 
@@ -43,7 +42,7 @@
 }
 
 .hero-image-mail {
-    /* height: 300px; */
+ 
 }
 
 .hero-image-lines {

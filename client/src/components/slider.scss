@@ -17,14 +17,12 @@ $animationSpeed: 40s;
 
 
 // Styling
+.slider-component {
+	background: khaki;
+	padding-bottom: 70px;
+}
 .slider {
-	background: lightblue;
-	border-radius: 1rem;
-	// box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
 	height: 200px;
-	margin-top: 1rem;
-	margin-right: auto;
-	margin-left: auto;
 	overflow: hidden;
 	position: relative;
 	width: 1160px;
@@ -32,7 +30,7 @@ $animationSpeed: 40s;
 	&::before,
 	&::after {
 		@include white-gradient;
-		height: 140px;
+		height: 180px;
 		position: relative;
 		width: 200px;
 		z-index: 2;
@@ -57,19 +55,19 @@ $animationSpeed: 40s;
 
 	.slide {
 		height: 100px;
-		width: 220px;
+		width: 200px;
 	}
 }
 
  .slider-subtitle {
-
- 	margin-left: auto;
- 	padding-top: 1rem;
- 	margin-right: auto;
+	font-size: 14px !important;
+		font-weight: 500 !important;
+		padding-left: 0px;
+		text-align: center;
+		color: rgba(44, 17, 56, 0.6);
  }
 .slide img {
 	margin: auto;
 	position: absolute;
-
 
 }
