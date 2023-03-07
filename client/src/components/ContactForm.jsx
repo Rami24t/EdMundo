@@ -6,6 +6,9 @@ import {
   MDBModalDialog,
   MDBModalContent,
   MDBModalBody,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
 } from "mdb-react-ui-kit";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import StripyMan from "../assets/stripy-man.png";
@@ -39,70 +42,79 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="contact-form-section">
-      <div className="contact-form-container">
-        <form className="contact-form" ref={form} onSubmit={sendEmail}>
-          <h3>Get in touch</h3>
-          <hr className="contact-hr" />
-          <label className="contact-label">Name</label>
-          <input
-            className="contact-input"
-            type="text"
-            name="user_name"
-            defaultValue={value}
-            placeholder="Write your name here.."
-            required
-          />
+    <MDBContainer className="text-md-start contact-form-section" id="contact">
+      <MDBRow className="contact-form-container">
+        <MDBCol md="6" className="mx-auto">
+          <form className="contact-form" ref={form} onSubmit={sendEmail}>
+            <h3>Get in touch</h3>
+            <hr className="contact-hr" />
+            <label className="contact-label">Name</label>
+            <input
+              className="contact-input"
+              type="text"
+              name="user_name"
+              defaultValue={value}
+              placeholder="Write your name here.."
+              required
+            />
 
-          <label className="contact-label">School name</label>
-          <input
-            className="contact-input"
-            type="text"
-            name="school_name"
-            placeholder="And the school name here.."
-            required
+            <label className="contact-label">School name</label>
+            <input
+              className="contact-input"
+              type="text"
+              name="school_name"
+              placeholder="And the school name here.."
+              required
+            />
+            <label className="contact-label">Email</label>
+            <input
+              className="contact-input"
+              type="email"
+              name="user_email"
+              placeholder="Let us know how to contact you back.."
+              required
+            />
+            <label className="contact-label">Message</label>
+            <textarea
+              name="message"
+              className="contact-input"
+              placeholder="What would you like to tell us.."
+              required
+            />
+            <input
+              className="contact-button"
+              type="submit"
+              value="Send message"
+            />
+          </form>
+
+          <MDBModal
+            animationDirection="bottom"
+            show={showModal}
+            tabIndex="-1"
+            setShow={setShowModal}
+          >
+            <MDBModalDialog position="top" frame>
+              <MDBModalContent>
+                <MDBModalBody className="py-1">
+                  <div className="d-flex justify-content-center align-items-center my-3">
+                    <IoIosCheckmarkCircleOutline className="mx-2 text-success" />
+                    <p className="mb-0">Thank you for your message!</p>
+                  </div>
+                </MDBModalBody>
+              </MDBModalContent>
+            </MDBModalDialog>
+          </MDBModal>
+        </MDBCol>
+        <MDBCol md="4" className="m-auto">
+          <img
+            src={StripyMan}
+            alt="stripy-man"
+            className=" d-block contact-form-image"
           />
-          <label className="contact-label">Email</label>
-          <input
-            className="contact-input"
-            type="email"
-            name="user_email"
-            placeholder="Let us know how to contact you back.."
-            required
-          />
-          <label className="contact-label">Message</label>
-          <textarea
-            name="message"
-            className="contact-input"
-            placeholder="What would you like to tell us.."
-            required
-          />
-          <input
-            className="contact-button"
-            type="submit"
-            value="Send message"
-          />
-        </form>
-        <MDBModal
-          animationDirection="bottom"
-          show={showModal}
-          tabIndex="-1"
-          setShow={setShowModal}
-        >
-          <MDBModalDialog position="top" frame>
-            <MDBModalContent>
-              <MDBModalBody className="py-1">
-                <div className="d-flex justify-content-center align-items-center my-3">
-                  <IoIosCheckmarkCircleOutline className="mx-2 text-success" />
-                  <p className="mb-0">Thank you for your message!</p>
-                </div>
-              </MDBModalBody>
-            </MDBModalContent>
-          </MDBModalDialog>
-        </MDBModal>
-      </div>
-      <img src={StripyMan} alt="" className="contact-form-image" />
-    </div>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
   );
 };
 
