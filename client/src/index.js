@@ -16,21 +16,21 @@ import App from "./pages/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<BrowserRouter>
-		<ContextProvider>
-			<Routes>
-				<Route path="/" element={<App />}>
-					<Route path="" element={<Home />} />
-					<Route path="/teacher/profile" element={<TeacherProfile />} />
-					<Route path="/teacher/lessons" element={<TeacherLessons />} />
-					<Route path="/student/profile" element={<StudentProfile />} />
-					<Route path="/student/lessons" element={<StudentLessons />} />
-					<Route path="/student/schedule" element={<StudentSchedule />} />
-					<Route path="/login" element={<Login />} />
-				</Route>
+  <BrowserRouter>
+    <ContextProvider>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="" element={<Home />} />
+          <Route path="/teacher/profile" element={<TeacherProfile />} />
+          <Route path="/teacher/lessons" element={<TeacherLessons />} />
+          <Route path="/student/profile" element={<StudentProfile />} />
+          <Route path="/student/lessons" element={<StudentLessons />} />
+          <Route path="/student/schedule" element={<StudentSchedule />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
 
-				<Route path="*" element={<h1>404: Not Found</h1>} />
-			</Routes>
-		</ContextProvider>
-	</BrowserRouter>,
+        <Route path="*" element={<h1>404: Not Found</h1>} />
+      </Routes>
+    </ContextProvider>
+  </BrowserRouter>,
 );
