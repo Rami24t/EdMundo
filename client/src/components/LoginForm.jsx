@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useSWRConfig } from "swr";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { mutate, useSWRConfig } from "swr";
 import {
   MDBContainer,
   MDBCol,
@@ -8,18 +8,43 @@ import {
   MDBBtn,
   MDBInput,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
+import Context from "./Context";
 
 function LoginForm() {
-  const { mutate } = useSWRConfig();
+  const navigate = useNavigate();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { mutate } = useSWRConfig();
+  // const { state, dispatch } = useContext(Context);
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    mutate("/login", () =>
-      axios.post("http://localhost:5001/api/users/login", { email, password })
-    );
+    mutate('/api/users/login', () => {
+      axios.post(baseUrl+"/api/users/login", { email, password }, { withCredentials: true })
+        .then((res) => {
+          console.log(res.data.user);
+          if (res.status === 200 && res.data.user.role) {
+            if (res.data.user.role === "admin") {
+              navigate("/admin");
+            }
+            else if (res.data.user.role === "teacher") {
+                navigate("/teacher/lessons");
+              }
+            else if (res.data.user.role === "student") {
+                navigate("/student/lessons");
+            }
+            // dispatch({ type: "LOGIN", payload: res.data.user });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   };
+
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">
