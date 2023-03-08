@@ -15,12 +15,10 @@ export default function auth(req, res, next) {
 				.status(401)
 				.json({ success: false, error: "Invalid token, please login again" });
 		else
-			res
-				.status(401)
-				.json({
-					success: false,
-					error: "Something went wrong, please login again",
-				});
+			res.status(401).json({
+				success: false,
+				error: "Something went wrong, please login again",
+			});
 		console.log(error.message);
 	}
 }

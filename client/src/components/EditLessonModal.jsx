@@ -53,11 +53,7 @@ export default function EditLessonModal() {
 					<MDBModalContent>
 						<MDBModalHeader>
 							<MDBModalTitle>Edit lesson</MDBModalTitle>
-							<MDBBtn
-								className="btn-close"
-								color="none"
-								onClick={toggleShow}
-							></MDBBtn>
+							<MDBBtn className="btn-close" color="none" onClick={toggleShow} />
 						</MDBModalHeader>
 						<MDBModalBody>
 							<Form onSubmit={handleFormSubmit}>

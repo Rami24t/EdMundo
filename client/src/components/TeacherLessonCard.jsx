@@ -78,7 +78,7 @@ const TeacherLessonCard = () => {
 												className="btn-close"
 												color="none"
 												onClick={() => setShowDeleteModal(false)}
-											></MDBBtn>
+											/>
 										</MDBModalHeader>
 										<MDBModalBody>
 											Once you delete the lesson you won't be able to restore
