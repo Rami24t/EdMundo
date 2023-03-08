@@ -1,9 +1,11 @@
 import React from "react";
 import { MDBSpinner } from "mdb-react-ui-kit";
-import useSWR from "swr";
 import styles from "./StudentSchedule.module.css";
+import useSWR from "swr";
+import axios from "axios";
 
-import { mockedFetcher } from "./sessions-response-mock";
+const sessionsFetcher = (url) =>
+  axios.get(url, { withCredentials: true }).then((res) => res.data);
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
@@ -17,12 +19,10 @@ const SLOTS = [
 ];
 const SCHEDULE_GRID = Array(DAYS.length).fill(Array(SLOTS.length).fill(null));
 
-console.log(SCHEDULE_GRID);
-
 const SUBJECT_TO_COLOR = {
   Biology: "tomato",
   Math: "yellow",
-  Chemistry: "purple",
+  Science: "lightblue",
 };
 
 const Slot = ({ slot, isLoading }) => {
@@ -40,18 +40,19 @@ const Slot = ({ slot, isLoading }) => {
   return (
     <div
       className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
-      style={{ backgroundColor: SUBJECT_TO_COLOR[slot.name] }}
+      style={{ backgroundColor: SUBJECT_TO_COLOR[slot.subjectName] }}
     >
-      <p className={`${styles.scheduleSubject}`}>{slot.name}</p>
+      <p className={`${styles.scheduleSubject}`}>{slot.subjectName}</p>
       <p>{slot.teacher.name}</p>
     </div>
   );
 };
 
 const Schedule = () => {
-  const { data, isLoading } = useSWR("api_sessions", mockedFetcher);
-
-  const sessions = data?.sessions;
+  const { data: sessions, isLoading } = useSWR(
+    `${process.env.REACT_APP_BASE_URL}/api/student/sessions`,
+    sessionsFetcher
+  );
 
   return (
     <div className={styles.schedulePage}>
@@ -80,7 +81,7 @@ const Schedule = () => {
               <Slot
                 key={`slot-${dayIndex}-${slotIndex}`}
                 slot={sessions?.find(
-                  (s) => s.day === dayIndex && s.periodNumber === slotIndex
+                  (s) => s.weekDay === dayIndex && s.slot === slotIndex
                 )}
                 isLoading={isLoading}
               />
