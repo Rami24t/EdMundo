@@ -1,5 +1,5 @@
 .contact-form-component {
-    background-color:  khaki;
+    background-color:  #FCE5D8;
     padding-top: 96px;
     padding-bottom: 96px;
     height: fit-content;
@@ -11,13 +11,21 @@
     margin: auto;
 }
 
-.form-title {
-    font-size: 44px !important;
+.contact-form-title {
+    font-size: 27px !important;
     font-weight: 500;
     line-height: 1.2;
     margin-bottom: 2rem;
-    color:white;
 }
+
+.form-title .subtitle {
+    color:  #a876f5;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    font-size: 44px !important;
+
+}
+
 
 .contact-form-image{
     max-height: 400px;
@@ -31,10 +39,6 @@
     flex-direction: column;
     justify-content: center;
 
-}
-
-.contact-hr {
-    margin-top: 0;
 }
 
 .contact-label {
@@ -65,7 +69,6 @@
     box-shadow: none !important;
     margin-top:1rem;
     transition:all .3s;
-    background:0;
     cursor:pointer;
     border: none !important;
     text-transform: uppercase;
@@ -80,3 +83,4 @@
     background: green;
     color:#fff;
 }
+

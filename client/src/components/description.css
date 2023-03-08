@@ -37,9 +37,10 @@
   font-size: 27px;
   margin-top: 2rem;
   margin-bottom: 1rem;
+
 }
 
-.stripy-image {
+.description-stripy-image {
   position: absolute;
   width: 300px;
   display: block;

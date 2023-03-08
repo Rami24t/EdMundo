@@ -12,6 +12,11 @@ import {
 } from "mdb-react-ui-kit";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import StripyMan from "../assets/stripy-man.png";
+import Zigzag from "../assets/zigzag-stripes.png";
+import StripyBeige from "../assets/stripy-beige.png";
+import ThreeLines from "../assets/3-green-lines.png";
+import FourLines from "../assets/4-green-lines.png";
+import DarkLoop from "../assets/dark-loop.png";
 
 const ContactForm = () => {
   const [showModal, setShowModal] = useState(false);
@@ -44,14 +49,14 @@ const ContactForm = () => {
   return (
     <div className="contact-form-component">
       <MDBContainer className="text-md-start contact-form-section" id="contact">
-        <MDBRow className="form-title">
+        <MDBRow className="contact-form-title">
           <p>See what future of education looks like! </p>
+          <p className="subtitle">Get in touch</p>
         </MDBRow>
+        <MDBRow className="contact-form-title"></MDBRow>
         <MDBRow className="contact-form-container">
           <MDBCol md="6">
             <form className="contact-form" ref={form} onSubmit={sendEmail}>
-              <h3>Get in touch</h3>
-              <hr className="contact-hr" />
               <label className="contact-label">Name</label>
               <input
                 className="contact-input"

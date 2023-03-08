@@ -5,7 +5,7 @@
 $animationSpeed: 40s;
 
 // Animation
-@keyframes scroll {
+@keyframes slider-scroll {
 	0% {
 		transform: translateX(0);
 	}
@@ -48,7 +48,7 @@ $animationSpeed: 40s;
 	}
 
 	.slide-track {
-		animation: scroll $animationSpeed linear infinite;
+		animation: slider-scroll $animationSpeed linear infinite;
 		display: flex;
 		width: calc(250px * 14);
 	}
@@ -65,9 +65,4 @@ $animationSpeed: 40s;
 		padding-left: 0px;
 		text-align: center;
 		color: rgba(44, 17, 56, 0.6);
- }
-.slide img {
-	margin: auto;
-	position: absolute;
-
 }

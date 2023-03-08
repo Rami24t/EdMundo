@@ -4,11 +4,7 @@ import "./description.css";
 import SmilingFace from "../assets/smiling-face.png";
 import Hat from "../assets/hat.png";
 import SpeechBubble from "../assets/speech-bubble.png";
-import Zigzag from "../assets/zigzag-stripes.png";
-import StripyBeige from "../assets/stripy-beige.png";
-import ThreeLines from "../assets/3-green-lines.png";
-import FourLines from "../assets/4-green-lines.png";
-import DarkLoop from "../assets/dark-loop.png";
+
 
 const Description = () => {
   return (
@@ -16,7 +12,7 @@ const Description = () => {
       <MDBContainer className="description-section">
         {/* <MDBRow>
           {" "}
-          <img src={StripyBeige} alt="" className="stripy-image" />
+          <img src={StripyBeige} alt="" className="description-stripy-image" />
         </MDBRow> */}
 
         <MDBRow className="description-text">
@@ -29,7 +25,7 @@ const Description = () => {
         <MDBRow>
           <MDBCol md={4} className="description-container-image">
             <img src={Hat} alt="red-lines" className="description-image" />
-            <h5 className="description-title">Convenience</h5>
+            <h5 className="description-title">Convenient</h5>
             <p className="description-subtitle">
               Say goodbye to the hassle of commuting to school or carrying heavy
               textbooks. Attend classes from the comfort of your own home,
@@ -43,7 +39,7 @@ const Description = () => {
               alt="red-lines"
               className="description-image"
             />
-            <h5 className="description-title">Interactivity</h5>
+            <h5 className="description-title">Interactive</h5>
             <p className="description-subtitle">
               Explore a variety of interactive features, such as live video
               conferencing, screen sharing, whiteboard tools, and breakout
@@ -57,7 +53,7 @@ const Description = () => {
               alt="red-lines"
               className="description-image"
             />
-            <h5 className="description-title">Flexibility</h5>
+            <h5 className="description-title">Flexibile</h5>
             <p className="description-subtitle">
               Our platform allows you to learn at your own pace and on your own
               schedule. Whether students prefer to attend live classes or watch

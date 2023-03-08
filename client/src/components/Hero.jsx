@@ -22,7 +22,7 @@ const Hero = () => {
               as you would in a physical classroom setting.
             </p>
             <HashLink to="/#contact">
-              <MDBBtn className="demo-button">Book a free demo</MDBBtn>
+              <MDBBtn className="hero-demo-button">Book a free demo</MDBBtn>
             </HashLink>
           </MDBCol>
           <MDBCol md={5} className="hero-container-image">

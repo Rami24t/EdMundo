@@ -3,6 +3,7 @@ import "./slider.scss";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Logo1 from "../assets/logo1.png";
 import Logo2 from "../assets/logo2.png";
+import Logo3 from "../assets/logo3.png";
 
 const Slider = () => {
   return (
@@ -22,7 +23,7 @@ const Slider = () => {
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
           <MDBCol md="6" className="slide">
-            <img src={Logo1} height="130" alt="school-logo" />
+            <img src={Logo3} height="130" alt="school-logo" />
           </MDBCol>
           <MDBCol md="6" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
@@ -34,7 +35,7 @@ const Slider = () => {
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
           <MDBCol md="6" className="slide">
-            <img src={Logo1} height="130" alt="school-logo" />
+            <img src={Logo3} height="130" alt="school-logo" />
           </MDBCol>
           <MDBCol md="6" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
@@ -46,7 +47,7 @@ const Slider = () => {
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
           <MDBCol md="6" className="slide">
-            <img src={Logo1} height="130" alt="school-logo" />
+            <img src={Logo3} height="130" alt="school-logo" />
           </MDBCol>
           <MDBCol md="6" className="slide">
             <img src={Logo1} height="130" alt="school-logo" />
