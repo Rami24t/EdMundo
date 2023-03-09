@@ -33,7 +33,7 @@ const ContactForm = () => {
         "service_p8q9go7",
         "template_kypxmgi",
         form.current,
-        "MvJyvDm2jLNqAJw6u"
+        "MvJyvDm2jLNqAJw6u",
       )
       .then(
         (result) => {
@@ -41,7 +41,7 @@ const ContactForm = () => {
         },
         (error) => {
           console.log(error.text);
-        }
+        },
       );
     e.target.reset();
   };

@@ -31,7 +31,7 @@ export const updateTeacher = async (req, res) => {
 export const updateLesson = async (req, res) => {
   // if (req.user.role !== "teacher")
   // add a middleware to populate the req.user object
-    // return res.status(401).json({ success: false, error: "Unauthorized" });
+  // return res.status(401).json({ success: false, error: "Unauthorized" });
   if (!req.body.topic)
     return res.status(400).json({ success: false, error: "Topic is required" });
   try {
@@ -104,7 +104,7 @@ export const getSessions = async (req, res) => {
     return res.status(401).json({ success: false, error: "Unauthorized" });
   try {
     const sessions = await Session.find({ teacher: req.user._id }).select(
-      "-__v"
+      "-__v",
     );
     if (!sessions) return res.send({ success: false, errorId: 404 });
     res.send({ success: true, sessions });

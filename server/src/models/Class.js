@@ -22,11 +22,13 @@ const classSchema = new Schema(
           type: String,
           required: true,
         },
-        sessions: [{
-          type: Schema.Types.ObjectId,
-          ref: "Session",
-          required: true,
-        }],
+        sessions: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: "Session",
+            required: true,
+          },
+        ],
       },
     ],
     notes: {
@@ -62,7 +64,7 @@ const classSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("Class", classSchema);

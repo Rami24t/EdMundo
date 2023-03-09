@@ -5,7 +5,6 @@ import ReceivingMail from "../assets/receiving-mail.png";
 import RedLines from "../assets/red-rays.png";
 import { HashLink } from "react-router-hash-link";
 
-
 const Hero = () => {
   return (
     <div className="hero">

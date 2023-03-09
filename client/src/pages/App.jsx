@@ -11,7 +11,7 @@ const App = () => {
     <div>
       <Navbar />
       <Outlet />
-     {theme!=='/login' && <Footer />}
+      {theme !== "/login" && <Footer />}
     </div>
   );
 };

@@ -5,8 +5,7 @@ import { createContext, useReducer } from "react";
 export const Context = createContext();
 
 export default function ContextProvider({ children }) {
-
-const reducer = (state, action) => {
+  const reducer = (state, action) => {
     switch (action.type) {
       case "LOGIN":
         return {
@@ -17,7 +16,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           user: null,
-        }
+        };
       case "CREATE-LESSON":
         return {
           ...state,
@@ -26,13 +25,15 @@ const reducer = (state, action) => {
       case "DELETE-LESSON":
         return {
           ...state,
-          lessons: state.lessons.filter((lesson) => lesson._id !== action.payload),
+          lessons: state.lessons.filter(
+            (lesson) => lesson._id !== action.payload,
+          ),
         };
       case "UPDATE-LESSON":
         return {
           ...state,
           lessons: state.lessons.map((lesson) =>
-            lesson._id === action.payload._id ? action.payload : lesson
+            lesson._id === action.payload._id ? action.payload : lesson,
           ),
         };
       case "UPDATE-PROFILE":
@@ -52,11 +53,7 @@ const reducer = (state, action) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-
-
-return (
-    <Context.Provider value={{state, dispatch}}>
-      {children}
-    </Context.Provider>
+  return (
+    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );
 }

@@ -17,7 +17,7 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate("/login", () =>
-      axios.post("http://localhost:5001/api/users/login", { email, password })
+      axios.post("http://localhost:5001/api/users/login", { email, password }),
     );
   };
 
