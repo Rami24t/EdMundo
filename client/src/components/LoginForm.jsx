@@ -24,7 +24,7 @@ function LoginForm() {
     mutate("/api/users/login", () => {
       axios
         .post(
-          baseUrl + "/api/users/login",
+          `${baseUrl}/api/users/login`,
           { email, password },
           { withCredentials: true },
         )

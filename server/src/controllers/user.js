@@ -78,8 +78,7 @@ export const login = async (req, res) => {
     if (!user) return res.send({ success: false, errorId: 404 });
     const passMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passMatch) return res.send({ success: false, errorId: 401 });
-    const newUser = user.toObject();
-    delete newUser.password;
+    const { password, ...newUser } = user.toObject();
     const token = jwt.sign(newUser, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
