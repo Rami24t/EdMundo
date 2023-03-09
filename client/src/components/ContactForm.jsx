@@ -53,7 +53,7 @@ const ContactForm = () => {
           <p>See what future of education looks like! </p>
           <p className="subtitle">Get in touch</p>
         </MDBRow>
-        <MDBRow className="contact-form-title"></MDBRow>
+        <MDBRow className="contact-form-title" />
         <MDBRow className="contact-form-container">
           <MDBCol md="6">
             <form className="contact-form" ref={form} onSubmit={sendEmail}>
