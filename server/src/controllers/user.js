@@ -79,7 +79,8 @@ export const login = async (req, res) => {
     const passMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passMatch) return res.send({ success: false, errorId: 401 });
     const { password, ...newUser } = user.toObject();
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+
+    const token = jwt.sign(newUser, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
     res.cookie("SocialAppMERNToken", token, { sameSite: "none", secure: true });
