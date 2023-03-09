@@ -29,7 +29,7 @@
 }
 
 .description-image {
-
+  max-height: 170px;
   margin: auto;
 }
 
@@ -37,7 +37,6 @@
   font-size: 27px;
   margin-top: 2rem;
   margin-bottom: 1rem;
-
 }
 
 .description-stripy-image {
@@ -50,11 +49,10 @@
 .description-subtitle {
 }
 
-
 @media only screen and (max-width: 600px) {
   .description {
-    padding-top:5rem;
-    padding-bottom: 4rem; 
+    padding-top: 5rem;
+    padding-bottom: 4rem;
   }
   .description-section {
     margin-left: 1rem;
@@ -62,7 +60,6 @@
     max-width: 330px;
   }
 
-  
   .description-section-title {
     font-size: 30px !important;
   }
@@ -71,18 +68,18 @@
     font-size: 16px;
   }
 
-.description-container-image{
-  margin-top: 3rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  max-width: 100%;
-  padding: 30px 20px;
-}
-.description-title {
-  font-size: 24px;
-}
+  .description-container-image {
+    margin-top: 3rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    max-width: 100%;
+    padding: 30px 20px;
+  }
+  .description-title {
+    font-size: 24px;
+  }
 
-.description-image{
-  height: 150px;
-}
+  .description-image {
+    height: 150px;
+  }
 }

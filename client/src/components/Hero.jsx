@@ -4,9 +4,10 @@ import "./hero.css";
 import ReceivingMail from "../assets/receiving-mail.png";
 import RedLines from "../assets/red-rays.png";
 import { HashLink } from "react-router-hash-link";
+import StripyMan from "../assets/stripy-man.png";
 
 const Hero = () => {
-	return (
+  return (
     <div className="hero">
       <MDBContainer className="hero-section">
         <MDBRow>
@@ -25,9 +26,9 @@ const Hero = () => {
             </HashLink>
           </MDBCol>
           <MDBCol md={5} className="col-sm hero-container-image">
-            <img src={RedLines} alt="red-lines" className=" hero-image-lines" />
+            <img src={RedLines} alt="red-lines" className="hero-image-lines" />
             <img
-              src={ReceivingMail}
+              src={StripyMan}
               alt="receiving-mail"
               className=" hero-image-main"
             />

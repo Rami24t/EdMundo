@@ -35,16 +35,20 @@
   text-align: center;
   box-shadow: none !important;
   margin-top: 1rem;
-  
 }
 
 .hero-container-image {
   margin: auto;
 }
 
-.hero-image-lines {
+.hero-image-main {
   float: right;
+}
+
+.hero-image-lines {
   height: 150px;
+  float: left;
+  transform: rotate(-70deg);
 }
 
 /* Media queries */
@@ -67,11 +71,10 @@
 
   .hero-demo-button {
     display: block;
-    margin:auto;
+    margin: auto;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
-
 
   .hero-image-lines {
     display: none;

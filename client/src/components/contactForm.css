@@ -1,5 +1,5 @@
 .contact-form-component {
-  background-color: #fce5d8;
+  background-color: #fadcd2;
   padding-top: 96px;
   padding-bottom: 96px;
   height: fit-content;
@@ -10,18 +10,25 @@
   margin: auto;
 }
 
-.contact-form-title {
-  font-size: 27px !important;
-  font-weight: 500;
-  line-height: 1.2;
-  margin-bottom: 2rem;
+.contact-form-container {
+  margin-bottom: 0px;
 }
 
-.contact-form-title .subtitle {
+.contact-form-title {
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+}
+
+.contact-form-title {
   color: #a876f5;
   text-decoration-line: underline;
   text-decoration-style: wavy;
   font-size: 44px !important;
+}
+
+.contact-form-images {
+  margin: auto;
 }
 
 .contact-form-image {
@@ -47,12 +54,12 @@
   margin-bottom: 15px;
   transition: all 0.3s;
   font-size: 14px;
-  color: white;
+  color: var(--black);
   background-color: transparent;
 }
 
 .contact-input:focus {
-  border-bottom: 2px solid green;
+  border-bottom: 2px solid #762de2;
 }
 
 .contact-button {
@@ -79,12 +86,17 @@
   color: #fff;
 }
 
+.contact-image-lines {
+  float: right;
+  height: 150px;
+}
+
 @media only screen and (max-width: 600px) {
   .contact-form-component {
     padding-top: 5rem;
     padding-bottom: 4rem;
   }
-  .contact-form-section {
+  .contact-form-section .message-sent-modal {
     margin-left: 1rem;
     margin-right: 1rem;
     max-width: 330px;
@@ -92,7 +104,7 @@
 
   .contact-form-title {
     font-size: 30px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
   }
   .contact-form-title .subtitle {
     font-size: 30px !important;
@@ -102,5 +114,8 @@
   .contact-form-image {
     margin: auto;
     margin-top: 3rem;
+  }
+  .contact-image-lines {
+    display: none;
   }
 }
