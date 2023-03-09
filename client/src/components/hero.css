@@ -1,0 +1,52 @@
+
+.hero {
+    height: fit-content;
+    background-color:khaki;
+    padding-top: 96px;
+    padding-bottom: 96px;
+}
+
+.hero-section {
+    width: 1160px !important;
+}
+
+.hero-text {
+
+}
+
+
+.hero-title {
+    margin-bottom: 2rem;
+    font-size: 56px;
+    max-width: 550px;
+}
+
+.hero-subtitle {
+    font-size:20px;
+    max-width: 480px;
+}
+
+.hero-demo-button{
+    border-radius: 30px;
+    padding: 20px 30px;
+    background-color:  #a876f5;
+    color: #fff;
+    text-align: center;
+    box-shadow: none !important;
+    margin-top:1rem;
+ 
+}
+
+.hero-container-image {
+    margin: auto;
+}
+
+.hero-image-mail {
+ 
+}
+
+.hero-image-lines {
+    float:right;
+    height: 150px;
+}
+
