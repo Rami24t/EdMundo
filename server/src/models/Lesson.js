@@ -1,56 +1,61 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-const lessonSchema = new Schema({
+const lessonSchema = new Schema(
+  {
     topic: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     session: {
-        type: Schema.Types.ObjectId,
-        ref: 'Session',
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "Session",
+      required: true,
     },
     teacher: {
-        type: Schema.Types.ObjectId,
-        ref: 'Teacher',
+      type: Schema.Types.ObjectId,
+      ref: "Teacher",
     },
     date: {
-        type: Date,
-        required: true
+      type: Date,
+      required: true,
     },
     objectives: {
-        type: String,
+      type: String,
     },
     description: {
-        type: String,
+      type: String,
     },
     materials: {
-        type: [String],
+      type: [String],
     },
     classworks: {
-        type: [String],
+      type: [String],
     },
     homeworks: {
-        type: [String],
+      type: [String],
     },
     assessment: {
-        type: String,
+      type: String,
     },
     notes: {
-        type: String,
+      type: String,
     },
     resources: {
-        type: [String],
+      type: [String],
     },
     attachments: {
-        type: [String],
+      type: [String],
     },
-    attendance: [{
+    attendance: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Student'
-    }]
-}, {
-    timestamps: true
-})
+        ref: "Student",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  },
+);
 
-export default mongoose.model('Lesson', lessonSchema)
+export default mongoose.model("Lesson", lessonSchema);

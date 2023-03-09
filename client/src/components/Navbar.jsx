@@ -35,50 +35,69 @@ export default function Navbar() {
         >
           <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
-<MDBCollapse navbar show={showNav}>
-{(theme!=="/login" ) &&
-          <MDBNavbarNav className="d-flex justify-content-end gap-4 ">
-            <MDBNavbarItem>
-              <NavLink to="/">
-                {({ isActive }) => (
-                  <MDBNavbarLink className={theme === "/" && " d-none "} active={isActive} aria-current="page">
-                    Home
-                  </MDBNavbarLink>
-                )}
-              </NavLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <NavLink to="/teacher/profile">
-                {({ isActive }) => (
-                  <MDBNavbarLink
-                    className={(theme === "/" || theme==="/login" ) && " d-none "}
-                    active={isActive}
+        <MDBCollapse navbar show={showNav}>
+          {theme !== "/login" && (
+            <MDBNavbarNav className="d-flex justify-content-end gap-4 ">
+              <MDBNavbarItem>
+                <NavLink to="/">
+                  {({ isActive }) => (
+                    <MDBNavbarLink
+                      className={theme === "/" && " d-none "}
+                      active={isActive}
+                      aria-current="page"
+                    >
+                      Home
+                    </MDBNavbarLink>
+                  )}
+                </NavLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem>
+                <NavLink to="/teacher/profile">
+                  {({ isActive }) => (
+                    <MDBNavbarLink
+                      className={
+                        (theme === "/" || theme === "/login") && " d-none "
+                      }
+                      active={isActive}
+                    >
+                      Profile
+                    </MDBNavbarLink>
+                  )}
+                </NavLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem>
+                <MDBNavbarLink
+                  href="#"
+                  className={
+                    (theme === "/" || theme === "/login") && " d-none "
+                  }
+                >
+                  Lessons
+                </MDBNavbarLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem
+                className={(theme === "/" || theme === "/login") && " d-none "}
+              >
+                <NavLink to="/student/schedule">
+                  {({ isActive }) => (
+                    <MDBNavbarLink href="#">Schedule</MDBNavbarLink>
+                  )}
+                </NavLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem>
+                <Link to="/login" className={theme === "/login" && "d-none"}>
+                  <MDBBtn
+                    outline
+                    color="success"
+                    className="me-2"
+                    type="button"
                   >
-                    Profile
-                  </MDBNavbarLink>
-                )}
-              </NavLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href="#" className={(theme === "/" || theme==="/login" ) && " d-none "}>
-                Lessons
-              </MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem className={(theme === "/" || theme==="/login" )&& " d-none "}>
-            <NavLink to="/student/schedule">
-                {({ isActive }) => (
-              <MDBNavbarLink href="#">Schedule</MDBNavbarLink>
-                )}
-              </NavLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <Link to="/login"  className={(theme==="/login" ) && 'd-none'}>
-                <MDBBtn outline color="success" className="me-2" type="button">
-                  Log In/Out
-                </MDBBtn>
-              </Link>
-            </MDBNavbarItem>
-          </MDBNavbarNav>}
+                    Log In/Out
+                  </MDBBtn>
+                </Link>
+              </MDBNavbarItem>
+            </MDBNavbarNav>
+          )}
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

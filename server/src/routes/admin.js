@@ -21,7 +21,7 @@ import {
   getClasses,
   getSessions,
   updateClassStudentsCurrentClass,
-  updateClassSessionsClassRef
+  updateClassSessionsClassRef,
 } from "../controllers/admin.js";
 import auth from "../middleware/auth.js";
 import multerMiddleware from "../config/multer-cloudinary.js";
@@ -31,118 +31,118 @@ import { check } from "express-validator";
 router.put(
   "/class/current",
   // auth,
-  updateClassStudentsCurrentClass
-)
+  updateClassStudentsCurrentClass,
+);
 
 router.put(
   "/class/passclassreftosessions",
   // auth,
-  updateClassSessionsClassRef
-)
+  updateClassSessionsClassRef,
+);
 
 router.put(
   "/school",
   // auth,
   multerMiddleware.single("image"),
-  updateSchool
+  updateSchool,
 );
 router.put(
   "/teacher",
   // auth,
   multerMiddleware.single("image"),
-  updateTeacher
+  updateTeacher,
 );
 router.put(
   "/student",
   // auth,
   multerMiddleware.single("image"),
-  updateStudent
+  updateStudent,
 );
 router.put(
   "/class",
   // auth,
   multerMiddleware.single("image"),
-  updateClass
+  updateClass,
 );
 
 router.put(
   "/session",
   // auth,
   multerMiddleware.single("image"),
-  updateSession
+  updateSession,
 );
 
 router.delete(
   "/school",
   // auth,
-  deleteSchool
+  deleteSchool,
 );
 router.delete(
   "/teacher",
   // auth,
-  deleteTeacher
+  deleteTeacher,
 );
 router.delete(
   "/student",
   // auth,
-  deleteStudent
+  deleteStudent,
 );
 router.delete(
   "/class",
   // auth,
-  deleteClass
+  deleteClass,
 );
 router.delete(
   "/session",
   // auth,
-  deleteSession
+  deleteSession,
 );
 
 router.get(
   "/school/:id",
   // auth,
-  getSchool
+  getSchool,
 );
 router.get(
   "/teacher/:id",
   // auth,
-  getTeacher
+  getTeacher,
 );
 router.get(
   "/student/:id",
   // auth,
-  getStudent
+  getStudent,
 );
 router.get(
   "/class/:id",
   // auth,
-  getClass
+  getClass,
 );
 router.get(
   "/session/:id",
   // auth,
-  getSession
+  getSession,
 );
 
 router.get(
   "/teachers",
   // auth,
-  getTeachers
+  getTeachers,
 );
 router.get(
   "/students",
   // auth,
-  getStudents
+  getStudents,
 );
 router.get(
   "/classes",
   // auth,
-  getClasses
+  getClasses,
 );
 router.get(
   "/sessions",
   // auth,
-  getSessions
+  getSessions,
 );
 
 router.get("/schools", getSchools);

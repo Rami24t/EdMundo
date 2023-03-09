@@ -80,7 +80,7 @@ const Schedule = () => {
               <Slot
                 key={`slot-${dayIndex}-${slotIndex}`}
                 slot={sessions?.find(
-                  (s) => s.day === dayIndex && s.periodNumber === slotIndex
+                  (s) => s.day === dayIndex && s.periodNumber === slotIndex,
                 )}
                 isLoading={isLoading}
               />

@@ -7,22 +7,24 @@ import Session from "../models/Session.js";
 import sendEmail from "../utilities/email.js";
 import { validationResult } from "express-validator";
 
-export const updateSchool = async(req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+export const updateSchool = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  try {
+    let school = await School.findByIdAndUpdate(req.body._id, req.body, {
+      new: true,
+    });
+    if (!school) {
+      if (!req.body.name)
+        return res
+          .status(400)
+          .json({ success: false, error: "School name is required" });
+      const newSchool = await School.create(req.body);
+      return res.status(200).json({ success: true, school: newSchool });
     }
-    try {
-        let school = await School.findByIdAndUpdate(req.body._id, req.body, {
-            new: true,
-        });
-        if (!school) {
-            if (!req.body.name)
-                return res.status(400).json({ success: false, error: "School name is required" });
-            const newSchool = await School.create(req.body);
-            return res.status(200).json({ success: true, school: newSchool });
-        }
-        return res.status(200).json({ success: true, school: school });
+    return res.status(200).json({ success: true, school: school });
   } catch (error) {
     console.log("update school error:", error.message);
     res.send({ success: false, error: error.message });
@@ -91,9 +93,13 @@ export const updateClass = async (req, res) => {
   }
   try {
     if (req.body._id) {
-      const schoolClass = await Class.findByIdAndUpdate(req.body._id, req.body, {
-        new: true,
-      });
+      const schoolClass = await Class.findByIdAndUpdate(
+        req.body._id,
+        req.body,
+        {
+          new: true,
+        },
+      );
       return res.status(200).json({ success: true, schoolClass: schoolClass });
     } else {
       const newClass = await Class.create(req.body);
@@ -162,7 +168,6 @@ export const updateClassStudentsCurrentClass = async (req, res) => {
   }
 };
 
-
 export const updateSession = async (req, res) => {
   if (!req.body.name)
     return res
@@ -203,7 +208,6 @@ export const updateSession = async (req, res) => {
 //     if(!classSchedule) return res.send({ success: false, errorId: 404, error: "Class schedule not found" });
 //     console.log("classSchedule:", classSchedule);
 
-  
 //     if(!sessions) return res.send({ success: false, errorId: 404 });
 //     sessions.forEach(async (session) => {
 //       session.currentClass = req.body._id;
@@ -242,10 +246,9 @@ export const updateClassSessionsClassRef = async (req, res) => {
 
     const sessions = classSchedule.schedule.reduce(
       (prev, curr) => [...prev, ...curr.sessions],
-      []
+      [],
     );
-    if (!sessions.length)
-      return res.send({ success: false, errorId: 404 });
+    if (!sessions.length) return res.send({ success: false, errorId: 404 });
 
     for (const session of sessions) {
       session.class = req.body._id;
@@ -402,11 +405,11 @@ export const getStudents = async (req, res) => {
 export const getClasses = async (req, res) => {
   try {
     const schoolClasses = await Class.find().populate({
-      path: 'schedule.sessions',
+      path: "schedule.sessions",
       populate: {
-        path: 'teacher',
-        model: 'Teacher'
-      }
+        path: "teacher",
+        model: "Teacher",
+      },
     });
     return res
       .status(200)
