@@ -2,34 +2,6 @@ import React from "react";
 import styles from "./StudentSchedule.module.css";
 
 const school = {
-  _id: "63ff41d7ef76ccf33ed37234",
-  name: "RJA Middle School",
-  address: "Berlinstr. 24",
-  city: "Berlin",
-  state: "Berlin",
-  zip: "10243",
-  email: "RJA@gmail.com",
-  phone: "004976534562",
-  teachers: [
-    "63ff411bef76ccf33ed37219",
-    "63ff54e6e9ab65e90557510b",
-    "63ff5745e9ab65e905575117",
-    "63ff56b1e9ab65e905575115",
-    "63ff5648e9ab65e905575113",
-    "63ff55f4e9ab65e905575111",
-    "63ff55b6e9ab65e90557510f",
-    "63ff555de9ab65e90557510d",
-  ],
-  students: [
-    "63ff4558ef76ccf33ed3723e",
-    "63ff46b4ef76ccf33ed37248",
-    "63ff4696ef76ccf33ed37246",
-    "63ff4651ef76ccf33ed37244",
-    "63ff4636ef76ccf33ed37242",
-    "63ff45cdef76ccf33ed37240",
-  ],
-  admins: ["63fe50afb503b44da326949c"],
-  classes: ["63ff7cafd8ddb69fa8c50bcc"],
   periods: [
     {
       number: 1,
@@ -74,9 +46,6 @@ const school = {
       _id: "63ff41d7ef76ccf33ed3723b",
     },
   ],
-  createdAt: "2023-03-01T12:15:19.602Z",
-  updatedAt: "2023-03-02T09:28:08.539Z",
-  __v: 0,
 };
 const periods = school.periods;
 
@@ -930,9 +899,18 @@ const Schedule = () => {
                 key={`slot-${dayIndex}-${slotIndex}`}
                 className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
               >
-                {" "}
-                <p className={`${styles.scheduleSubject}`}>Biology</p>
-                <p>Julia Kobzar</p>
+                <p className={`${styles.scheduleSubject}`}>
+                  {
+                    classWithSchedule.schedule[dayIndex].sessions[slotIndex]
+                      .name
+                  }
+                </p>
+                <p>
+                  {
+                    classWithSchedule.schedule[dayIndex].sessions[slotIndex]
+                      .teacher.name
+                  }
+                </p>
               </div>
             ))}
           </div>
