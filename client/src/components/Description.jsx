@@ -5,7 +5,6 @@ import SmilingFace from "../assets/smiling-face.png";
 import Hat from "../assets/hat.png";
 import SpeechBubble from "../assets/speech-bubble.png";
 
-
 const Description = () => {
   return (
     <div className="description">
