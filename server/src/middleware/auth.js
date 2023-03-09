@@ -19,6 +19,10 @@ export default function auth(req, res, next) {
         success: false,
         error: "Something went wrong, please login again",
       });
+    res.status(401).json({
+      success: false,
+      error: "Something went wrong, please login again",
+    });
     console.log(error.message);
   }
 }
