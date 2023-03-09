@@ -1,0 +1,21 @@
+/* .profileForm .form {
+  display: flex;
+  flex-direction: column;
+}
+.profileForm .label {
+  padding: 1rem;
+}
+.profileForm .input {
+  padding-left: 0.5rem;
+}
+.profileForm .inputText {
+  padding-right: 0.5rem;
+}
+.profileForm .buttonsContainer {
+  display: flex;
+  justify-content: space-around;
+} */
+.header-2 {
+  font-size: 1.2rem;
+  padding: 1rem 0.5rem;
+}

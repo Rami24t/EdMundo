@@ -1,0 +1,86 @@
+.lesson-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    margin: 1rem;
+}
+
+.lesson-card .lesson-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.lesson-card .title-container {
+    width: 80%;
+    margin-right: 10px;
+}
+
+.lesson-card .buttons-container {
+    width: 20%;
+}
+
+.lesson-card .edit-delete-buttons {
+    background-color: transparent;
+    border: none;
+    float: right;
+}
+
+.lesson-card .delete-button {
+    color: red;
+}
+
+.lesson-card hr {
+    height: 1px;
+    margin-top: 0rem;
+}
+
+.lesson-card .topic {
+    margin-bottom: 20px;
+}
+
+.lesson-card .info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.lesson-card .column {
+    width: 50%;
+}
+
+.lesson-card p {
+    margin-bottom: 5px;
+}
+
+.lesson-card .lesson-card-label {
+    /* margin-bottom: 0px !important; */
+    font-size: small !important;
+    color: green;
+
+}
+
+.lesson-card .lesson-card-input {
+    background-color: #ffffff !important;
+    border: none;
+    padding: 0px;
+    color: rgba(0, 0, 0, 0.788) !important;
+
+}
+
+.lesson-card .lesson-card-icon {
+    padding-top: 0px;
+    line-height: normal;
+    color: green; 
+}
+
+.lesson-card .form-label {
+    float: left;
+}

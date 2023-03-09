@@ -1,4 +1,6 @@
-import User from "../models/User.js";
+import Teacher from "../models/Teacher.js";
+import Student from "../models/Student.js";
+import Admin from "../models/Admin.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendEmail from "../utilities/email.js";
@@ -7,20 +9,32 @@ import { validationResult } from "express-validator";
 const SALT_ROUNDS = 10;
 export const register = async(req, res) => {
     try {
+        console.log('register req.body: ', req.body);
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
+        if (!errors.isEmpty())
+        {
             return res.status(400).json({ errors: errors.array() });
         }
-
         const salt = await bcrypt.genSalt(SALT_ROUNDS);
         const hashedPass = await bcrypt.hash(req.body.password, salt);
         req.body.password = hashedPass;
-        const user = await User.create(req.body);
-        console.log("register user: ", user);
+        let user;
+        if(req.body.role === 'teacher') {
+            console.log("register teacher: ", req.body);
+            user = await Teacher.create(req.body);
+            console.log("register teacher: ", user);
+        } else if(req.body.role === 'student') {
+            user = await Student.create(req.body);
+            console.log("register student: ", user);
+        }
+        else if(req.body.role === 'admin') {
+            user = await Admin.create(req.body);
+            console.log("register admin: ", user);
+        }
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: "1h",
         });
-        sendEmail(token);
+        // sendEmail(token);
         res.send({ success: true });
     } catch (error) {
         console.log("registration error:", error.message);
@@ -34,13 +48,34 @@ export const login = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const user = await User.findOne({
-            $or: [
-                { username: req.body.emailOrUsername },
-                { email: req.body.emailOrUsername },
-            ],
+        let user = await Teacher.findOne({
+            // $or: [
+                // { username: req.body.email },
+                // { 
+                    email: req.body.email 
+                // },
+            // ],
         }).select("-__v");
-
+        if (!user)
+            user = await Student.findOne({
+                // $or: [
+                    // { username: req.body.email },
+                    // { 
+                        email: req.body.email 
+                    // },
+                // ],
+            }).select("-__v");
+        else if(!user) {
+            user = await Admin.findOne({
+                // $or: [
+                    // { username: req.body.email },
+                    // { 
+                        email: req.body.email
+                    //  }
+                    // ,
+                // ],
+            }).select("-__v");
+        }
         console.log("logging in user:", user);
         if (!user) return res.send({ success: false, errorId: 404 });
         const passMatch = await bcrypt.compare(req.body.password, user.password);
@@ -85,8 +120,8 @@ export const forgotPass = async(req, res) => {
     try {
         const user = await User.findOne({
             $or: [
-                { username: req.body.emailOrUsername },
-                { email: req.body.emailOrUsername },
+                { username: req.body.email },
+                { email: req.body.email },
             ],
         });
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -136,8 +171,12 @@ export const getUserPublic = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const user = await User.findById(req.params.id).select("-password -__v");
-        if (!user) return res.json({ success: false, errorId: 404 }).status(404);
+        let user = await Admin.findById(req.params.id).select("-password -__v");
+        if (!user)
+            user = await Teacher.findById(req.params.id).select("-password -__v");
+        if (!user)
+            user = await Student.findById(req.params.id).select("-password -__v");
+        if(!user) return res.json({ success: false, errorId: 404 }).status(404);
         res.json({ success: true, user }).status(200);
     } catch (error) {
         console.log("getUser error:", error.message);
@@ -153,31 +192,34 @@ export const updateProfile = async(req, res) => {
     try {
         if (req.file) req.body.profileImage = req.file.path;
         req.body.likes = JSON.parse(req.body.likes);
-        const user = await User.findByIdAndUpdate(req.user, req.body, {
-            new: true,
-        }).select("-password -__v");
+        let user = await Admin.findById(req.user)
+        if (!user) user = await Teacher.findById(req.user)
+        if (!user) user = await Student.findById(req.user)
         if (!user) return res.send({ success: false, errorId: 404 });
+        user.set(req.body);
+        await user.save();
+        user = user.select("-password -__v");
         res.send({ success: true, user });
     } catch (error) {
         console.log("updateProfile error:", error.message);
-        res.send({ success: false, error: error.message });
+        res.status(500).send({ success: false, error: error.message });
     }
 };
 
-export const updateCover = async(req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    try {
-        if (req.file) req.body.coverImage = req.file.path;
-        const user = await User.findByIdAndUpdate(req.user, req.body, {
-            new: true,
-        }).select("-password -__v");
-        if (!user) return res.send({ success: false, errorId: 404 });
-        res.json({ success: true, coverImage: user.coverImage }).status(200);
-    } catch (error) {
-        console.log("updateProfile error:", error.message);
-        res.send({ success: false, error: error.message });
-    }
-};
+// export const updateCover = async(req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         return res.status(400).json({ errors: errors.array() });
+//     }
+//     try {
+//         if (req.file) req.body.coverImage = req.file.path;
+//         const user = await User.findByIdAndUpdate(req.user, req.body, {
+//             new: true,
+//         }).select("-password -__v");
+//         if (!user) return res.send({ success: false, errorId: 404 });
+//         res.json({ success: true, coverImage: user.coverImage }).status(200);
+//     } catch (error) {
+//         console.log("updateProfile error:", error.message);
+//         res.send({ success: false, error: error.message });
+//     }
+// };

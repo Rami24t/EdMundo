@@ -1,8 +1,9 @@
 import express from 'express'
 import dotenv from 'dotenv'
-// import userRoutes from './src/routes/userRoutes.js'
-// import postRoutes from './src/routes/postRoutes.js'
-// import commentRoutes from './src/routes/commentRoutes.js'
+import userRoutes from './src/routes/user.js'
+import adminRoutes from './src/routes/admin.js'
+import teacherRoutes from './src/routes/teacher.js'
+import studentRoutes from './src/routes/student.js'
 import dbConnect from './src/config/db.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -23,9 +24,11 @@ app.use(cors({
     // app.options(cors());
 app.use(express.json())
 app.use(cookieParser())
-    // app.use('/users', userRoutes)
-    // app.use('/posts', postRoutes)
-    // app.use('/comment', commentRoutes)
+
+    app.use('/api/users', userRoutes)
+    // app.use('/api/admin', adminRoutes)
+    app.use('/api/teacher', teacherRoutes)
+    app.use('/api/student', studentRoutes)
 
 const port = process.env.PORT || 5001
 app.listen(port, () => console.log('Server is up and running at port: ', port))

@@ -10,21 +10,20 @@ const TeacherSchema = new Schema({
         required: true,
         unique: true
     },
-    username: {
-        type: String,
-        //        required: true
-    },
+    // username: {
+    //     type: String,
+    //     unique: true,
+    //     //        required: true
+    // },
     password: {
         type: String,
         required: true
     },
     phone: {
         type: String,
-        required: true
     },
     address: {
         type: String,
-        required: true
     },
     role: {
         type: String,
@@ -34,4 +33,4 @@ const TeacherSchema = new Schema({
 }, {
     timestamps: true
 })
-export default mongoose.model('teacher', TeacherSchema)
+export default mongoose.model('Teacher', TeacherSchema)
