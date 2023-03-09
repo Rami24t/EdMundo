@@ -103,7 +103,7 @@ export const emailConfirm = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       { _id: decrypted.id },
       { verified: true },
-      { new: true }
+      { new: true },
     );
     console.log("emailConfirm ~ user", user);
     res.send({ success: true });
@@ -147,7 +147,7 @@ export const changePass = async (req, res) => {
     await User.findByIdAndUpdate(
       decrypted.id,
       { password: hashedPass },
-      { new: true }
+      { new: true },
     );
     res.send({ success: true });
   } catch (error) {

@@ -20,21 +20,23 @@ function LoginForm() {
   // const { state, dispatch } = useContext(Context);
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    mutate('/api/users/login', () => {
-      axios.post(baseUrl+"/api/users/login", { email, password }, { withCredentials: true })
+    mutate("/api/users/login", () => {
+      axios
+        .post(
+          baseUrl + "/api/users/login",
+          { email, password },
+          { withCredentials: true },
+        )
         .then((res) => {
           console.log(res.data.user);
           if (res.status === 200 && res.data.user.role) {
             if (res.data.user.role === "admin") {
               navigate("/admin");
-            }
-            else if (res.data.user.role === "teacher") {
-                navigate("/teacher/lessons");
-              }
-            else if (res.data.user.role === "student") {
-                navigate("/student/lessons");
+            } else if (res.data.user.role === "teacher") {
+              navigate("/teacher/lessons");
+            } else if (res.data.user.role === "student") {
+              navigate("/student/lessons");
             }
             // dispatch({ type: "LOGIN", payload: res.data.user });
           }
@@ -44,7 +46,6 @@ function LoginForm() {
         });
     });
   };
-
 
   return (
     <MDBContainer fluid className="p-3 my-5 h-custom">

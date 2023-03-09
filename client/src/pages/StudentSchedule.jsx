@@ -51,7 +51,7 @@ const Slot = ({ slot, isLoading }) => {
 const Schedule = () => {
   const { data: sessions, isLoading } = useSWR(
     `${process.env.REACT_APP_BASE_URL}/api/student/sessions`,
-    sessionsFetcher
+    sessionsFetcher,
   );
 
   return (
@@ -81,7 +81,7 @@ const Schedule = () => {
               <Slot
                 key={`slot-${dayIndex}-${slotIndex}`}
                 slot={sessions?.find(
-                  (s) => s.weekDay === dayIndex && s.slot === slotIndex
+                  (s) => s.weekDay === dayIndex && s.slot === slotIndex,
                 )}
                 isLoading={isLoading}
               />
