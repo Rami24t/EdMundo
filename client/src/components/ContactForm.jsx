@@ -51,7 +51,7 @@ const ContactForm = () => {
       <MDBContainer className=" contact-form-section" id="contact">
         <MDBRow className="contact-form-title">
           <p>See what future of education looks like! </p>
-          <p className="subtitle">Get in touch</p>
+          <p className="subtitle">Get in touch </p>
         </MDBRow>
         <MDBRow className="contact-form-container">
           <MDBCol md="6">

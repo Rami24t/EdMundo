@@ -43,7 +43,7 @@
 .contact-input {
   border: none;
   outline: none;
-  border-bottom: 2px solid lightcyan;
+  border-bottom: 2px solid #a876f5;
   margin-bottom: 15px;
   transition: all 0.3s;
   font-size: 14px;
