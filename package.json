@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Rami24t/EdMundo#readme",
   "devDependencies": {
-    "rome": "^11.0.0",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "rome": "^11.0.0"
   }
 }
