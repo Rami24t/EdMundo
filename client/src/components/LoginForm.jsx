@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { mutate, useSWRConfig } from "swr";
+import { useSWRConfig } from "swr";
 import {
   MDBContainer,
   MDBCol,

@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 export default function auth(req, res, next) {
   try {
-    const token = req.cookies["SocialAppMERNToken"];
+    const token = req.cookies["OnlineSchoolUser"];
+    if(!token) return res.status(401).json({success: false, error: "No token, authorization denied"});
     const decrypted = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decrypted;
     next();
@@ -17,12 +18,8 @@ export default function auth(req, res, next) {
     else
       res.status(401).json({
         success: false,
-        error: "Something went wrong, please login again",
+        error: "Something went wrong, please login again" + error.message,
       });
-    res.status(401).json({
-      success: false,
-      error: "Something went wrong, please login again",
-    });
     console.log(error.message);
   }
 }

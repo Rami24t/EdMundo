@@ -65,22 +65,26 @@ export default function ContextProvider({ children }) {
           lessons: action.payload,
         };
       case "LOADING":
+        // console.log("loading");
         return {
           ...state,
           loading: true,
         };
       case "ERROR":
+        // console.log("error");
         return {
           ...state,
           error: true,
         };
       case "DATA":
+        // console.log("data");
         return {
           ...state,
           user: action.payload.user,
           school: action.payload.school,
-          class: action.payload.class,
-          lessons: action.payload.lessons,
+          displaySchedule: action.payload.displaySchedule,
+          // class: action.payload.class,
+          // lessons: action.payload.lessons,
           loading: false,
           error: false,
         };
