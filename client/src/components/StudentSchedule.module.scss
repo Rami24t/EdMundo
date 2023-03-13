@@ -7,20 +7,25 @@
 
 .scheduleContainer {
   display: flex;
+  gap: 10px;
+}
+
+.dayColumn {
+  @extend .scheduleContainer;
+  flex-direction: column;
 }
 
 .scheduleCell {
-  width: 150px;
-  height: 100px;
+  width: 10rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 15px;
 }
 
 .scheduleSlot {
-  background-color: #fbc4ab;
-  border: 1px solid #495057;
   cursor: pointer;
 }
 .scheduleSubject {

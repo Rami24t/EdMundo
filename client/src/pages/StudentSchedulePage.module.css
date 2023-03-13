@@ -1,0 +1,16 @@
+.schedulePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0px 5rem;
+  background-color: #fffffc;
+}
+.scheduleMain {
+  display: flex;
+  justify-content: space-around;
+}
+.schedulePageImage {
+  width: 30rem;
+  position: sticky;
+  top: 20rem;
+}
