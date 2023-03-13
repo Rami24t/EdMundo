@@ -32,7 +32,7 @@ const App = () => {
           <span className='visually-hidden'>Loading...</span>
         </MDBSpinner>
       )}
-      {((theme === "/login" || theme==="/" ) || state.user?.name) && <Outlet />}
+      {((theme === "/login" || theme==="/" || theme==='/student' ) || state.user?.name) && <Outlet />}
       {theme !== "/login" && <Footer />}
     </div>
   );

@@ -206,6 +206,7 @@ export const getUserData = async (req, res) => {
 
     const school = user.school;
       delete user.school;
+      console.log("getUserData user:", user.role);
 if(user.role === 'student') 
 {     const days = user.currentClass.schedule.map((day) => day.day);
       const slots = school.periods.map((period) => {
@@ -223,9 +224,8 @@ if(user.role === 'student')
         };
       });
       const displaySchedule = { days, slots } || null;
-    }      console.log("getUserData user:", user);
-    if(user.role === 'student')
-    res.status(200).json({ success: true, user, school,  displaySchedule });
+      res.status(200).json({ success: true, user, school,  displaySchedule });
+    }   
     else res.status(200).json({ success: true, user, school });
   } catch (error) {
     console.log("getUser error:", error.message);
