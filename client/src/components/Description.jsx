@@ -52,7 +52,7 @@ const Description = () => {
               alt="red-lines"
               className="description-image"
             />
-            <h5 className="description-title">Flexibile</h5>
+            <h5 className="description-title">Flexible</h5>
             <p className="description-subtitle">
               Our platform allows you to learn at your own pace and on your own
               schedule. Whether students prefer to attend live classes or watch

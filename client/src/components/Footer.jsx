@@ -22,7 +22,8 @@ export default function Footer() {
                 <MDBIcon fab icon="github" />
               </a>
             </MDBCol>
-            <MDBCol md="4" lg="3" xl="3" className="mx-auto" />
+            <MDBCol md="3" className="mx-auto" />
+            <MDBCol md="3" className="mx-auto" />
           </MDBRow>
         </MDBContainer>
       </section>

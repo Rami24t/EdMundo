@@ -11,12 +11,8 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import StripyMan from "../assets/stripy-man.png";
-import Zigzag from "../assets/zigzag-stripes.png";
-import StripyBeige from "../assets/stripy-beige.png";
-import ThreeLines from "../assets/3-green-lines.png";
-import FourLines from "../assets/4-green-lines.png";
-import DarkLoop from "../assets/dark-loop.png";
+import ReceivingMail from "../assets/receiving-mail.png";
+import RedLines from "../assets/red-rays.png";
 
 const ContactForm = () => {
   const [showModal, setShowModal] = useState(false);
@@ -48,14 +44,12 @@ const ContactForm = () => {
 
   return (
     <div className="contact-form-component">
-      <MDBContainer className="text-md-start contact-form-section" id="contact">
-        <MDBRow className="contact-form-title">
-          <p>See what future of education looks like! </p>
-          <p className="subtitle">Get in touch</p>
-        </MDBRow>
-        <MDBRow className="contact-form-title" />
+      <MDBContainer className=" contact-form-section" id="contact">
         <MDBRow className="contact-form-container">
-          <MDBCol md="6">
+          <MDBCol md="6" className="mb-0">
+            <div className="contact-form-title">
+              <p>Get in touch </p>
+            </div>
             <form className="contact-form" ref={form} onSubmit={sendEmail}>
               <label className="contact-label">Name</label>
               <input
@@ -102,6 +96,7 @@ const ContactForm = () => {
               show={showModal}
               tabIndex="-1"
               setShow={setShowModal}
+              className="message-sent-modal"
             >
               <MDBModalDialog position="top" frame>
                 <MDBModalContent>
@@ -115,9 +110,14 @@ const ContactForm = () => {
               </MDBModalDialog>
             </MDBModal>
           </MDBCol>
-          <MDBCol md="4" className="m-auto">
+          <MDBCol md="5" className="col-sm contact-form-images">
             <img
-              src={StripyMan}
+              src={RedLines}
+              alt="red-lines"
+              className="contact-image-lines"
+            />
+            <img
+              src={ReceivingMail}
               alt="stripy-man"
               className=" d-block contact-form-image"
             />

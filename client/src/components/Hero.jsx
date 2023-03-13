@@ -4,6 +4,7 @@ import "./hero.css";
 import ReceivingMail from "../assets/receiving-mail.png";
 import RedLines from "../assets/red-rays.png";
 import { HashLink } from "react-router-hash-link";
+import StripyMan from "../assets/stripy-man.png";
 
 const Hero = () => {
   return (
@@ -13,7 +14,7 @@ const Hero = () => {
           <MDBCol md={7} className="hero-text">
             <h1 className="hero-title">
               Bringing the classroom to you - <br />
-              anytime, anywhere!
+              <span className="hero-title-span"> anytime, anywhere!</span>
             </h1>
             <p className="hero-subtitle">
               A virtual playground for students and teachers alike, complete
@@ -24,12 +25,12 @@ const Hero = () => {
               <MDBBtn className="hero-demo-button">Book a free demo</MDBBtn>
             </HashLink>
           </MDBCol>
-          <MDBCol md={5} className="hero-container-image">
+          <MDBCol md={5} className="col-sm hero-container-image">
             <img src={RedLines} alt="red-lines" className="hero-image-lines" />
             <img
-              src={ReceivingMail}
+              src={StripyMan}
               alt="receiving-mail"
-              className="hero-image-main"
+              className=" hero-image-main"
             />
           </MDBCol>
         </MDBRow>
