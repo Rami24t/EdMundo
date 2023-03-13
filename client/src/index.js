@@ -13,7 +13,8 @@ import StudentProfile from "./pages/StudentProfile";
 import StudentLessons from "./pages/StudentLessons";
 import StudentSchedule from "./pages/StudentSchedule";
 import ContextProvider from "./components/Context";
-import App from "./pages/App";
+import App from "./App";
+import { Navigate } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,8 +23,10 @@ root.render(
 			<Routes>
 				<Route path="/" element={<App />}>
 					<Route path="" element={<Home />} />
+					<Route path="/teacher" element=<Navigate to="/teacher/profile" replace={true}/> />
 					<Route path="/teacher/profile" element={<TeacherProfile />} />
 					<Route path="/teacher/lessons" element={<TeacherLessons />} />
+					<Route path="/student" element=<Navigate to="/student/profile" replace={true}/> />
 					<Route path="/student/profile" element={<StudentProfile />} />
 					<Route path="/student/lessons" element={<StudentLessons />} />
 					<Route path="/student/schedule" element={<StudentSchedule />} />
