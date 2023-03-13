@@ -19,7 +19,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://school-online.app"
+        ? "https://ed-mundo.vercel.app/"
         : "http://localhost:3000",
     credentials: true,
     preflightContinue: true,
