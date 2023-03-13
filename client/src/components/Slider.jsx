@@ -6,7 +6,7 @@ import Logo2 from "../assets/logo2.png";
 import Logo3 from "../assets/logo3.png";
 
 const Slider = () => {
-	return (
+  return (
     <div className="container-fluid slider-section">
       <MDBContainer className="container-fluid slider">
         <MDBRow>
