@@ -29,14 +29,14 @@ const TeacherLessons = () => {
           </MDBCol>
         </MDBRow>
 
-        <CreateLessonModal
-          optModal={optModal}
-          setOptModal={setOptModal}
-          toggleShow={toggleShow}
-          handleCreateLessonConfirm={handleCreateLessonConfirm}
-        />
+      <CreateLessonModal
+        optModal={optModal}
+        setOptModal={setOptModal}
+        toggleShow={toggleShow}
+        handleCreateLessonConfirm={handleCreateLessonConfirm}
+      />
 
-        <TeacherLessonCard />
+      <TeacherLessonCard />
 
         <ScrollToTop showUnder={160}>
           <span>

@@ -6,56 +6,56 @@ import { IoMdPeople } from "react-icons/io";
 import "./lessonCard.css";
 import EditLessonModal from "./EditLessonModal";
 import {
-	MDBBtn,
-	MDBModal,
-	MDBModalDialog,
-	MDBModalContent,
-	MDBModalHeader,
-	MDBModalTitle,
-	MDBModalBody,
-	MDBModalFooter,
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
 
 const TeacherLessonCard = () => {
-	const [showDeleteModal, setShowDeleteModal] = useState(false);
-	const [showEditModal, setShowEditModal] = useState(false);
-	const [isVisible, setIsVisible] = useState(true);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-	const [lessonDetails, setLessonDetails] = useState({
-		date: "2023-02-02",
-		slot: "8 - 8.40am",
-		class: "1 A",
-		subject: "Math",
-		topic: "Odd numbers",
-		objectives: "Learn arithmetic with odd numbers.",
-		classwork: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-		homework: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-		notes: "Please review even numbers.",
-		link: "google.com",
-	});
+  const [lessonDetails, setLessonDetails] = useState({
+    date: "2023-02-02",
+    slot: "8 - 8.40am",
+    class: "1 A",
+    subject: "Math",
+    topic: "Odd numbers",
+    objectives: "Learn arithmetic with odd numbers.",
+    classwork: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
+    homework: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
+    notes: "Please review even numbers.",
+    link: "google.com",
+  });
 
-	const handleEdit = () => {
-		setShowEditModal(true);
-	};
-	const handleDelete = () => {
-		setShowDeleteModal(true);
-	};
+  const handleEdit = () => {
+    setShowEditModal(true);
+  };
+  const handleDelete = () => {
+    setShowDeleteModal(true);
+  };
 
-	const handleDeleteConfirm = () => {
-		setShowDeleteModal(false);
-		setIsVisible(false);
-	};
+  const handleDeleteConfirm = () => {
+    setShowDeleteModal(false);
+    setIsVisible(false);
+  };
 
-	return (
+  return (
     <>
       {isVisible && (
         <div className="lesson-card">
           <div className="lesson-header">
-            <Col className="title-container">
+            <div className="title-container">
               <h2>{lessonDetails.subject}</h2>
-            </Col>
-            <Col className="buttons-container">
+            </div>
+            <div className="buttons-container">
               <button
                 className="edit-delete-buttons delete-button"
                 onClick={handleDelete}
@@ -101,7 +101,7 @@ const TeacherLessonCard = () => {
               <button className="edit-delete-buttons" onClick={handleEdit}>
                 <EditLessonModal />
               </button>
-            </Col>
+            </div>
           </div>
           <hr />
 
@@ -173,17 +173,14 @@ const TeacherLessonCard = () => {
                   <Label for="link" className="lesson-card-label">
                     Classroom link
                   </Label>
-                  <Badge
-                    className="lesson-card-badge"
-                    id="classwork"
-                    name="classwork"
-                    target="_blank"
-                    href={lessonDetails.homework}
-                    defaultValue={lessonDetails.homework}
+                  <Input
+                    className="lesson-card-input"
+                    id="link"
+                    name="link"
+                    type="url"
+                    defaultValue={lessonDetails.link}
                     disabled
-                  >
-                    Classroom link
-                  </Badge>
+                  />
                 </FormGroup>
               </Col>
             </Row>

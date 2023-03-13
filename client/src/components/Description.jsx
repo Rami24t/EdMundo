@@ -6,7 +6,7 @@ import Hat from "../assets/hat.png";
 import SpeechBubble from "../assets/speech-bubble.png";
 
 const Description = () => {
-	return (
+  return (
     <div className="description">
       <MDBContainer className="description-section">
         {/* <MDBRow>

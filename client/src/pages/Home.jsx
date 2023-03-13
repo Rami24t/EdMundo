@@ -5,14 +5,14 @@ import Hero from "../components/Hero";
 import Slider from "../components/Slider";
 
 const Home = () => {
-	return (
-		<div>
-			<Hero />
-			<Slider />
-			<Description />
-			<ContactForm />
-		</div>
-	);
+  return (
+    <div>
+      <Hero />
+      <Slider />
+      <Description />
+      <ContactForm />
+    </div>
+  );
 };
 
 export default Home;
