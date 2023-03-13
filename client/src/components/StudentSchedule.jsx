@@ -3,7 +3,7 @@ import { MDBSpinner } from "mdb-react-ui-kit";
 import styles from "./StudentSchedule.module.scss";
 import useSWR from "swr";
 import axios from "axios";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 const sessionsFetcher = (url) =>
   axios.get(url, { withCredentials: true }).then((res) => res.data);
