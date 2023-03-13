@@ -33,6 +33,10 @@ const studentSchema = new Schema(
       type: String,
       default: "student",
     },
+    school: {
+      type: Schema.Types.ObjectId,
+      ref: "School",
+    },
   },
   {
     timestamps: true,
