@@ -1,42 +1,47 @@
 import React from "react";
 import { MDBSpinner } from "mdb-react-ui-kit";
-import styles from "./StudentSchedule.module.css";
+import styles from "./StudentSchedule.module.scss";
 import useSWR from "swr";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const sessionsFetcher = (url) =>
   axios.get(url, { withCredentials: true }).then((res) => res.data);
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
-	{ from: "8:00", to: "9:00" },
-	{ from: "9:00", to: "10:00" },
-	{ from: "11:00", to: "12:00" },
-	{ from: "12:00", to: "13:00" },
-	{ from: "13:00", to: "14:00" },
-	{ from: "14:00", to: "15:00" },
-	{ from: "15:00", to: "16:00" },
+  { from: "8:00", to: "9:00" },
+  { from: "9:00", to: "10:00" },
+  { from: "11:00", to: "12:00" },
+  { from: "12:00", to: "13:00" },
+  { from: "13:00", to: "14:00" },
+  { from: "14:00", to: "15:00" },
+  { from: "15:00", to: "16:00" },
 ];
 const SCHEDULE_GRID = Array(DAYS.length).fill(Array(SLOTS.length).fill(null));
 
 const SUBJECT_TO_COLOR = {
-  Biology: "tomato",
-  Math: "yellow",
-  Science: "lightblue",
+  Math: "#FDFFB6",
+  Science: "#9BF6FF",
+  History: "#CAFFBF",
+  Geography: "#BDB2FF",
+  Art: "#FFD6A5",
+  Lab: "#A0C4FF",
+  Music: "#FFC6FF",
+  "P.E": "#FFADAD",
 };
 
 const Slot = ({ slot, isLoading }) => {
-	if (!slot)
-		return (
-			<div className={`${styles.scheduleCell} ${styles.scheduleSlot}`}>
-				{isLoading && (
-					<MDBSpinner className="mx-2" color="info">
-						<span className="visually-hidden">Loading...</span>
-					</MDBSpinner>
-				)}
-			</div>
-		);
-
+  if (!slot)
+    return (
+      <div className={`${styles.scheduleCell} ${styles.scheduleSlot}`}>
+        {isLoading && (
+          <MDBSpinner className="mx-2" color="info">
+            <span className="visually-hidden">Loading...</span>
+          </MDBSpinner>
+        )}
+      </div>
+    );
 
   return (
     <div
@@ -55,20 +60,20 @@ const Schedule = () => {
     sessionsFetcher,
   );
 
-	return (
-		<div className={styles.schedulePage}>
-			<div className={styles.scheduleContainer}>
-				<div className="slots-column">
-					<div className={styles.scheduleCell} />
-					{SLOTS.map((slot) => (
-						<div
-							key={`${slot.from}-${slot.to}`}
-							className={`${styles.scheduleCell} ${styles.scheduleLabel}`}
-						>
-							{slot.from} - {slot.to}
-						</div>
-					))}
-				</div>
+  return (
+    <div className={styles.schedulePage}>
+      <div className={styles.scheduleContainer}>
+        <div className="slots-column">
+          <div className={styles.scheduleCell} />
+          {SLOTS.map((slot) => (
+            <div
+              key={`${slot.from}-${slot.to}`}
+              className={`${styles.scheduleCell} ${styles.scheduleLabel}`}
+            >
+              {slot.from} - {slot.to}
+            </div>
+          ))}
+        </div>
 
         {SCHEDULE_GRID.map((col, dayIndex) => (
           <div key={`day-${dayIndex}`} className={styles.dayColumn}>

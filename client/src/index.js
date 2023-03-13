@@ -11,7 +11,7 @@ import TeacherProfile from "./pages/TeacherProfile.jsx";
 import TeacherLessons from "./pages/TeacherLessons.jsx";
 import StudentProfile from "./pages/StudentProfile";
 import StudentLessons from "./pages/StudentLessons";
-import StudentSchedule from "./pages/StudentSchedule";
+import StudentSchedulePage from "./pages/StudentSchedulePage";
 import ContextProvider from "./components/Context";
 import App from "./App";
 import { Navigate } from "react-router-dom";

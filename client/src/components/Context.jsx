@@ -106,9 +106,9 @@ export default function ContextProvider({ children }) {
 		error: false,
 	};
 
-	const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-	return (
-		<Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
-	);
+  return (
+    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
+  );
 }

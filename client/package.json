@@ -15,6 +15,7 @@
         "axios": "^1.2.4",
         "dotenv": "^16.0.3",
         "emojibase": "^6.1.0",
+        "framer-motion": "^10.2.5",
         "interweave": "^13.0.0",
         "interweave-autolink": "^5.1.0",
         "interweave-emoji": "^7.0.0",
