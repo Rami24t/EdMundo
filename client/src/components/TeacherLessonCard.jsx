@@ -48,210 +48,213 @@ const TeacherLessonCard = () => {
 	};
 
 	return (
-		<>
-			{isVisible && (
-				<div className="lesson-card">
-					<div className="lesson-header">
-						<div className="title-container">
-							<h2>{lessonDetails.subject}</h2>
-						</div>
-						<div className="buttons-container">
-							<button
-								className="edit-delete-buttons delete-button"
-								onClick={handleDelete}
-							>
-								<TiDeleteOutline />
-							</button>
+    <>
+      {isVisible && (
+        <div className="lesson-card">
+          <div className="lesson-header">
+            <Col className="title-container">
+              <h2>{lessonDetails.subject}</h2>
+            </Col>
+            <Col className="buttons-container">
+              <button
+                className="edit-delete-buttons delete-button"
+                onClick={handleDelete}
+              >
+                <TiDeleteOutline />
+              </button>
 
-							{/* Delete Modal  */}
+              {/* Delete Modal  */}
 
-							<MDBModal
-								show={showDeleteModal}
-								setShow={setShowDeleteModal}
-								tabIndex="-1"
-							>
-								<MDBModalDialog centered>
-									<MDBModalContent>
-										<MDBModalHeader>
-											<MDBModalTitle>Delete lesson</MDBModalTitle>
-											<MDBBtn
-												className="btn-close"
-												color="none"
-												onClick={() => setShowDeleteModal(false)}
-											/>
-										</MDBModalHeader>
-										<MDBModalBody>
-											Once you delete the lesson you won't be able to restore
-											it. Are you sure you want to delete this lesson?
-										</MDBModalBody>
-										<MDBModalFooter>
-											<MDBBtn
-												color="secondary"
-												onClick={() => setShowDeleteModal(false)}
-											>
-												Cancel
-											</MDBBtn>
-											<MDBBtn color="danger" onClick={handleDeleteConfirm}>
-												Delete
-											</MDBBtn>
-										</MDBModalFooter>
-									</MDBModalContent>
-								</MDBModalDialog>
-							</MDBModal>
-							<button className="edit-delete-buttons" onClick={handleEdit}>
-								<EditLessonModal />
-							</button>
-						</div>
-					</div>
-					<hr />
+              <MDBModal
+                show={showDeleteModal}
+                setShow={setShowDeleteModal}
+                tabIndex="-1"
+              >
+                <MDBModalDialog centered>
+                  <MDBModalContent>
+                    <MDBModalHeader>
+                      <MDBModalTitle>Delete lesson</MDBModalTitle>
+                      <MDBBtn
+                        className="btn-close"
+                        color="none"
+                        onClick={() => setShowDeleteModal(false)}
+                      />
+                    </MDBModalHeader>
+                    <MDBModalBody>
+                      Once you delete the lesson you won't be able to restore
+                      it. Are you sure you want to delete this lesson?
+                    </MDBModalBody>
+                    <MDBModalFooter>
+                      <MDBBtn
+                        color="secondary"
+                        onClick={() => setShowDeleteModal(false)}
+                      >
+                        Cancel
+                      </MDBBtn>
+                      <MDBBtn color="danger" onClick={handleDeleteConfirm}>
+                        Delete
+                      </MDBBtn>
+                    </MDBModalFooter>
+                  </MDBModalContent>
+                </MDBModalDialog>
+              </MDBModal>
+              <button className="edit-delete-buttons" onClick={handleEdit}>
+                <EditLessonModal />
+              </button>
+            </Col>
+          </div>
+          <hr />
 
-					{/* Card body  */}
+          {/* Card body  */}
 
-					<Form>
-						<Row>
-							<FormGroup row>
-								<Label for="date" md={1} className="lesson-card-icon">
-									<BsCalendarDate />
-								</Label>
-								<Col md={3} className="date-input">
-									<Input
-										className="lesson-card-input"
-										id="date"
-										name="date"
-										type="text"
-										defaultValue={lessonDetails.date}
-										disabled
-									/>
-								</Col>
-								<Label for="date" md={1} className="lesson-card-icon">
-									<TfiTime />
-								</Label>
-								<Col md={3} className="date-input">
-									<Input
-										className="lesson-card-input"
-										id="slot"
-										name="slot"
-										type="text"
-										defaultValue={lessonDetails.slot}
-										disabled
-									/>
-								</Col>
-								<Label for="date" md={1} className="lesson-card-icon">
-									<IoMdPeople />
-								</Label>
-								<Col md={3} className="date-input">
-									<Input
-										className="lesson-card-input"
-										id="class"
-										name="class"
-										type="text"
-										defaultValue={lessonDetails.class}
-										disabled
-									/>
-								</Col>
-							</FormGroup>
-						</Row>
+          <Form>
+            <Row>
+              <FormGroup row>
+                <Label for="date" md={1} className="lesson-card-icon">
+                  <BsCalendarDate />
+                </Label>
+                <Col md={3} className="date-input">
+                  <Input
+                    className="lesson-card-input"
+                    id="date"
+                    name="date"
+                    type="text"
+                    defaultValue={lessonDetails.date}
+                    disabled
+                  />
+                </Col>
+                <Label for="date" md={1} className="lesson-card-icon">
+                  <TfiTime />
+                </Label>
+                <Col md={3} className="date-input">
+                  <Input
+                    className="lesson-card-input"
+                    id="slot"
+                    name="slot"
+                    type="text"
+                    defaultValue={lessonDetails.slot}
+                    disabled
+                  />
+                </Col>
+                <Label for="date" md={1} className="lesson-card-icon">
+                  <IoMdPeople />
+                </Label>
+                <Col md={3} className="date-input">
+                  <Input
+                    className="lesson-card-input"
+                    id="class"
+                    name="class"
+                    type="text"
+                    defaultValue={lessonDetails.class}
+                    disabled
+                  />
+                </Col>
+              </FormGroup>
+            </Row>
 
-						<Row>
-							<Col md={6}>
-								<FormGroup>
-									<Label for="topic" className="lesson-card-label">
-										Topic
-									</Label>
-									<Input
-										className="lesson-card-input"
-										id="topic"
-										name="topic"
-										type="text"
-										defaultValue={lessonDetails.topic}
-										disabled
-									/>
-								</FormGroup>
-							</Col>
-							<Col md={6}>
-								<FormGroup>
-									<Label for="link" className="lesson-card-label">
-										Classroom link
-									</Label>
-									<Input
-										className="lesson-card-input"
-										id="link"
-										name="link"
-										type="url"
-										defaultValue={lessonDetails.link}
-										disabled
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<FormGroup>
-							<Label for="objectives" className="lesson-card-label">
-								Objectives
-							</Label>
-							<Input
-								id="objectives"
-								name="objectives"
-								type="text"
-								className="lesson-card-input"
-								defaultValue={lessonDetails.objectives}
-								disabled
-							/>
-						</FormGroup>
-						<Row>
-							<Col md={6}>
-								<FormGroup>
-									<Label for="classwork" className="lesson-card-label">
-										Classwork
-									</Label>
+            <Row>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="topic" className="lesson-card-label">
+                    Topic
+                  </Label>
+                  <Input
+                    className="lesson-card-input"
+                    id="topic"
+                    name="topic"
+                    type="text"
+                    defaultValue={lessonDetails.topic}
+                    disabled
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="link" className="lesson-card-label">
+                    Classroom link
+                  </Label>
+                  <Badge
+                    className="lesson-card-badge"
+                    id="classwork"
+                    name="classwork"
+                    target="_blank"
+                    href={lessonDetails.homework}
+                    defaultValue={lessonDetails.homework}
+                    disabled
+                  >
+                    Classroom link
+                  </Badge>
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormGroup>
+              <Label for="objectives" className="lesson-card-label">
+                Objectives
+              </Label>
+              <Input
+                id="objectives"
+                name="objectives"
+                type="text"
+                className="lesson-card-input"
+                defaultValue={lessonDetails.objectives}
+                disabled
+              />
+            </FormGroup>
+            <Row>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="classwork" className="lesson-card-label">
+                    Classwork
+                  </Label>
 
-									<Badge
-										className="lesson-card-badge"
-										id="classwork"
-										name="classwork"
-										target="_blank"
-										href={lessonDetails.classwork}
-										defaultValue={lessonDetails.classwork}
-									>
-										Classwork PDF
-									</Badge>
-								</FormGroup>
-							</Col>
-							<Col md={6}>
-								<FormGroup>
-									<Label for="homework" className="lesson-card-label">
-										Homework
-									</Label>
-									<Badge
-										className="lesson-card-badge"
-										id="homework"
-										name="homework"
-										target="_blank"
-										href={lessonDetails.homework}
-										defaultValue={lessonDetails.homework}
-									>
-										Homework PDF
-									</Badge>
-								</FormGroup>
-							</Col>
-						</Row>
-						<FormGroup>
-							<Label for="notes" className="lesson-card-label">
-								Notes
-							</Label>
-							<Input
-								id="notes"
-								name="notes"
-								type="text"
-								className="lesson-card-input"
-								defaultValue={lessonDetails.notes}
-								disabled
-							/>
-						</FormGroup>
-					</Form>
-				</div>
-			)}
-		</>
-	);
+                  <Badge
+                    className="lesson-card-badge"
+                    id="classwork"
+                    name="classwork"
+                    target="_blank"
+                    href={lessonDetails.classwork}
+                    defaultValue={lessonDetails.classwork}
+                  >
+                    Classwork PDF
+                  </Badge>
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="homework" className="lesson-card-label">
+                    Homework
+                  </Label>
+                  <Badge
+                    className="lesson-card-badge"
+                    id="homework"
+                    name="homework"
+                    target="_blank"
+                    href={lessonDetails.homework}
+                    defaultValue={lessonDetails.homework}
+                  >
+                    Homework PDF
+                  </Badge>
+                </FormGroup>
+              </Col>
+            </Row>
+            <FormGroup>
+              <Label for="notes" className="lesson-card-label">
+                Notes
+              </Label>
+              <Input
+                id="notes"
+                name="notes"
+                type="text"
+                className="lesson-card-input"
+                defaultValue={lessonDetails.notes}
+                disabled
+              />
+            </FormGroup>
+          </Form>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default TeacherLessonCard;

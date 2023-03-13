@@ -1,0 +1,33 @@
+.teacher-lessons-page {
+ background-color: lightblue;
+ height: fit-content;
+ padding-top: 45px;
+ padding-bottom: 45px;
+}
+
+.teacher-lessons-container {
+    
+}
+
+.teacher-lesson-header {
+margin-bottom: 5rem;
+}
+
+.create-new-lesson {
+    border-radius: 30px;
+    padding: 20px 30px;
+    background-color: #a876f5;
+    color: #fff;
+    text-align: center;
+    box-shadow: none !important;
+    margin-top: 1rem;
+    float:right;
+}
+
+.teacher-lesson-title {
+    font-size: 56px !important;
+    font-weight: 500 !important;
+    line-height: 1.2;
+  
+  }
+  
