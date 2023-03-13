@@ -9,7 +9,7 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import Context from "./Context";
+import { Context } from "./Context";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
-  // const { state, dispatch } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,14 +31,10 @@ function LoginForm() {
         .then((res) => {
           console.log(res.data.user);
           if (res.status === 200 && res.data.user.role) {
-            if (res.data.user.role === "admin") {
-              navigate("/admin");
-            } else if (res.data.user.role === "teacher") {
-              navigate("/teacher/lessons");
-            } else if (res.data.user.role === "student") {
-              navigate("/student/lessons");
-            }
-            // dispatch({ type: "LOGIN", payload: res.data.user });
+            navigate("/" + res.data.user.role);
+            dispatch({ type: "LOGIN", payload: res.data.user });
+          } else if (res.status !== 200 || !res.data.user.role) {
+            navigate("/login");
           }
         })
         .catch((err) => {

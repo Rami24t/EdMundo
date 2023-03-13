@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  getUserPublic,
+  getUserData,
   register,
   login,
   emailConfirm,
@@ -41,7 +41,7 @@ router.post(
 
 router.get("/logout", logout);
 
-router.get("/:id", auth, getUserPublic);
+router.get("/:id", auth, getUserData);
 
 router.post("/forgotpass", forgotPass);
 router.post("/changepassword", changePass);

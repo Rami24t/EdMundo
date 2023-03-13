@@ -83,7 +83,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(newUser, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.cookie("SocialAppMERNToken", token, { sameSite: "none", secure: true });
+    res.cookie("OnlineSchoolUser", token, { sameSite: "none", secure: true });
     res.send({ success: true, user: newUser });
   } catch (error) {
     console.log("login error:", error.message);
@@ -166,7 +166,7 @@ export const logout = async (req, res) => {
   }
 };
 
-export const getUserPublic = async (req, res) => {
+export const getUserData = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
