@@ -1,6 +1,6 @@
 import React from "react";
 import StudentSchedule from "../components/StudentSchedule.jsx";
-import styles from "./StudentSchedulePage.module.css";
+import styles from "./StudentSchedulePage.module.scss";
 import StudentScheduleImage from "../assets/student-schedule-image.png";
 
 const Schedule = () => {

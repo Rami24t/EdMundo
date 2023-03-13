@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Oswald:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,700;0,800;1,700&family=PT+Sans:ital@0;1&display=swap");
 
 :root {
   --black: #333;
@@ -47,7 +47,8 @@ html {
     background-color: #f5f5f5;
     color: var(--black);
     font: normal 1rem/1.5;
-    font-family: "Lora", serif;
+    font-family: "PT Sans", serif;
+    font-weight: 400;
     color: var(--black);
 
     &::-webkit-scrollbar {
@@ -77,7 +78,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
 }
 
 /* =========== */
