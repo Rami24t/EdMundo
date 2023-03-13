@@ -1,12 +1,7 @@
 import React from "react";
-import { MDBSpinner } from "mdb-react-ui-kit";
 import styles from "./StudentSchedule.module.scss";
-import useSWR from "swr";
-import axios from "axios";
-// import { motion } from "framer-motion";
-
-const sessionsFetcher = (url) =>
-  axios.get(url, { withCredentials: true }).then((res) => res.data);
+import { useContext } from "react";
+import { Context } from "./Context";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
@@ -31,41 +26,16 @@ const SUBJECT_TO_COLOR = {
   "P.E": "#FFADAD",
 };
 
-const Slot = ({ slot, isLoading }) => {
-  if (!slot)
-    return (
-      <div className={`${styles.scheduleCell} ${styles.scheduleSlot}`}>
-        {isLoading && (
-          <MDBSpinner className="mx-2" color="info">
-            <span className="visually-hidden">Loading...</span>
-          </MDBSpinner>
-        )}
-      </div>
-    );
-
-  return (
-    <div
-      className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
-      style={{ backgroundColor: SUBJECT_TO_COLOR[slot.subjectName] }}
-    >
-      <p className={`${styles.scheduleSubject}`}>{slot.subjectName}</p>
-      <p>{slot.teacher.name}</p>
-    </div>
-  );
-};
-
 const Schedule = () => {
-  const { data: sessions, isLoading } = useSWR(
-    `${process.env.REACT_APP_BASE_URL}/api/student/sessions`,
-    sessionsFetcher,
-  );
+  const { state } = useContext(Context);
+  const {days,slots}  =  state?.displaySchedule || {days: DAYS, slots: SLOTS};
 
   return (
     <div className={styles.schedulePage}>
       <div className={styles.scheduleContainer}>
         <div className="slots-column">
           <div className={styles.scheduleCell} />
-          {SLOTS.map((slot) => (
+          {slots.map((slot) => (
             <div
               key={`${slot.from}-${slot.to}`}
               className={`${styles.scheduleCell} ${styles.scheduleLabel}`}
@@ -78,24 +48,31 @@ const Schedule = () => {
         {SCHEDULE_GRID.map((col, dayIndex) => (
           <div key={`day-${dayIndex}`} className={styles.dayColumn}>
             <div
-              key={DAYS[dayIndex]}
+              key={days[dayIndex]}
               className={`${styles.scheduleCell} ${styles.scheduleLabel}`}
             >
-              {DAYS[dayIndex]}
+              {days[dayIndex]}
             </div>
-            {col.map((_, slotIndex) => (
-              <Slot
-                key={`slot-${dayIndex}-${slotIndex}`}
-                slot={sessions?.find(
-                  (s) => s.weekDay === dayIndex && s.slot === slotIndex,
-                )}
-                isLoading={isLoading}
-              />
+
+        {col.map((_, slotIndex) => (
+              <div
+                key={`${slotIndex}-${dayIndex}`}
+                className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
+                style={{ backgroundColor: SUBJECT_TO_COLOR[state.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
+                      .subjectName] }}
+              >
+                <p className={`${styles.scheduleSubject}`}>
+                  {state.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
+                      .subjectName}
+                </p>
+                <p>{state.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
+                      .teacher.name}</p>
+              </div>
             ))}
           </div>
         ))}
       </div>
-      {isLoading && <span>loading your schedule...</span>}
+      {!state.user?.currentClass && <span>loading your schedule...</span>}
     </div>
   );
 };
