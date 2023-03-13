@@ -103,7 +103,7 @@ export const emailConfirm = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       { _id: decrypted.id },
       { verified: true },
-      { new: true },
+      { new: true }
     );
     console.log("emailConfirm ~ user", user);
     res.send({ success: true });
@@ -147,7 +147,7 @@ export const changePass = async (req, res) => {
     await User.findByIdAndUpdate(
       decrypted.id,
       { password: hashedPass },
-      { new: true },
+      { new: true }
     );
     res.send({ success: true });
   } catch (error) {
@@ -172,16 +172,64 @@ export const getUserData = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   try {
-    let user = await Admin.findById(req.params.id).select("-password -__v");
+    let user = await Admin.findById(req.user._id)
+      .select("-password -__v")
+      .populate({
+        path: "school",
+        populate: {
+          path: "students teachers classes",
+          select: "-password -__v",
+        },
+      });
+
     if (!user)
-      user = await Teacher.findById(req.params.id).select("-password -__v");
+      user = await Teacher.findById(req.user._id)
+        .select("-password -__v")
+        .populate({
+          path: "school",
+          select: "-__v",
+        });
     if (!user)
-      user = await Student.findById(req.params.id).select("-password -__v");
+      user = await Student.findById(req.user._id)
+        .select("-password -__v")
+        .populate({ path: "school", select: "-__v" })
+        .populate({
+          path: "currentClass",
+          select: "-__v",
+          populate: {
+            path: "schedule.sessions",
+            select: "-__v",
+            populate: { path: "teacher", select: "-__v" },
+          },
+        });
     if (!user) return res.json({ success: false, errorId: 404 }).status(404);
-    res.json({ success: true, user }).status(200);
+
+    const school = user.school;
+      delete user.school;
+if(user.role === 'student') 
+{     const days = user.currentClass.schedule.map((day) => day.day);
+      const slots = school.periods.map((period) => {
+        return {
+          from:
+            (period.startTime / 60).toFixed(2).split(".")[0] +
+            ":" +
+            (period.startTime % 60 === 0 ? "00" : period.startTime % 60),
+          to:
+            ((period.startTime + period.duration) / 60).toFixed(2).split(".")[0] +
+            ":" +
+            ((period.startTime + period.duration) % 60 === 0
+              ? "00"
+              : (period.startTime + period.duration) % 60),
+        };
+      });
+      const displaySchedule = { days, slots } || null;
+    }      console.log("getUserData user:", user);
+    if(user.role === 'student')
+    res.status(200).json({ success: true, user, school,  displaySchedule });
+    else res.status(200).json({ success: true, user, school });
   } catch (error) {
     console.log("getUser error:", error.message);
-    res.json({ success: false, error: error.message }).status(500);
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
