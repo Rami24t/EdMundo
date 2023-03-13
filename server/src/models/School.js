@@ -74,7 +74,7 @@ const schoolSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("School", schoolSchema);

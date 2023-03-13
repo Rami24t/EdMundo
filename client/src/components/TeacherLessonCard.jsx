@@ -15,7 +15,7 @@ import {
   MDBModalBody,
   MDBModalFooter,
 } from "mdb-react-ui-kit";
-import { Form, Col, Row, FormGroup, Label, Input } from "reactstrap";
+import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
 
 const TeacherLessonCard = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -29,8 +29,8 @@ const TeacherLessonCard = () => {
     subject: "Math",
     topic: "Odd numbers",
     objectives: "Learn arithmetic with odd numbers.",
-    classwork: "Book pg. 24-29",
-    homework: "Book pg. 30-32",
+    classwork: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
+    homework: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
     notes: "Please review even numbers.",
     link: "google.com",
   });
@@ -78,7 +78,7 @@ const TeacherLessonCard = () => {
                         className="btn-close"
                         color="none"
                         onClick={() => setShowDeleteModal(false)}
-                      ></MDBBtn>
+                      />
                     </MDBModalHeader>
                     <MDBModalBody>
                       Once you delete the lesson you won't be able to restore
@@ -203,14 +203,17 @@ const TeacherLessonCard = () => {
                   <Label for="classwork" className="lesson-card-label">
                     Classwork
                   </Label>
-                  <Input
-                    className="lesson-card-input"
+
+                  <Badge
+                    className="lesson-card-badge"
                     id="classwork"
                     name="classwork"
-                    type="url"
+                    target="_blank"
+                    href={lessonDetails.classwork}
                     defaultValue={lessonDetails.classwork}
-                    disabled
-                  />
+                  >
+                    Classwork PDF
+                  </Badge>
                 </FormGroup>
               </Col>
               <Col md={6}>
@@ -218,14 +221,16 @@ const TeacherLessonCard = () => {
                   <Label for="homework" className="lesson-card-label">
                     Homework
                   </Label>
-                  <Input
+                  <Badge
+                    className="lesson-card-badge"
                     id="homework"
                     name="homework"
-                    className="lesson-card-input"
+                    target="_blank"
+                    href={lessonDetails.homework}
                     defaultValue={lessonDetails.homework}
-                    type="url"
-                    disabled
-                  />
+                  >
+                    Homework PDF
+                  </Badge>
                 </FormGroup>
               </Col>
             </Row>

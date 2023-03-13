@@ -15,6 +15,7 @@
         "axios": "^1.2.4",
         "dotenv": "^16.0.3",
         "emojibase": "^6.1.0",
+        "framer-motion": "^10.2.5",
         "interweave": "^13.0.0",
         "interweave-autolink": "^5.1.0",
         "interweave-emoji": "^7.0.0",
@@ -27,6 +28,7 @@
         "react-dom": "^18.2.0",
         "react-icons": "^4.7.1",
         "react-router-dom": "^6.7.0",
+        "react-router-hash-link": "^2.4.3",
         "react-scripts": "5.0.1",
         "react-scroll-up": "^1.4.0",
         "reactstrap": "^9.1.6",
@@ -58,5 +60,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "sass": "^1.58.3"
     }
 }

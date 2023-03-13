@@ -84,3 +84,16 @@
 .lesson-card .form-label {
     float: left;
 }
+
+
+.lesson-card .lesson-card-badge {
+    background-color: transparent !important;
+    color: black;
+    outline: 1px solid green;
+    font-size:0.75rem;
+    font-weight: 400;
+    line-height: 1.6;
+   margin-left: 1rem;
+
+    
+}

@@ -1,28 +1,39 @@
 .schedulePage {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fffffc;
 }
 
 .scheduleContainer {
   display: flex;
+  gap: 20px;
+}
+
+.dayColumn {
+  @extend .scheduleContainer;
+  flex-direction: column;
 }
 
 .scheduleCell {
-  width: 150px;
-  height: 100px;
+  width: 10rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 15px;
 }
 
 .scheduleSlot {
-  background-color: #fbc4ab;
-  border: 1px solid #495057;
   cursor: pointer;
+  box-shadow: 5px 5px 15px -1px rgba(0, 0, 0, 0.2);
 }
 .scheduleSubject {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
+  font-family: "Nunito";
+  font-weight: 700;
 }
 
 .scheduleLabel {

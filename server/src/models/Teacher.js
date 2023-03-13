@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-const TeacherSchema = new Schema({
+const TeacherSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     // username: {
     //     type: String,
@@ -16,21 +17,23 @@ const TeacherSchema = new Schema({
     //     //        required: true
     // },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     phone: {
-        type: String,
+      type: String,
     },
     address: {
-        type: String,
+      type: String,
     },
     role: {
-        type: String,
-        default: 'teacher'
+      type: String,
+      default: "teacher",
     },
-    // Lesson ? 
-}, {
-    timestamps: true
-})
-export default mongoose.model('Teacher', TeacherSchema)
+    // Lesson ?
+  },
+  {
+    timestamps: true,
+  },
+);
+export default mongoose.model("Teacher", TeacherSchema);

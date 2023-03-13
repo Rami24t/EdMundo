@@ -13,8 +13,8 @@ const StudentLessonCard = () => {
     subject: "Math",
     topic: "Odd numbers",
     objectives: "Learn arithmetic with odd numbers.",
-    classwork: "Book pg. 24-29",
-    homework: "Book pg. 30-32",
+    classwork: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
+    homework: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
     notes: "Please review even numbers.",
     link: "google.com",
   };
