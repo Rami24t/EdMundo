@@ -30,6 +30,10 @@ const TeacherSchema = new Schema(
       type: String,
       default: "teacher",
     },
+    school: {
+      type: Schema.Types.ObjectId,
+      ref: "School",
+    },
     // Lesson ?
   },
   {
