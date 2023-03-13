@@ -2,13 +2,13 @@ import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import "./contactForm.css";
 import {
-	MDBModal,
-	MDBModalDialog,
-	MDBModalContent,
-	MDBModalBody,
-	MDBContainer,
-	MDBRow,
-	MDBCol,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalBody,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
 } from "mdb-react-ui-kit";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import ReceivingMail from "../assets/receiving-mail.png";
@@ -29,7 +29,7 @@ const ContactForm = () => {
         "service_p8q9go7",
         "template_kypxmgi",
         form.current,
-        "MvJyvDm2jLNqAJw6u"
+        "MvJyvDm2jLNqAJw6u",
       )
       .then(
         (result) => {
@@ -37,7 +37,7 @@ const ContactForm = () => {
         },
         (error) => {
           console.log(error.text);
-        }
+        },
       );
     e.target.reset();
   };

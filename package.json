@@ -4,7 +4,9 @@
   "description": "Rami Al-Saadi, Julia Kobzar, and Alina Cuznetov",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm:start-*\"",
+    "start-backend": "cd server && npm run server",
+    "start-frontend": "cd client && npm start",
     "prepare": "husky install"
   },
   "repository": {
@@ -19,6 +21,7 @@
   },
   "homepage": "https://github.com/Rami24t/EdMundo#readme",
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "husky": "^8.0.0",
     "rome": "^11.0.0"
   }
