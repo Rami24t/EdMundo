@@ -76,7 +76,7 @@ export default function Navbar() {
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem
-                className={(theme === "/" || theme === "/login") && " d-none "}
+                className={(theme === "/" || theme === "/login" || theme.startsWith('/teacher')) && " d-none "}
               >
                 <NavLink to="/student/schedule">
                   {({ isActive }) => (

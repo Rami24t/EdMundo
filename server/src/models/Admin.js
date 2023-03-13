@@ -31,6 +31,10 @@ const adminSchema = new Schema(
       type: String,
       default: "admin",
     },
+    school: {
+      type: Schema.Types.ObjectId,
+      ref: "School",
+    },
   },
   {
     timestamps: true,
