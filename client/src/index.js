@@ -35,7 +35,7 @@ root.render(
           />
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/lessons" element={<StudentLessons />} />
-          <Route path="/student/schedule" element={<StudentSchedule />} />
+          <Route path="/student/schedule" element={<StudentSchedulePage />} />
           <Route path="/login" element={<Login />} />
         </Route>
         <Route path="*" element={<h1>404: Not Found</h1>} />
