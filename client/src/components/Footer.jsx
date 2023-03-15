@@ -14,7 +14,7 @@ export default function Footer() {
         <MDBContainer className="text-center text-md-start mt-4 ">
           <MDBRow className="mt-3">
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-2 ">
-              <spangi>Check out our project repository</spangi>
+              <span>Check out our project repository</span>
               <a
                 href="https://github.com/Rami24t/EdMundo"
                 className="m-3 text-reset"

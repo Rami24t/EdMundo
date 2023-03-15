@@ -18,9 +18,12 @@ const TeacherLessons = () => {
   return (
     <div className="teacher-lessons-page">
       <MDBContainer className="teacher-lessons-container">
-        <MDBRow className="teacher-lessons-header">
-          <MDBCol md={6} className="teacher-lessons-title">
-            My Lessons
+        <MDBRow
+          className="teacher-lessons-header"
+          style={{ alignItems: "center" }}
+        >
+          <MDBCol md={6}>
+            <h1 className="teacher-lessons-title"> My Lessons</h1>
           </MDBCol>
           <MDBCol md={6}>
             <MDBBtn className="create-new-lesson" onClick={toggleShow}>
@@ -29,19 +32,23 @@ const TeacherLessons = () => {
           </MDBCol>
         </MDBRow>
 
-      <CreateLessonModal
-        optModal={optModal}
-        setOptModal={setOptModal}
-        toggleShow={toggleShow}
-        handleCreateLessonConfirm={handleCreateLessonConfirm}
-      />
+        <CreateLessonModal
+          optModal={optModal}
+          setOptModal={setOptModal}
+          toggleShow={toggleShow}
+          handleCreateLessonConfirm={handleCreateLessonConfirm}
+        />
 
-      <TeacherLessonCard />
+        <TeacherLessonCard />
 
         <ScrollToTop showUnder={160}>
           <span>
             <BsArrowUpCircle
-              style={{ width: "2.5rem", height: "2.5rem", color: "green" }}
+              style={{
+                width: "2.5rem",
+                height: "2.5rem",
+                color: "#a876f5",
+              }}
             />
           </span>
         </ScrollToTop>

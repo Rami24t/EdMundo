@@ -6,7 +6,7 @@
     background-color: khaki;
     border-radius: 10px;
     padding: 20px;
-    margin: 1rem;
+    margin-bottom: 1rem;
 }
 
 .lesson-card .lesson-header {
@@ -14,11 +14,13 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    align-items:center ;
 }
 
 .lesson-card .title-container {
     width: 80%;
     margin-right: 10px;
+
 }
 
 .lesson-card .buttons-container {
@@ -29,10 +31,20 @@
     background-color: transparent;
     border: none;
     float: right;
+
 }
 
 .lesson-card .delete-button {
     color: red;
+    margin:0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.edit-button {
+    margin:0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .lesson-card hr {
@@ -73,9 +85,11 @@
 }
 
 .lesson-card .lesson-card-icon {
-    padding-top: 0px;
     line-height: normal;
     color: green; 
+    height: 1rem;
+    width: 1rem;
+
 }
 
 .lesson-card .form-label {
@@ -90,7 +104,17 @@
     font-size:0.75rem;
     font-weight: 400;
     line-height: 1.6;
-   margin-left: 1rem;
+    border-radius: 2rem;
+    padding: 8px 12px;
+    margin-left: 1rem;
 
     
+}
+
+.delete-modal-button {
+    padding-bottom: 10px !important;
+  }
+
+.lesson-save-button {
+    padding-bottom: 8px;
 }

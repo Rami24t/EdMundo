@@ -5,12 +5,8 @@
  padding-bottom: 45px;
 }
 
-.teacher-lessons-container {
-    
-}
-
 .teacher-lesson-header {
-margin-bottom: 5rem;
+align-items: center !important;
 }
 
 .create-new-lesson {
@@ -25,9 +21,21 @@ margin-bottom: 5rem;
 }
 
 .teacher-lesson-title {
-    font-size: 56px !important;
     font-weight: 500 !important;
     line-height: 1.2;
-  
+    font-size: 56px !important;
   }
+
+  .delete-modal-button {
+    text-align: center !important;
+  }
+
   
+@media only screen and (max-width: 600px) {
+
+    .teacher-lesson-title {
+      font-size: 30px;
+      margin-bottom: 2rem;
+
+  }
+}
