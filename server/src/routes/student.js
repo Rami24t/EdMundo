@@ -9,7 +9,7 @@ import {
   updateStudent,
 } from "../controllers/student.js";
 
-router.put("/student", auth, multerMiddleware.single("image"), updateStudent);
+router.put("/update", auth, multerMiddleware.single("image"), updateStudent);
 
 router.get("/lessons", auth, getLessons);
 
