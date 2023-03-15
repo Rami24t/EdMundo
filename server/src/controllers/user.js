@@ -240,7 +240,7 @@ export const updateProfile = async (req, res) => {
   }
   try {
     if (req.file) req.body.profileImage = req.file.path;
-    req.body.likes = JSON.parse(req.body.likes);
+    // req.body.likes = JSON.parse(req.body.likes);
     let user = await Admin.findById(req.user);
     if (!user) user = await Teacher.findById(req.user);
     if (!user) user = await Student.findById(req.user);
