@@ -6,28 +6,32 @@ import { validationResult } from "express-validator";
 import Session from "../models/Session.js";
 
 export const updateStudent = async (req, res) => {
-  if (req.user.role !== "teacher")
+  if (req.user.role !== "student")
     return res.status(401).json({ success: false, error: "Unauthorized" });
-  if (!req.body.topic)
-    return res.status(400).json({ success: false, error: "Topic is required" });
+  if (!req.user._id)
+    return res.status(400).json({ success: false, error: "ID is required" });
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    if (req.body._id) {
-      const lesson = Lesson.findByIdAndUpdate(req.body._id, req.body, {
+    // if (req.body._id) 
+    const update = { phone: req.body.phone, address: req.body.address };    
+    console.log("updateStudent update: ", update);
+    const student = await Student.findByIdAndUpdate(req.user._id, update, {
         new: true,
       });
-      if (!lesson) return res.send({ success: false, errorId: 404 });
-      res.send({ success: true, lesson });
-    } else {
-      const newLesson = new Lesson.create(req.body);
-      if (!newLesson) return res.send({ success: false, errorId: 404 });
-      res.send({ success: true, newLesson });
-    }
+      console.log("updateStudent student: ", student);
+      if (!student)
+        return res.send({ success: false, errorId: 404 });
+      res.send({ success: true, student });     
+    // else {
+    //   const newStudent = new Student.create(req.body);
+    //   if (!newStudent) return res.send({ success: false, errorId: 500 });
+    //   res.send({ success: true, newStudent });
+    // }
   } catch (error) {
-    console.log("updateLesson error:", error.message);
+    console.log("updateStudent error:", error.message);
     res.send({ success: false, error: error.message });
   }
 };
