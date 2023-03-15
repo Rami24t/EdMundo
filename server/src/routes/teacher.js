@@ -36,6 +36,6 @@ router.get("/classes", auth, getClasses);
 
 router.get("/class", auth, getClass);
 
-router.put("/teacher", auth, multerMiddleware.single("image"), updateTeacher);
+router.put("/update", auth, multerMiddleware.single("image"), updateTeacher);
 
 export default router;
