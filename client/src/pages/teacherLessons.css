@@ -1,11 +1,13 @@
-.teacher-lessons-page {
+.teacher-lessons-page,
+.student-lessons-page {
  background-color: lightblue;
  height: fit-content;
  padding-top: 45px;
  padding-bottom: 45px;
 }
 
-.teacher-lesson-header {
+.teacher-lessons-header,
+.student-lessons-header {
 align-items: center !important;
 }
 
@@ -20,22 +22,20 @@ align-items: center !important;
     float:right;
 }
 
-.teacher-lesson-title {
+.teacher-lesson-title,
+.student-lesson-title {
     font-weight: 500 !important;
     line-height: 1.2;
     font-size: 56px !important;
   }
 
-  .delete-modal-button {
-    text-align: center !important;
-  }
 
   
 @media only screen and (max-width: 600px) {
 
-    .teacher-lesson-title {
+    .teacher-lesson-title,
+    .student-lesson-title {
       font-size: 30px;
       margin-bottom: 2rem;
-
   }
 }

@@ -125,9 +125,9 @@ const TeacherLessonCard = () => {
                     disabled
                   />
                 </Col>
-                <Label for="date" md={1}>
+                <Col for="date" md={1}>
                   <TfiTime className="lesson-card-icon" />
-                </Label>
+                </Col>
                 <Col md={3} className="date-input">
                   <Input
                     className="lesson-card-input"
@@ -138,9 +138,9 @@ const TeacherLessonCard = () => {
                     disabled
                   />
                 </Col>
-                <Label for="date" md={1}>
+                <Col for="date" md={1}>
                   <IoMdPeople className="lesson-card-icon" />
-                </Label>
+                </Col>
                 <Col md={3} className="date-input">
                   <Input
                     className="lesson-card-input"
