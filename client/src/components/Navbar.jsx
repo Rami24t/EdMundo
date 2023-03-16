@@ -55,7 +55,7 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <NavLink to="/teacher/profile">
+                <NavLink to={"/"+state.user?.role+"/profile"}>
                   {({ isActive }) => (
                     <MDBNavbarLink
                       className={
@@ -69,14 +69,19 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
+              <NavLink to={"/"+state.user?.role+"/lessons"}>
+                  {({ isActive }) => (
                 <MDBNavbarLink
                   href="#"
                   className={
                     (theme === "/" || theme === "/login") && " d-none "
                   }
-                >
+                  active={isActive}
+                    >
                   Lessons
                 </MDBNavbarLink>
+                  )}
+                </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem
                 className={(theme === "/" || theme === "/login" || theme.startsWith('/teacher') || state.user?.role ==='teacher') && " d-none "}
@@ -97,7 +102,7 @@ export default function Navbar() {
                   >
                     Log In
                   </MDBBtn>}
-                  {state.user.name && <MDBBtn
+                  {state.user?.name && <MDBBtn
                     outline
                     color="success"
                     className="me-2"
