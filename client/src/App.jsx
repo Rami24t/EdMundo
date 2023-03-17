@@ -27,7 +27,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      {theme !== "/" && !state.user?.name && (
+      {(theme !== "/" && theme!=="/login") && !state.user?.name && (
         <MDBSpinner grow style={{ width: "3rem", height: "3rem" }}>
           <span className='visually-hidden'>Loading...</span>
         </MDBSpinner>
