@@ -13,6 +13,7 @@ const FormData = {
   class: "0z-00",
 };
 
+
 export default function ProfileForm() {
   let { isLoading, error, data } = useUser();
   data = data?.data;
@@ -34,6 +35,7 @@ export default function ProfileForm() {
     }));
   }, [data?.user]);
 
+
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const handleChange = (e) => {
@@ -43,6 +45,7 @@ export default function ProfileForm() {
 
   const handleSave = (e) => {
     e.preventDefault();
+
     if (data?.user?.role) {
       axios
         .put(

@@ -12,6 +12,7 @@ const App = () => {
   // const { state, dispatch } = useContext(Context);
   const location = useLocation();
   const theme = location.pathname;
+
   // const { isLoading, error, data } = useUser();
   // useEffect(() => {
   //   if (isLoading) dispatch({ type: "LOADING" });
@@ -25,11 +26,14 @@ const App = () => {
   
   // console.log(' d.e.l.  ', { data, error, isLoading });
 
+
   return (
     <div>
       <Navbar />
+
       {/* {((theme === "/login" || theme==="/" || theme==='/student' ) || state.user?.name) && <Outlet />} */}
       <Outlet />
+
       {theme !== "/login" && <Footer />}
     </div>
   );

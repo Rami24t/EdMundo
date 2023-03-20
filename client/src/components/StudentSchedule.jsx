@@ -37,9 +37,11 @@ const Spinner = () => {
 };
 
 const Schedule = () => {
+
   let { data, error, isLoading} = useUser();
   data && (data = data?.data);
   const {days,slots}  =  data?.displaySchedule || {days: DAYS, slots: SLOTS};
+
 
   return (
     <div className={styles.schedulePage}>
@@ -64,6 +66,7 @@ const Schedule = () => {
             >
               {days[dayIndex]}
             </div>
+
 
         {col.map((_, slotIndex) => (
           !data?.user?.currentClass.schedule ? <Spinner key={`${slotIndex}-${dayIndex}`}/> :

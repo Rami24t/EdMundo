@@ -16,6 +16,7 @@ import {
   MDBBtn,
   MDBIcon,
 } from "mdb-react-ui-kit";
+
 import useUser from "../hooks/useUser";
 
 export default function Navbar() {
@@ -29,6 +30,7 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   // const { state, dispatch } = useContext(Context);
+
 
   const [showNav, setShowNav] = useState(false);
   const location = useLocation();
@@ -66,7 +68,9 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
+
                 <NavLink to={`/${data?.user?.role}/profile`}>
+
                   {({ isActive }) => (
                     <MDBNavbarLink
                       className={
@@ -80,12 +84,16 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
+
                 <NavLink to={`/${data?.user?.role}/lessons`}>
+
                   {({ isActive }) => (
                     <MDBNavbarLink
                       href="#"
                       className={
+
                         (!data?.user?.name || theme === "/login") && " d-none "
+
                       }
                       active={isActive}
                     >
@@ -96,6 +104,7 @@ export default function Navbar() {
               </MDBNavbarItem>
               <MDBNavbarItem
                 className={
+
                   (!data?.user?.name ||
                     theme === "/login" ||
                     theme.startsWith("/teacher") ||
@@ -111,6 +120,7 @@ export default function Navbar() {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <Link to="/login" className={theme === "/login" && "d-none"}>
+
                   {!data?.user?.name && (
                     <MDBBtn
                       outline
@@ -121,12 +131,15 @@ export default function Navbar() {
                       Log In
                     </MDBBtn>
                   )}
+
                   {data?.user?.name && (
+
                     <MDBBtn
                       outline
                       color="success"
                       className="me-2"
                       type="button"
+
                       onClick={() => {
                         // Delete the authentication cookie
                         document.cookie =
