@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StudentSchedule.module.scss";
 import useUser from "../hooks/useUser";
-import  { MDBSpinner } from "mdb-react-ui-kit";
+import { MDBSpinner } from "mdb-react-ui-kit";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
@@ -23,7 +23,7 @@ const SUBJECT_TO_COLOR = {
   Technology: "#EDD6B6",
   Ethics: "#FFE6B6",
   Chemistry: "#7DA6FF",
-  Physics: '#C5B6FF',
+  Physics: "#C5B6FF",
   Biology: "#9BF6FF",
   History: "#CAFFBF",
   Geography: "#BDB2FF",
@@ -35,18 +35,20 @@ const SUBJECT_TO_COLOR = {
 
 const Spinner = () => {
   return (
-    <MDBSpinner grow role="status" className={`spinner-border text-primary ${styles.scheduleCell} ${styles.scheduleSlot}`}>
+    <MDBSpinner
+      grow
+      role="status"
+      className={`spinner-border text-primary ${styles.scheduleCell} ${styles.scheduleSlot}`}
+    >
       <span className="visually-hidden">Loading...</span>
     </MDBSpinner>
   );
 };
 
 const Schedule = () => {
-
   let { data } = useUser();
   data && (data = data?.data);
-  const {days,slots}  =  data?.displaySchedule || {days: DAYS, slots: SLOTS};
-
+  const { days, slots } = data?.displaySchedule || { days: DAYS, slots: SLOTS };
 
   return (
     <div className={styles.schedulePage}>
@@ -72,23 +74,39 @@ const Schedule = () => {
               {days[dayIndex]}
             </div>
 
-
-        {col.map((_, slotIndex) => (
-          !data?.user?.currentClass.schedule ? <Spinner key={`${slotIndex}-${dayIndex}`}/> :
-              (<div
-                key={`${slotIndex}-${dayIndex}`}
-                className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
-                style={{ backgroundColor: SUBJECT_TO_COLOR[data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
-                      .subjectName] }}
-              >
-                <p className={`${styles.scheduleSubject}`}>
-                  {data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
-                      .subjectName}
-                </p>
-                <p>{data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
-                      .teacher.name}</p>
-              </div>)
-            ))}
+            {col.map((_, slotIndex) =>
+              !data?.user?.currentClass.schedule ? (
+                <Spinner key={`${slotIndex}-${dayIndex}`} />
+              ) : (
+                <div
+                  key={`${slotIndex}-${dayIndex}`}
+                  className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
+                  style={{
+                    backgroundColor:
+                      SUBJECT_TO_COLOR[
+                        data?.user?.currentClass?.schedule[dayIndex].sessions[
+                          slotIndex
+                        ].subjectName
+                      ],
+                  }}
+                >
+                  <p className={`${styles.scheduleSubject}`}>
+                    {
+                      data?.user?.currentClass?.schedule[dayIndex].sessions[
+                        slotIndex
+                      ].subjectName
+                    }
+                  </p>
+                  <p>
+                    {
+                      data?.user?.currentClass?.schedule[dayIndex].sessions[
+                        slotIndex
+                      ].teacher.name
+                    }
+                  </p>
+                </div>
+              ),
+            )}
           </div>
         ))}
       </div>

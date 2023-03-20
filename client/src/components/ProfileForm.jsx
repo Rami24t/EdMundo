@@ -49,7 +49,7 @@ export default function ProfileForm() {
         .put(
           `${baseUrl}/api/${data?.user?.role}/update`,
           { phone: profile.phone, address: profile.address },
-          { withCredentials: true }
+          { withCredentials: true },
         )
         .then((res) => {
           console.log("Save response:", res.data.user);

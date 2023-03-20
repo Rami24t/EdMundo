@@ -56,7 +56,9 @@ export default function Navbar() {
                 <NavLink to="/">
                   {({ isActive }) => (
                     <MDBNavbarLink
-                      className={theme === "/" && !data?.user?.name && " d-none "}
+                      className={
+                        theme === "/" && !data?.user?.name && " d-none "
+                      }
                       active={isActive}
                       aria-current="page"
                     >
@@ -139,7 +141,7 @@ export default function Navbar() {
                               .then((res) => {
                                 // dispatch({ type: "LOGOUT" });
                                 // dispatch({ type: "CLEAR" });
-                              })
+                              }),
                           )
                           .catch((err) => {
                             console.log(err);
