@@ -15,16 +15,15 @@ export const updateStudent = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    // if (req.body._id) 
-    const update = { phone: req.body.phone, address: req.body.address };    
+    // if (req.body._id)
+    const update = { phone: req.body.phone, address: req.body.address };
     console.log("updateStudent update: ", update);
     const student = await Student.findByIdAndUpdate(req.user._id, update, {
-        new: true,
-      });
-      console.log("updateStudent student: ", student);
-      if (!student)
-        return res.send({ success: false, errorId: 404 });
-      res.send({ success: true, student });     
+      new: true,
+    });
+    console.log("updateStudent student: ", student);
+    if (!student) return res.send({ success: false, errorId: 404 });
+    res.send({ success: true, student });
     // else {
     //   const newStudent = new Student.create(req.body);
     //   if (!newStudent) return res.send({ success: false, errorId: 500 });

@@ -46,8 +46,6 @@
   transform: rotate(-135deg);
 }
 
-.description-subtitle {
-}
 
 @media only screen and (max-width: 600px) {
   .description {

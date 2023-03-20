@@ -16,8 +16,8 @@ const FormData = {
 
 export default function ProfileForm({ role }) {
   const { state, dispatch } = useContext(Context);
-  const [profile, setProfile] = useState({...state.user} || FormData);
-  if(state.user.role === "student")
+  const [profile, setProfile] = useState({ ...state.user } || FormData);
+  if (state.user.role === "student")
     profile.class = state.user?.currentClass?.name;
   // console.log("profile", state.user);
   const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -30,23 +30,23 @@ export default function ProfileForm({ role }) {
   const handleSave = (e) => {
     e.preventDefault();
     // backend call /api/users/update
-      axios
-        .put(
-          `${baseUrl}/api/${state.user.role}/update`,
-          { phone: profile.phone, address: profile.address },
-          { withCredentials: true },
-        )
-        .then((res) => {
-          console.log('Save response:', res.data.user);
-          if (res.status === 200) {
-            alert("Profile updated successfully!");            
-          } else if (res.status !== 200) {
-            alert("Profile update failed!");
-          }
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
+    axios
+      .put(
+        `${baseUrl}/api/${state.user.role}/update`,
+        { phone: profile.phone, address: profile.address },
+        { withCredentials: true },
+      )
+      .then((res) => {
+        console.log("Save response:", res.data.user);
+        if (res.status === 200) {
+          alert("Profile updated successfully!");
+        } else if (res.status !== 200) {
+          alert("Profile update failed!");
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (

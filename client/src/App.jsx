@@ -21,18 +21,21 @@ const App = () => {
       dispatch({ type: "CLEAR" });
     }
   }, [isLoading, error, data, dispatch]);
-  
-  console.log(' d.e.l.  ', { data, error, isLoading });
+
+  console.log(" d.e.l.  ", { data, error, isLoading });
 
   return (
     <div>
       <Navbar />
-      {(theme !== "/" && theme!=="/login") && !state.user?.name && (
+      {theme !== "/" && theme !== "/login" && !state.user?.name && (
         <MDBSpinner grow style={{ width: "3rem", height: "3rem" }}>
           <span className='visually-hidden'>Loading...</span>
         </MDBSpinner>
       )}
-      {((theme === "/login" || theme==="/" || theme==='/student' ) || state.user?.name) && <Outlet />}
+      {(theme === "/login" ||
+        theme === "/" ||
+        theme === "/student" ||
+        state.user?.name) && <Outlet />}
       {theme !== "/login" && <Footer />}
     </div>
   );

@@ -2,7 +2,10 @@ import jwt from "jsonwebtoken";
 export default function auth(req, res, next) {
   try {
     const token = req.cookies["OnlineSchoolUser"];
-    if(!token) return res.status(401).json({success: false, error: "No token, authorization denied"});
+    if (!token)
+      return res
+        .status(401)
+        .json({ success: false, error: "No token, authorization denied" });
     const decrypted = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decrypted;
     next();

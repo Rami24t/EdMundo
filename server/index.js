@@ -54,7 +54,6 @@ app.listen(port, () => console.log("Server is up and running at port: ", port));
 // dotenv.config();
 // dbConnect();
 
-
 // scripts:
 // const addSchoolRefToUsers = async () => {
 //    try {

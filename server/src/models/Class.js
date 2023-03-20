@@ -64,7 +64,7 @@ const classSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("Class", classSchema);

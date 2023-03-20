@@ -103,7 +103,7 @@ export const emailConfirm = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       { _id: decrypted.id },
       { verified: true },
-      { new: true }
+      { new: true },
     );
     console.log("emailConfirm ~ user", user);
     res.send({ success: true });
@@ -147,7 +147,7 @@ export const changePass = async (req, res) => {
     await User.findByIdAndUpdate(
       decrypted.id,
       { password: hashedPass },
-      { new: true }
+      { new: true },
     );
     res.send({ success: true });
   } catch (error) {
@@ -205,10 +205,10 @@ export const getUserData = async (req, res) => {
     if (!user) return res.json({ success: false, errorId: 404 }).status(404);
 
     const school = user.school;
-      delete user.school;
-      console.log("getUserData user:", user.role);
-if(user.role === 'student') 
-{     const days = user.currentClass.schedule.map((day) => day.day);
+    delete user.school;
+    console.log("getUserData user:", user.role);
+    if (user.role === "student") {
+      const days = user.currentClass.schedule.map((day) => day.day);
       const slots = school.periods.map((period) => {
         return {
           from:
@@ -216,7 +216,9 @@ if(user.role === 'student')
             ":" +
             (period.startTime % 60 === 0 ? "00" : period.startTime % 60),
           to:
-            ((period.startTime + period.duration) / 60).toFixed(2).split(".")[0] +
+            ((period.startTime + period.duration) / 60)
+              .toFixed(2)
+              .split(".")[0] +
             ":" +
             ((period.startTime + period.duration) % 60 === 0
               ? "00"
@@ -224,9 +226,8 @@ if(user.role === 'student')
         };
       });
       const displaySchedule = { days, slots } || null;
-      res.status(200).json({ success: true, user, school,  displaySchedule });
-    }   
-    else res.status(200).json({ success: true, user, school });
+      res.status(200).json({ success: true, user, school, displaySchedule });
+    } else res.status(200).json({ success: true, user, school });
   } catch (error) {
     console.log("getUser error:", error.message);
     res.status(500).json({ success: false, error: error.message });

@@ -15,9 +15,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-
 export default function Navbar() {
-  
   const { state, dispatch } = useContext(Context);
 
   const [showNav, setShowNav] = useState(false);
@@ -55,7 +53,7 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <NavLink to={"/"+state.user?.role+"/profile"}>
+                <NavLink to={"/" + state.user?.role + "/profile"}>
                   {({ isActive }) => (
                     <MDBNavbarLink
                       className={
@@ -69,22 +67,28 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-              <NavLink to={"/"+state.user?.role+"/lessons"}>
+                <NavLink to={"/" + state.user?.role + "/lessons"}>
                   {({ isActive }) => (
-                <MDBNavbarLink
-                  href="#"
-                  className={
-                    (theme === "/" || theme === "/login") && " d-none "
-                  }
-                  active={isActive}
+                    <MDBNavbarLink
+                      href="#"
+                      className={
+                        (theme === "/" || theme === "/login") && " d-none "
+                      }
+                      active={isActive}
                     >
-                  Lessons
-                </MDBNavbarLink>
+                      Lessons
+                    </MDBNavbarLink>
                   )}
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem
-                className={(theme === "/" || theme === "/login" || theme.startsWith('/teacher') || state.user?.role ==='teacher') && " d-none "}
+                className={
+                  (theme === "/" ||
+                    theme === "/login" ||
+                    theme.startsWith("/teacher") ||
+                    state.user?.role === "teacher") &&
+                  " d-none "
+                }
               >
                 <NavLink to="/student/schedule">
                   {({ isActive }) => (
@@ -94,22 +98,26 @@ export default function Navbar() {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <Link to="/login" className={theme === "/login" && "d-none"}>
-                  {!state.user?.name && <MDBBtn
-                    outline
-                    color="success"
-                    className="me-2"
-                    type="button"
-                  >
-                    Log In
-                  </MDBBtn>}
-                  {state.user?.name && <MDBBtn
-                    outline
-                    color="success"
-                    className="me-2"
-                    type="button"
-                  >
-                    Log Out
-                  </MDBBtn>}
+                  {!state.user?.name && (
+                    <MDBBtn
+                      outline
+                      color="success"
+                      className="me-2"
+                      type="button"
+                    >
+                      Log In
+                    </MDBBtn>
+                  )}
+                  {state.user?.name && (
+                    <MDBBtn
+                      outline
+                      color="success"
+                      className="me-2"
+                      type="button"
+                    >
+                      Log Out
+                    </MDBBtn>
+                  )}
                 </Link>
               </MDBNavbarItem>
             </MDBNavbarNav>
