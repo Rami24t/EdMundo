@@ -15,8 +15,6 @@ const App = () => {
   // const { isLoading, error, data } = useUser();
   // useEffect(() => {
   //   if (isLoading) dispatch({ type: "LOADING" });
-@@ -25,14 +26,17 @@ const App = () => {
-
   // console.log(' d.e.l.  ', { data, error, isLoading });
 
   return (
