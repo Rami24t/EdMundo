@@ -13,8 +13,8 @@ export default function ContextProvider({ children }) {
           ...state,
           user: action.payload.user,
           school: action.payload.school,
-          class: action.payload.class,
-          lessons: action.payload.lessons,
+          // class: action.payload.class,
+          // lessons: action.payload.lessons,
         };
       case "LOGOUT":
         axios.get("/api/users/logout");
