@@ -16,8 +16,15 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
+import useUser from "../hooks/useUser";
 
 const TeacherLessonCard = () => {
+  let { data, error, isLoading } = useUser();
+  data = data?.data;
+  // console.log("data", data);
+  let lessons = data?.user?.lessons || data?.user?.currentClass?.lessons;
+  lessons && lessons.map((lesson, idx) => console.log("lesson "+(idx+1) +': ' , lesson));
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [isVisible, setIsVisible] = useState(true);

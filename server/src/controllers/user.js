@@ -1,5 +1,6 @@
 import Teacher from "../models/Teacher.js";
 import Student from "../models/Student.js";
+import Lesson from "../models/Lesson.js";
 import Admin from "../models/Admin.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -47,46 +48,82 @@ export const login = async (req, res) => {
   }
   try {
     let user = await Teacher.findOne({
-      // $or: [
-      // { username: req.body.email },
-      // {
       email: req.body.email,
-      // },
-      // ],
-    }).select("-__v");
+    }).select("-__v")            .populate({
+      path: "school",
+      select: "-__v",
+    });
     if (!user)
-      user = await Student.findOne({
-        // $or: [
-        // { username: req.body.email },
-        // {
-        email: req.body.email,
-        // },
-        // ],
-      }).select("-__v");
+    user = await Student.findOne({
+      email: req.body.email,
+    })
+    .select("-__v")
+    .populate({ path: "school", select: "-__v" })
+    .populate({
+      path: "currentClass",
+      select: "-__v",
+      populate: [
+        {
+          path: "schedule.sessions",
+          select: "-__v",
+          populate: { path: "teacher", select: "-__v" },
+        },
+        {
+          path: "lessons",
+          select: "-__v",
+        }
+      ]
+    });    
     else if (!user) {
       user = await Admin.findOne({
-        // $or: [
-        // { username: req.body.email },
-        // {
         email: req.body.email,
-        //  }
-        // ,
-        // ],
-      }).select("-__v");
+      }).select("-__v")          .populate({
+        path: "school",
+        populate: {
+          path: "students teachers classes",
+          select: "-password -__v",
+        },
+      });
     }
-    console.log("logging in user:", user);
+    // console.log("logging in user:", user);
     if (!user) return res.send({ success: false, errorId: 404 });
     const passMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passMatch) return res.send({ success: false, errorId: 401 });
-    const { password, ...newUser } = user.toObject();
 
-    const token = jwt.sign(newUser, process.env.JWT_SECRET, {
+    let displaySchedule;
+        // if (!user) return res.json({ success: false, errorId: 404 }).status(404);    
+          console.log("logging in ", user.role);
+    if(user.role === 'student')
+    {     const days = user.currentClass.schedule.map((day) => day.day);
+          const slots = user.school.periods.map((period) => {
+            return {
+              from:
+                `${(period.startTime / 60).toFixed(2).split(".")[0]}:${period.startTime % 60 === 0 ? "00" : period.startTime % 60}`,
+              to:
+                `${((period.startTime + period.duration) / 60).toFixed(2).split(".")[0]}:${(period.startTime + period.duration) % 60 === 0
+                  ? "00"
+                  : (period.startTime + period.duration) % 60}`,
+            };
+          });
+           displaySchedule = { days, slots } || null;
+        }
+
+    const {school , password, ...newUser } = user.toObject();
+    const cookieData = newUser;
+    console.log("cookieData", cookieData)
+    delete cookieData.currentClass;
+    console.log("cookieData", cookieData);
+    const token = jwt.sign(cookieData, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
     res.cookie("OnlineSchoolUser", token, { sameSite: "none", secure: true });
-    res.send({ success: true, user: newUser });
+
+    if(user.role === 'student')
+    res.status(200).json({ success: true, school, user: newUser, displaySchedule });
+    else
+    res.status(200).json({ success: true, school, user: newUser });
   } catch (error) {
-    console.log("login error:", error.message);
+    console.log("login error:", error);
     res.send({ success: false, error: error.message });
   }
 };
@@ -158,7 +195,8 @@ export const changePass = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("SocialAppMERNToken", { sameSite: "none", secure: true });
+    res.clearCookie("OnlineSchoolUser", { sameSite: "none", secure: true });
+    console.log("logged out");
     res.json({ success: true }).status(200);
   } catch (error) {
     console.log("logout error:", error.message);
@@ -201,14 +239,21 @@ export const getUserData = async (req, res) => {
             select: "-__v",
             populate: { path: "teacher", select: "-__v" },
           },
+          populate: {
+            path: "lessons",
+            select: "-__v",
+            // populate: { path: "teacher", select: "-__v" },
+          },
         });
     if (!user) return res.json({ success: false, errorId: 404 }).status(404);
 
-    const school = user.school;
-    delete user.school;
-    console.log("getUserData user:", user.role);
-    if (user.role === "student") {
-      const days = user.currentClass.schedule.map((day) => day.day);
+
+    const {school, ...newUser} = user.toObject();
+      
+      console.log("getUserData newUser:", newUser.role);
+if(newUser.role === 'student') 
+{     const days = newUser.currentClass.schedule.map((day) => day.day);
+
       const slots = school.periods.map((period) => {
         return {
           from:
@@ -226,8 +271,19 @@ export const getUserData = async (req, res) => {
         };
       });
       const displaySchedule = { days, slots } || null;
-      res.status(200).json({ success: true, user, school, displaySchedule });
-    } else res.status(200).json({ success: true, user, school });
+
+      res.status(200).json({ success: true, user: newUser, school,  displaySchedule });
+    }   
+    else if(newUser.role === 'teacher')
+    {
+      const lessons = await Lesson.find({teacher: newUser._id})
+      .populate({path: 'session', select: '-__v', populate: {path: 'class', select: '-__v'}})
+      .populate({path: 'attendance', select: 'name'});
+      res.status(200).json({ success: true, user: newUser, school, lessons });
+    }
+    else
+    res.status(200).json({ success: true, user: newUser, school });
+
   } catch (error) {
     console.log("getUser error:", error.message);
     res.status(500).json({ success: false, error: error.message });
