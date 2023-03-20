@@ -1,0 +1,41 @@
+.teacher-lessons-page,
+.student-lessons-page {
+ background-color: lightblue;
+ height: fit-content;
+ padding-top: 45px;
+ padding-bottom: 45px;
+}
+
+.teacher-lessons-header,
+.student-lessons-header {
+align-items: center !important;
+}
+
+.create-new-lesson {
+    border-radius: 30px;
+    padding: 20px 30px;
+    background-color: #a876f5;
+    color: #fff;
+    text-align: center;
+    box-shadow: none !important;
+    margin-top: 1rem;
+    float:right;
+}
+
+.teacher-lesson-title,
+.student-lesson-title {
+    font-weight: 500 !important;
+    line-height: 1.2;
+    font-size: 56px !important;
+  }
+
+
+  
+@media only screen and (max-width: 600px) {
+
+    .teacher-lesson-title,
+    .student-lesson-title {
+      font-size: 30px;
+      margin-bottom: 2rem;
+  }
+}

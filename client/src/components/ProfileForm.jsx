@@ -1,60 +1,113 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./profileForm.css";
-import { MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
-import { useContext } from "react";
-import { Context } from "../components/Context";
+import axios from "axios";
+import useUser from "../hooks/useUser";
 
 const FormData = {
-  name: "Carol Peletier",
-  email: "peletier_school@school.com",
+  name: "Your Name",
+  email: "youremail@domain.com",
   phone: "1256783746",
   address: "Berlin, Berliner Plz., 1",
-  class: "9a-23",
+  class: "0z-00",
 };
 
-export default function ProfileForm({ role }) {
-  const { state, dispatch } = useContext(Context);
-  const profile = {...state.user} || FormData;
-  profile.class = state.user?.currentClass?.name;
-  console.log("profile", state.user);
+
+export default function ProfileForm() {
+  let { isLoading, error, data } = useUser();
+  data = data?.data;
+  const [profile, setProfile] = useState(FormData);
+
+  useEffect(() => {
+    if (data?.user?.role === "student") {
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        class: data?.user?.currentClass?.name,
+      }));
+    }
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      name: data?.user?.name,
+      email: data?.user?.email,
+      phone: data?.user?.phone,
+      address: data?.user?.address,
+    }));
+  }, [data?.user]);
 
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prevProfile) => ({ ...prevProfile, [name]: value }));
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    if (data?.user?.role) {
+      axios
+        .put(
+          `${baseUrl}/api/${data?.user?.role}/update`,
+          { phone: profile.phone, address: profile.address },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          console.log("Save response:", res.data.user);
+          if (res.status === 200) {
+            alert("Profile updated successfully!");
+          } else if (res.status !== 200) {
+            alert("Profile update failed!");
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
+
+  if (error) return <div>Error...</div>;
+  if (!data?.user?.name)
+    return (
+      <div>
+        <MDBSpinner grow style={{ width: "3rem", height: "3rem" }}>
+          <span className="visually-hidden">Loading...</span>
+        </MDBSpinner>
+      </div>
+    );
 
   return (
     <form className="profileForm">
       <MDBTypography variant="h2" className="header-2">
-        Hello, {profile?.name.split(" ")[0]}! Here you can edit your
-        information.
+        Hello{profile.name ? " , " + profile?.name?.split(" ")[0] : ""}! Here
+        you can edit your information.
       </MDBTypography>
       <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
-            label={profile?.name}
+            label={profile?.name || "Name"}
             placeholder={profile?.name}
-            id="formControlReadOnly"
             type="text"
-            readonly
+            readOnly
             disabled
           />
         </MDBCol>
       </MDBRow>
-      {role === "student" ? (
+      {data?.user?.role === "student" && (
         <MDBInput
           wrapperClass="mb-4"
           type="text"
-          defaultValue={profile?.class}
-          id="form6Example5"
+          value={profile?.class}
           label="Class"
           readonly
           disabled
         />
-      ) : null}
+      )}
       <MDBInput
         wrapperClass="mb-4"
         type="email"
-        defaultValue={profile?.email}
-        id="form6Example5"
+        value={profile?.email}
         label="Email"
         readonly
         disabled
@@ -62,18 +115,20 @@ export default function ProfileForm({ role }) {
       <MDBInput
         wrapperClass="mb-4"
         type="tel"
-        defaultValue={profile?.phone}
-        id="form6Example6"
+        name="phone"
+        value={profile?.phone}
+        onChange={handleChange}
         label="Phone"
       />
       <MDBInput
         wrapperClass="mb-4"
-        id="form6Example4"
+        name="address"
         label="Address"
-        defaultValue={profile?.address}
+        value={profile?.address}
+        onChange={handleChange}
       />
 
-      <MDBBtn className="mb-4" type="submit" block>
+      <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
         Save
       </MDBBtn>
     </form>

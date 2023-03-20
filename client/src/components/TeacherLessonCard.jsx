@@ -16,8 +16,15 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
+import useUser from "../hooks/useUser";
 
 const TeacherLessonCard = () => {
+  let { data, error, isLoading } = useUser();
+  data = data?.data;
+  // console.log("data", data);
+  let lessons = data?.user?.lessons || data?.user?.currentClass?.lessons;
+  lessons && lessons.map((lesson, idx) => console.log("lesson "+(idx+1) +': ' , lesson));
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -56,11 +63,8 @@ const TeacherLessonCard = () => {
               <h2>{lessonDetails.subject}</h2>
             </div>
             <div className="buttons-container">
-              <button
-                className="edit-delete-buttons delete-button"
-                onClick={handleDelete}
-              >
-                <TiDeleteOutline />
+              <button className="edit-delete-buttons " onClick={handleDelete}>
+                <TiDeleteOutline className="delete-button" />
               </button>
 
               {/* Delete Modal  */}
@@ -86,12 +90,17 @@ const TeacherLessonCard = () => {
                     </MDBModalBody>
                     <MDBModalFooter>
                       <MDBBtn
+                        className="delete-modal-button"
                         color="secondary"
                         onClick={() => setShowDeleteModal(false)}
                       >
                         Cancel
                       </MDBBtn>
-                      <MDBBtn color="danger" onClick={handleDeleteConfirm}>
+                      <MDBBtn
+                        className="delete-modal-button"
+                        color="danger"
+                        onClick={handleDeleteConfirm}
+                      >
                         Delete
                       </MDBBtn>
                     </MDBModalFooter>
@@ -110,9 +119,9 @@ const TeacherLessonCard = () => {
           <Form>
             <Row>
               <FormGroup row>
-                <Label for="date" md={1} className="lesson-card-icon">
-                  <BsCalendarDate />
-                </Label>
+                <Col for="date" md={1}>
+                  <BsCalendarDate className="lesson-card-icon" />
+                </Col>
                 <Col md={3} className="date-input">
                   <Input
                     className="lesson-card-input"
@@ -123,9 +132,9 @@ const TeacherLessonCard = () => {
                     disabled
                   />
                 </Col>
-                <Label for="date" md={1} className="lesson-card-icon">
-                  <TfiTime />
-                </Label>
+                <Col for="date" md={1}>
+                  <TfiTime className="lesson-card-icon" />
+                </Col>
                 <Col md={3} className="date-input">
                   <Input
                     className="lesson-card-input"
@@ -136,9 +145,9 @@ const TeacherLessonCard = () => {
                     disabled
                   />
                 </Col>
-                <Label for="date" md={1} className="lesson-card-icon">
-                  <IoMdPeople />
-                </Label>
+                <Col for="date" md={1}>
+                  <IoMdPeople className="lesson-card-icon" />
+                </Col>
                 <Col md={3} className="date-input">
                   <Input
                     className="lesson-card-input"
@@ -197,6 +206,19 @@ const TeacherLessonCard = () => {
                 disabled
               />
             </FormGroup>
+            <FormGroup>
+              <Label for="notes" className="lesson-card-label">
+                Notes
+              </Label>
+              <Input
+                id="notes"
+                name="notes"
+                type="text"
+                className="lesson-card-input"
+                defaultValue={lessonDetails.notes}
+                disabled
+              />
+            </FormGroup>
             <Row>
               <Col md={6}>
                 <FormGroup>
@@ -234,19 +256,6 @@ const TeacherLessonCard = () => {
                 </FormGroup>
               </Col>
             </Row>
-            <FormGroup>
-              <Label for="notes" className="lesson-card-label">
-                Notes
-              </Label>
-              <Input
-                id="notes"
-                name="notes"
-                type="text"
-                className="lesson-card-input"
-                defaultValue={lessonDetails.notes}
-                disabled
-              />
-            </FormGroup>
           </Form>
         </div>
       )}

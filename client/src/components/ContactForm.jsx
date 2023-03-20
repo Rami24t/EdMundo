@@ -47,8 +47,8 @@ const ContactForm = () => {
       <MDBContainer className=" contact-form-section" id="contact">
         <MDBRow className="contact-form-container">
           <MDBCol md="6" className="mb-0">
-            <div className="contact-form-title">
-              <p>Get in touch </p>
+            <div>
+              <h1 className="contact-form-title-text">Get in touch </h1>
             </div>
             <form className="contact-form" ref={form} onSubmit={sendEmail}>
               <label className="contact-label">Name</label>
