@@ -122,7 +122,6 @@ export default function Navbar() {
                     </MDBBtn>
                   )}
                   {data?.user?.name && (
-
                     <MDBBtn
                       outline
                       color="success"
