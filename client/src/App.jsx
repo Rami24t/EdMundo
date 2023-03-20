@@ -12,28 +12,18 @@ const App = () => {
   // const { state, dispatch } = useContext(Context);
   const location = useLocation();
   const theme = location.pathname;
-
   // const { isLoading, error, data } = useUser();
   // useEffect(() => {
   //   if (isLoading) dispatch({ type: "LOADING" });
-  //   if (error) dispatch({ type: "ERROR" });
-  //   if (data) {
-  //     console.log("useUser ~ data", data.data);
-  //     dispatch({ type: "DATA", payload: data.data });
-  //     dispatch({ type: "CLEAR" });
-  //   }
-  // }, [isLoading, error, data, dispatch]);
-  
-  // console.log(' d.e.l.  ', { data, error, isLoading });
+@@ -25,14 +26,17 @@ const App = () => {
 
+  // console.log(' d.e.l.  ', { data, error, isLoading });
 
   return (
     <div>
       <Navbar />
-
       {/* {((theme === "/login" || theme==="/" || theme==='/student' ) || state.user?.name) && <Outlet />} */}
       <Outlet />
-
       {theme !== "/login" && <Footer />}
     </div>
   );
