@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { BsCalendarDate } from "react-icons/bs";
 import { TfiTime } from "react-icons/tfi";
-import { IoMdPerson } from "react-icons/io";
+import { IoMdPeople } from "react-icons/io";
 import "./lessonCard.css";
-import { Form, Col, Row, FormGroup, Label, Input } from "reactstrap";
+import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
+import useUser from "../hooks/useUser";
+import { MDBSpinner } from "mdb-react-ui-kit";
 
 const StudentLessonCard = () => {
+  let { data, error, isLoading } = useUser();
+  data = data?.data;
+  // console.log("data", data);
+  let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
+  lessons && lessons.map((lesson, idx) => console.log("lesson "+(idx+1) +': ' , lesson));
+
   const lessonDetails = {
     date: "2023-02-02",
     slot: "8 - 8.40am",
@@ -18,6 +26,22 @@ const StudentLessonCard = () => {
     notes: "Please review even numbers.",
     link: "google.com",
   };
+
+  if (isLoading) {
+    return (
+      <div className="spinner lesson-card">
+        <MDBSpinner grow />
+      </div>
+    );
+  }
+
+  if(error) {
+    return (
+      <div className="lesson-card">
+        <h1>Something went wrong</h1>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -32,9 +56,9 @@ const StudentLessonCard = () => {
         <Form>
           <Row>
             <FormGroup row>
-              <Label for="date" md={1} className="lesson-card-icon">
-                <BsCalendarDate />
-              </Label>
+              <Col for="date" md={1} className="vertical-center">
+                <BsCalendarDate className="lesson-card-icon" />
+              </Col>
               <Col md={3} className="date-input">
                 <Input
                   className="lesson-card-input"
@@ -45,9 +69,9 @@ const StudentLessonCard = () => {
                   disabled
                 />
               </Col>
-              <Label for="date" md={1} className="lesson-card-icon">
-                <TfiTime />
-              </Label>
+              <Col for="date" md={1} className="vertical-center">
+                <TfiTime className="lesson-card-icon" />
+              </Col>
               <Col md={3} className="date-input">
                 <Input
                   className="lesson-card-input"
@@ -58,9 +82,9 @@ const StudentLessonCard = () => {
                   disabled
                 />
               </Col>
-              <Label for="date" md={1} className="lesson-card-icon">
-                <IoMdPerson />
-              </Label>
+              <Col for="date" md={1} className="vertical-center">
+                <IoMdPeople className="lesson-card-icon" />
+              </Col>
               <Col md={3} className="date-input">
                 <Input
                   className="lesson-card-input"
@@ -119,38 +143,6 @@ const StudentLessonCard = () => {
               disabled
             />
           </FormGroup>
-          <Row>
-            <Col md={6}>
-              <FormGroup>
-                <Label for="classwork" className="lesson-card-label">
-                  Classwork
-                </Label>
-                <Input
-                  className="lesson-card-input"
-                  id="classwork"
-                  name="classwork"
-                  type="url"
-                  defaultValue={lessonDetails.classwork}
-                  disabled
-                />
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
-                <Label for="homework" className="lesson-card-label">
-                  Homework
-                </Label>
-                <Input
-                  id="homework"
-                  name="homework"
-                  className="lesson-card-input"
-                  defaultValue={lessonDetails.homework}
-                  type="url"
-                  disabled
-                />
-              </FormGroup>
-            </Col>
-          </Row>
           <FormGroup>
             <Label for="notes" className="lesson-card-label">
               Notes
@@ -164,6 +156,45 @@ const StudentLessonCard = () => {
               disabled
             />
           </FormGroup>
+          <Row>
+            <Col md={6}>
+              <FormGroup>
+                <Label
+                  for="classwork"
+                  className="vertical-center lesson-card-label "
+                >
+                  Classwork
+                </Label>
+                <Badge
+                  className="lesson-card-badge"
+                  id="classwork"
+                  name="classwork"
+                  target="_blank"
+                  href={lessonDetails.classwork}
+                  defaultValue={lessonDetails.classwork}
+                >
+                  Classwork PDF
+                </Badge>
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label for="homework" className="lesson-card-label">
+                  Homework
+                </Label>
+                <Badge
+                  className="lesson-card-badge"
+                  id="homework"
+                  name="homework"
+                  target="_blank"
+                  href={lessonDetails.homework}
+                  defaultValue={lessonDetails.homework}
+                >
+                  Homework PDF
+                </Badge>
+              </FormGroup>
+            </Col>
+          </Row>
         </Form>
       </div>
     </>

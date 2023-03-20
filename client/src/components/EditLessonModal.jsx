@@ -46,7 +46,7 @@ export default function EditLessonModal() {
   return (
     <>
       <button className="edit-delete-buttons" onClick={toggleShow}>
-        <CiEdit />
+        <CiEdit className="edit-button" />
       </button>
       <MDBModal show={optModal} tabIndex="-1" setShow={setOptModal}>
         <MDBModalDialog size="lg" centered>
@@ -209,7 +209,7 @@ export default function EditLessonModal() {
                     disabled
                   />
                 </FormGroup>
-                <MDBBtn outline color="success">
+                <MDBBtn outline color="success" className="lesson-save-button">
                   Save
                 </MDBBtn>
               </Form>

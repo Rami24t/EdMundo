@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./StudentSchedule.module.scss";
 import { useContext } from "react";
 import { Context } from "./Context";
+import useUser from "../hooks/useUser";
+import  { MDBSpinner } from "mdb-react-ui-kit";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
@@ -26,9 +28,20 @@ const SUBJECT_TO_COLOR = {
   "P.E": "#FFADAD",
 };
 
+const Spinner = () => {
+  return (
+    <MDBSpinner grow role="status" className={`spinner-border text-primary ${styles.scheduleCell} ${styles.scheduleSlot}`}>
+      <span className="visually-hidden">Loading...</span>
+    </MDBSpinner>
+  );
+};
+
 const Schedule = () => {
-  const { state } = useContext(Context);
-  const {days,slots}  =  state?.displaySchedule || {days: DAYS, slots: SLOTS};
+
+  let { data, error, isLoading} = useUser();
+  data && (data = data?.data);
+  const {days,slots}  =  data?.displaySchedule || {days: DAYS, slots: SLOTS};
+
 
   return (
     <div className={styles.schedulePage}>
@@ -54,25 +67,27 @@ const Schedule = () => {
               {days[dayIndex]}
             </div>
 
+
         {col.map((_, slotIndex) => (
-              <div
+          !data?.user?.currentClass.schedule ? <Spinner key={`${slotIndex}-${dayIndex}`}/> :
+              (<div
                 key={`${slotIndex}-${dayIndex}`}
                 className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
-                style={{ backgroundColor: SUBJECT_TO_COLOR[state.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
+                style={{ backgroundColor: SUBJECT_TO_COLOR[data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
                       .subjectName] }}
               >
                 <p className={`${styles.scheduleSubject}`}>
-                  {state.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
+                  {data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
                       .subjectName}
                 </p>
-                <p>{state.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
+                <p>{data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
                       .teacher.name}</p>
-              </div>
+              </div>)
             ))}
           </div>
         ))}
       </div>
-      {!state.user?.currentClass && <span>loading your schedule...</span>}
+      {!data?.user?.currentClass && <span>loading your schedule...</span>}
     </div>
   );
 };

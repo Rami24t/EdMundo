@@ -29,10 +29,10 @@ function LoginForm() {
           { withCredentials: true },
         )
         .then((res) => {
-          console.log(res.data.user);
+          console.log(res.data);
           if (res.status === 200 && res.data.user.role) {
-            navigate("/" + res.data.user.role);
-            dispatch({ type: "LOGIN", payload: res.data.user });
+            dispatch({ type: "DATA", payload: res.data });
+            navigate(`/${res.data.user.role}/profile`);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
           }

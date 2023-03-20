@@ -14,18 +14,17 @@
   margin-bottom: 0px;
 }
 
-.contact-form-title {
-  font-weight: 500;
+.contact-form-title-text {
+  /* font-weight: 500; */
   line-height: 1.2;
-  margin-bottom: 3rem;
-}
-
-.contact-form-title {
+  margin-bottom: 2rem;
   color: #a876f5;
   text-decoration-line: underline;
   text-decoration-style: wavy;
-  font-size: 44px !important;
+  font-size: 56px !important;
 }
+
+
 
 .contact-form-images {
   margin: auto;

@@ -21,15 +21,15 @@ dbConnect();
 app.use("/*", body("*").trim().escape());
 
 app.use(
-  cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://ed-mundo.vercel.app"
-        : "http://localhost:3000",
-    credentials: true,
-    preflightContinue: true,
-    // "methods": "GET,HEAD,PUT,PATCH,POST,DELETE, OPTIONS"
-  }),
+	cors({
+		origin:
+			process.env.NODE_ENV === "production"
+				? "https://ed-mundo.vercel.app"
+				: "http://localhost:3000",
+		credentials: true,
+		preflightContinue: true,
+		// "methods": "GET,HEAD,PUT,PATCH,POST,DELETE, OPTIONS"
+	}),
 );
 // app.options(cors());
 app.use(express.json());
@@ -53,7 +53,6 @@ app.listen(port, () => console.log("Server is up and running at port: ", port));
 
 // dotenv.config();
 // dbConnect();
-
 
 // scripts:
 // const addSchoolRefToUsers = async () => {
