@@ -234,16 +234,16 @@ export const getUserData = async (req, res) => {
         .populate({
           path: "currentClass",
           select: "-__v",
-          populate: {
+          populate: [{
             path: "schedule.sessions",
             select: "-__v",
             populate: { path: "teacher", select: "-__v" },
           },
-          populate: {
+          {
             path: "lessons",
             select: "-__v",
             // populate: { path: "teacher", select: "-__v" },
-          },
+          }]
         });
     if (!user) return res.json({ success: false, errorId: 404 }).status(404);
 
