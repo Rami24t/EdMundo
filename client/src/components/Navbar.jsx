@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Context } from "./Context";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useSWRConfig } from "swr";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 import {
   MDBContainer,
@@ -14,16 +16,25 @@ import {
   MDBBtn,
   MDBIcon,
 } from "mdb-react-ui-kit";
-
+import useUser from "../hooks/useUser";
 
 export default function Navbar() {
-  
-  const { state, dispatch } = useContext(Context);
+  const { mutate } = useSWRConfig();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
+  let { data } = useUser();
+  data && (data = data?.data);
+  const userName = data?.user.name || "";
+  const school = data?.school.name || "";
+
+  const navigate = useNavigate();
+  // const { state, dispatch } = useContext(Context);
 
   const [showNav, setShowNav] = useState(false);
   const location = useLocation();
   const theme = location.pathname;
   // alert(theme);
+
   return (
     <MDBNavbar expand="lg" light bgColor="light">
       <MDBContainer fluid>
@@ -45,7 +56,7 @@ export default function Navbar() {
                 <NavLink to="/">
                   {({ isActive }) => (
                     <MDBNavbarLink
-                      className={theme === "/" && " d-none "}
+                      className={theme === "/" && !data?.user?.name && " d-none "}
                       active={isActive}
                       aria-current="page"
                     >
@@ -55,11 +66,11 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <NavLink to={"/"+state.user?.role+"/profile"}>
+                <NavLink to={`/${data?.user?.role}/profile`}>
                   {({ isActive }) => (
                     <MDBNavbarLink
                       className={
-                        (theme === "/" || theme === "/login") && " d-none "
+                        (!data?.user?.name || theme === "/login") && " d-none "
                       }
                       active={isActive}
                     >
@@ -69,22 +80,28 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-              <NavLink to={"/"+state.user?.role+"/lessons"}>
+                <NavLink to={`/${data?.user?.role}/lessons`}>
                   {({ isActive }) => (
-                <MDBNavbarLink
-                  href="#"
-                  className={
-                    (theme === "/" || theme === "/login") && " d-none "
-                  }
-                  active={isActive}
+                    <MDBNavbarLink
+                      href="#"
+                      className={
+                        (!data?.user?.name || theme === "/login") && " d-none "
+                      }
+                      active={isActive}
                     >
-                  Lessons
-                </MDBNavbarLink>
+                      Lessons
+                    </MDBNavbarLink>
                   )}
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem
-                className={(theme === "/" || theme === "/login" || theme.startsWith('/teacher') || state.user?.role ==='teacher') && " d-none "}
+                className={
+                  (!data?.user?.name ||
+                    theme === "/login" ||
+                    theme.startsWith("/teacher") ||
+                    data?.user?.role === "teacher") &&
+                  " d-none "
+                }
               >
                 <NavLink to="/student/schedule">
                   {({ isActive }) => (
@@ -94,22 +111,45 @@ export default function Navbar() {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <Link to="/login" className={theme === "/login" && "d-none"}>
-                  {!state.user?.name && <MDBBtn
-                    outline
-                    color="success"
-                    className="me-2"
-                    type="button"
-                  >
-                    Log In
-                  </MDBBtn>}
-                  {state.user?.name && <MDBBtn
-                    outline
-                    color="success"
-                    className="me-2"
-                    type="button"
-                  >
-                    Log Out
-                  </MDBBtn>}
+                  {!data?.user?.name && (
+                    <MDBBtn
+                      outline
+                      color="success"
+                      className="me-2"
+                      type="button"
+                    >
+                      Log In
+                    </MDBBtn>
+                  )}
+                  {data?.user?.name && (
+                    <MDBBtn
+                      outline
+                      color="success"
+                      className="me-2"
+                      type="button"
+                      onClick={() => {
+                        // Delete the authentication cookie
+                        document.cookie =
+                          "OnlineSchoolUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        // Reset the SWR cache
+                        mutate(baseUrl + "/api/users/getData", null, false)
+                          .then(
+                            axios
+                              .get(baseUrl + "/api/users/logout")
+                              .then((res) => {
+                                // dispatch({ type: "LOGOUT" });
+                                // dispatch({ type: "CLEAR" });
+                              })
+                          )
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                        navigate("/login");
+                      }}
+                    >
+                      Log Out
+                    </MDBBtn>
+                  )}
                 </Link>
               </MDBNavbarItem>
             </MDBNavbarNav>
