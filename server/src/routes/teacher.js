@@ -1,14 +1,14 @@
 import express from "express";
 import {
-  updateTeacher,
-  updateLesson,
-  getLessons,
-  getLesson,
-  deleteLesson,
-  getSessions,
-  getSession,
-  getClasses,
-  getClass,
+	updateTeacher,
+	updateLesson,
+	getLessons,
+	getLesson,
+	deleteLesson,
+	getSessions,
+	getSession,
+	getClasses,
+	getClass,
 } from "../controllers/teacher.js";
 import auth from "../middleware/auth.js";
 import multerMiddleware from "../config/multer-cloudinary.js";
@@ -16,10 +16,10 @@ const router = express.Router();
 import { check } from "express-validator";
 
 router.put(
-  "/lesson",
-  auth,
-  // multerMiddleware.single("image"),
-  updateLesson,
+	"/lesson",
+	auth,
+	// multerMiddleware.single("image"),
+	updateLesson,
 );
 
 router.delete("/lesson", auth, deleteLesson);

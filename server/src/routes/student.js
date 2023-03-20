@@ -4,9 +4,9 @@ import multerMiddleware from "../config/multer-cloudinary.js";
 const router = express.Router();
 import { check } from "express-validator";
 import {
-  getLessons,
-  getSessions,
-  updateStudent,
+	getLessons,
+	getSessions,
+	updateStudent,
 } from "../controllers/student.js";
 
 router.put("/update", auth, multerMiddleware.single("image"), updateStudent);
