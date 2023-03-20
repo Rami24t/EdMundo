@@ -13,7 +13,6 @@ const FormData = {
   class: "0z-00",
 };
 
-
 export default function ProfileForm() {
   let { isLoading, error, data } = useUser();
   data = data?.data;
@@ -34,7 +33,6 @@ export default function ProfileForm() {
       address: data?.user?.address,
     }));
   }, [data?.user]);
-
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -66,7 +64,6 @@ export default function ProfileForm() {
         });
     }
   };
-
   if (error) return <div>Error...</div>;
   if (!data?.user?.name)
     return (
@@ -76,7 +73,6 @@ export default function ProfileForm() {
         </MDBSpinner>
       </div>
     );
-
   return (
     <form className="profileForm">
       <MDBTypography variant="h2" className="header-2">
@@ -127,7 +123,6 @@ export default function ProfileForm() {
         value={profile?.address}
         onChange={handleChange}
       />
-
       <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
         Save
       </MDBBtn>
