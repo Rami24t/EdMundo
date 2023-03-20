@@ -4,8 +4,16 @@ import { TfiTime } from "react-icons/tfi";
 import { IoMdPeople } from "react-icons/io";
 import "./lessonCard.css";
 import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
+import useUser from "../hooks/useUser";
+import { MDBSpinner } from "mdb-react-ui-kit";
 
 const StudentLessonCard = () => {
+  let { data, error, isLoading } = useUser();
+  data = data?.data;
+  // console.log("data", data);
+  let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
+  lessons && lessons.map((lesson, idx) => console.log("lesson "+(idx+1) +': ' , lesson));
+
   const lessonDetails = {
     date: "2023-02-02",
     slot: "8 - 8.40am",
@@ -18,6 +26,22 @@ const StudentLessonCard = () => {
     notes: "Please review even numbers.",
     link: "google.com",
   };
+
+  if (isLoading) {
+    return (
+      <div className="spinner lesson-card">
+        <MDBSpinner grow />
+      </div>
+    );
+  }
+
+  if(error) {
+    return (
+      <div className="lesson-card">
+        <h1>Something went wrong</h1>
+      </div>
+    )
+  }
 
   return (
     <>
