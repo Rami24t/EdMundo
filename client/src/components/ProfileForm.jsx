@@ -64,7 +64,7 @@ export default function ProfileForm() {
         });
     }
   };
-  if (error) return <div>Error...</div>;
+  if (error) return <div><p>Some error has happened.</p> <p>Please try refreshing your page.</p></div>;
   if (!data?.user?.name)
     return (
       <div>
