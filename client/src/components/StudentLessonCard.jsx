@@ -13,9 +13,7 @@ const StudentLessonCard = () => {
   // console.log("data", data);
   let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
   lessons &&
-    lessons.map((lesson, idx) =>
-      console.log("lesson " + (idx + 1) + ": ", lesson),
-    );
+    lessons.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
 
   const lessonDetails = {
     date: "2023-02-02",
