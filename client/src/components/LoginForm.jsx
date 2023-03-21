@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useSWRConfig } from "swr";
 import {
@@ -9,7 +9,6 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import { Context } from "./Context";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -17,7 +16,6 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
-  const { state, dispatch } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,14 +29,13 @@ function LoginForm() {
         .then((res) => {
           console.log(res.data);
           if (res.status === 200 && res.data.user.role) {
-            dispatch({ type: "DATA", payload: res.data });
             navigate(`/${res.data.user.role}/profile`);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.message);
         });
     });
   };
@@ -77,7 +74,6 @@ function LoginForm() {
           />
 
           {/* <div className="d-flex justify-content-between mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
             <a href="!#">Forgot password?</a>
           </div> */}
 
