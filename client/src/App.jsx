@@ -16,6 +16,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
+      {state.user?.name && <p className="opacity-90 position-absolute text-end w-100 pt-1 pe-3" >You are logged in as <span className="text-black-50">{state.user?.name}</span></p>}
       {theme === "/login" || theme === "/" || state.user?.name ? (
         <Outlet />
       ) : (
