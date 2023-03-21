@@ -37,7 +37,7 @@
   font-weight: 800;
   font-family: "Nunito", sans-serif;
   box-shadow: none;
-  /* margin-top: 2rem !important; */
+  margin-top: 2rem !important;
 }
 
 .navbar-button-login {
@@ -46,9 +46,10 @@
 }
 
 .navbar-button-logout {
-  background-color: #ffd6d6;
-  border-color: #ffd6d6;
+  background-color: #C2D9FF;
+  border-color: #C2D9FF;
   color: #333;
+  margin:auto !important;
 }
 
 .navbar-button-logout:focus {
