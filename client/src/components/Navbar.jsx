@@ -135,7 +135,7 @@ export default function Navbar() {
                               .then((res) => {
                                 // dispatch({ type: "LOGOUT" });
                                 // dispatch({ type: "CLEAR" });
-                              })
+                              }),
                           )
                           .catch((err) => {
                             console.log(err);
