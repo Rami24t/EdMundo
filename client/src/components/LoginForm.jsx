@@ -35,7 +35,9 @@ function LoginForm() {
           console.log(res.data);
           if (res.status === 200 && res.data.user.role) {
             dispatch({ type: "LOGIN", payload: res.data.user });
-            navigate(`/${res.data.user.role}/profile`);
+            setTimeout(() => {
+              navigate(`/${res.data.user.role}/profile`)
+            }, 300);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
           }
