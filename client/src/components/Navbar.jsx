@@ -52,7 +52,7 @@ export default function Navbar() {
         </MDBNavbarToggler>
         <MDBCollapse navbar show={showNav}>
           {theme !== "/login" && (
-            <MDBNavbarNav className="d-flex justify-content-end gap-5 ">
+            <MDBNavbarNav className="d-flex justify-content-end gap-4 ">
               <MDBNavbarItem>
                 <NavLink to="/">
                   {({ isActive }) => (
