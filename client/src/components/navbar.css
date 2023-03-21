@@ -6,8 +6,7 @@
 }
 
 .navbar-container {
-  margin-right: 20rem;
-  margin-left: 20rem;
+    width: 1300px !important;
 }
 
 .navbar-title {
