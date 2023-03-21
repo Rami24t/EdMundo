@@ -45,7 +45,6 @@ const StudentLessonCard = () => {
 
   return (
     <>
-      {" "}
       {lessons?.map((lesson) => (
         <div key={lesson._id} className="lesson-card">
           <div className="lesson-header">
