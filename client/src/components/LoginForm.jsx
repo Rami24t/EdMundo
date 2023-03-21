@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useSWRConfig } from "swr";
+import {Context} from "../components/Context";
 import {
   MDBContainer,
   MDBCol,
@@ -16,6 +17,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
+  const { dispatch } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ function LoginForm() {
         .then((res) => {
           console.log(res.data);
           if (res.status === 200 && res.data.user.role) {
+            dispatch({ type: "LOGIN", payload: res.data.user });
             navigate(`/${res.data.user.role}/profile`);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
