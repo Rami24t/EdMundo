@@ -14,19 +14,6 @@ const StudentLessonCard = () => {
   let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
   lessons?.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
 
-  const lessonDetails = {
-    date: "2023-02-02",
-    slot: "8 - 8.40am",
-    teacherName: "Tina Turner",
-    subject: "Math",
-    topic: "Odd numbers",
-    objectives: "Learn arithmetic with odd numbers.",
-    classwork: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-    homework: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-    notes: "Please review even numbers.",
-    link: "google.com",
-  };
-
   if (isLoading) {
     return (
       <div className="spinner lesson-card">
@@ -49,7 +36,7 @@ const StudentLessonCard = () => {
         <div key={lesson._id} className="lesson-card">
           <div className="lesson-header">
             <div className="title-container">
-              <h2>{lesson.topic}</h2>
+              <h2>{lesson.session.subjectName}</h2>
             </div>
           </div>
           <hr />
@@ -66,33 +53,33 @@ const StudentLessonCard = () => {
                     id="date"
                     name="date"
                     type="text"
-                    defaultValue={lesson.date}
+                    defaultValue={lesson.date.slice(0, 10)}
                     disabled
                   />
                 </Col>
                 <Col for="date" md={1} className="vertical-center">
                   <TfiTime className="lesson-card-icon" />
                 </Col>
-                <Col md={3} className="date-input">
+                <Col md={1} className="date-input">
                   <Input
                     className="lesson-card-input"
                     id="slot"
                     name="slot"
                     type="text"
-                    defaultValue={lesson.session}
+                    defaultValue={lesson.session.periodNumber}
                     disabled
                   />
                 </Col>
                 <Col for="date" md={1} className="vertical-center">
                   <IoMdPeople className="lesson-card-icon" />
                 </Col>
-                <Col md={3} className="date-input">
+                <Col md={5} className="date-input">
                   <Input
                     className="lesson-card-input"
                     id="slot"
                     name="slot"
                     type="text"
-                    defaultValue={lesson.teacher}
+                    defaultValue={lesson.session.teacher.name}
                     disabled
                   />
                 </Col>
@@ -145,14 +132,15 @@ const StudentLessonCard = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="notes" className="lesson-card-label">
+              <Label for="notes" className=" vertical-center lesson-card-label">
                 Notes
               </Label>
-              <Input
+              <Badge
+                className="lesson-card-badge"
                 id="notes"
                 name="notes"
-                type="text"
-                className="lesson-card-input"
+                target="_blank"
+                href={lesson.materials}
                 defaultValue={lesson.materials}
                 disabled
               />
@@ -166,16 +154,18 @@ const StudentLessonCard = () => {
                   >
                     Classwork
                   </Label>
-                  <Badge
-                    className="lesson-card-badge"
-                    id="classwork"
-                    name="classwork"
-                    target="_blank"
-                    href={lesson.classworks}
-                    defaultValue={lesson.classworks}
-                  >
-                    Classwork PDF
-                  </Badge>
+                  {lesson?.classworks.map((classwork) => (
+                    <Badge
+                      className="lesson-card-badge"
+                      id="classwork"
+                      name="classwork"
+                      target="_blank"
+                      href={lesson.classworks}
+                      defaultValue={lesson.classworks}
+                    >
+                      Classwork PDF
+                    </Badge>
+                  ))}
                 </FormGroup>
               </Col>
               <Col md={6}>
