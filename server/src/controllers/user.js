@@ -252,7 +252,15 @@ export const getUserData = async (req, res) => {
             {
               path: "lessons",
               select: "-__v",
-              // populate: { path: "teacher", select: "-__v" },
+              populate: [
+                {
+                  path: "session",
+                  select: "-__v",
+                  populate: { path: "teacher", select: "-password -_v" },
+                },
+                { path: "teacher", select: "name" },
+                { path: "attendance", select: "name" },
+              ],
             },
           ],
         });
