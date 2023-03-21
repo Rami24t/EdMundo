@@ -125,6 +125,7 @@ export const login = async (req, res) => {
       expiresIn: "1h",
     });
     res.cookie("OnlineSchoolUser", token, { sameSite: "none", secure: true });
+    // res.cookie("OnlineSchoolUser", token, { sameSite: false, secure: true });
 
     if (user.role === "student")
       res
