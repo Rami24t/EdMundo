@@ -14,7 +14,9 @@ const FormData = {
 };
 
 export default function ProfileForm() {
-  let { isLoading, error, data } = useUser();
+  let { 
+    // isLoading,
+     error, data } = useUser();
   data = data?.data;
   const [profile, setProfile] = useState(FormData);
 
