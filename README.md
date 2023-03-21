@@ -2,6 +2,10 @@
 
 <img src="./client/src/assets/EdMundo.png" alt="Edmundo image">
 
+## Live Demo
+
+https://ed-mundo.vercel.app/
+
 ## Description
 
 EdMundo is a digital schooling platform for educational institutions that require a sudden transition to online learning in instances such as pandemics, unsafe weather conditions, or natural disasters.

@@ -14,7 +14,8 @@ function getCookie(name) {
 
 export default function useUser() {
   const { data, error, isLoading } = useSWR(
-    getCookie("OnlineSchoolUser") && `${baseUrl}/api/users/getData`,
+    // getCookie("OnlineSchoolUser") &&
+    `${baseUrl}/api/users/getData`,
     () =>
       axios
         .get(`${baseUrl}/api/users/getData`, {
