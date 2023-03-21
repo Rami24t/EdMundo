@@ -1,25 +1,30 @@
 import React from "react";
 import styles from "./StudentSchedule.module.scss";
-import { useContext } from "react";
-import { Context } from "./Context";
 import useUser from "../hooks/useUser";
-import  { MDBSpinner } from "mdb-react-ui-kit";
+import { MDBSpinner } from "mdb-react-ui-kit";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
-  { from: "8:00", to: "9:00" },
-  { from: "9:00", to: "10:00" },
-  { from: "11:00", to: "12:00" },
-  { from: "12:00", to: "13:00" },
-  { from: "13:00", to: "14:00" },
-  { from: "14:00", to: "15:00" },
-  { from: "15:00", to: "16:00" },
+  { from: "8:00", to: "8:40" },
+  { from: "8:40", to: "9:20" },
+  { from: "9:40", to: "10:20" },
+  { from: "10:20", to: "11:00" },
+  { from: "11:30", to: "12:10" },
+  { from: "12:10", to: "12:50" },
+  { from: "12:50", to: "13:30" },
 ];
 const SCHEDULE_GRID = Array(DAYS.length).fill(Array(SLOTS.length).fill(null));
 
 const SUBJECT_TO_COLOR = {
   Math: "#FDFFB6",
-  Science: "#9BF6FF",
+  German: "#5BD6FF",
+  English: "#ACE6B6",
+  Computer: "#DDD6B6",
+  Technology: "#EDD6B6",
+  Ethics: "#FFE6B6",
+  Chemistry: "#7DA6FF",
+  Physics: "#C5B6FF",
+  Biology: "#9BF6FF",
   History: "#CAFFBF",
   Geography: "#BDB2FF",
   Art: "#FFD6A5",
@@ -30,18 +35,20 @@ const SUBJECT_TO_COLOR = {
 
 const Spinner = () => {
   return (
-    <MDBSpinner grow role="status" className={`spinner-border text-primary ${styles.scheduleCell} ${styles.scheduleSlot}`}>
+    <MDBSpinner
+      grow
+      role="status"
+      className={`spinner-border text-primary ${styles.scheduleCell} ${styles.scheduleSlot}`}
+    >
       <span className="visually-hidden">Loading...</span>
     </MDBSpinner>
   );
 };
 
 const Schedule = () => {
-
-  let { data, error, isLoading} = useUser();
+  let { data } = useUser();
   data && (data = data?.data);
-  const {days,slots}  =  data?.displaySchedule || {days: DAYS, slots: SLOTS};
-
+  const { days, slots } = data?.displaySchedule || { days: DAYS, slots: SLOTS };
 
   return (
     <div className={styles.schedulePage}>
@@ -67,23 +74,39 @@ const Schedule = () => {
               {days[dayIndex]}
             </div>
 
-
-        {col.map((_, slotIndex) => (
-          !data?.user?.currentClass.schedule ? <Spinner key={`${slotIndex}-${dayIndex}`}/> :
-              (<div
-                key={`${slotIndex}-${dayIndex}`}
-                className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
-                style={{ backgroundColor: SUBJECT_TO_COLOR[data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
-                      .subjectName] }}
-              >
-                <p className={`${styles.scheduleSubject}`}>
-                  {data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
-                      .subjectName}
-                </p>
-                <p>{data?.user?.currentClass?.schedule[dayIndex].sessions[slotIndex]
-                      .teacher.name}</p>
-              </div>)
-            ))}
+            {col.map((_, slotIndex) =>
+              !data?.user?.currentClass.schedule ? (
+                <Spinner key={`${slotIndex}-${dayIndex}`} />
+              ) : (
+                <div
+                  key={`${slotIndex}-${dayIndex}`}
+                  className={`${styles.scheduleCell} ${styles.scheduleSlot}`}
+                  style={{
+                    backgroundColor:
+                      SUBJECT_TO_COLOR[
+                        data?.user?.currentClass?.schedule[dayIndex].sessions[
+                          slotIndex
+                        ].subjectName
+                      ],
+                  }}
+                >
+                  <p className={`${styles.scheduleSubject}`}>
+                    {
+                      data?.user?.currentClass?.schedule[dayIndex].sessions[
+                        slotIndex
+                      ].subjectName
+                    }
+                  </p>
+                  <p>
+                    {
+                      data?.user?.currentClass?.schedule[dayIndex].sessions[
+                        slotIndex
+                      ].teacher.name
+                    }
+                  </p>
+                </div>
+              ),
+            )}
           </div>
         ))}
       </div>
