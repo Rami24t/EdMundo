@@ -114,20 +114,14 @@ export default function Navbar() {
               <MDBNavbarItem>
                 <Link to="/login" className={theme === "/login" && "d-none"}>
                   {!data?.user?.name && (
-                    <MDBBtn
-                      outline
-                      color="success"
-                      className="me-2"
-                      type="button"
-                    >
-                      Log In
-                    </MDBBtn>
+                    <btn className="navbar-button-login">LOGIN</btn>
                   )}
+                </Link>
+                <Link to="/" className={theme === "/login" && "d-none"}>
                   {data?.user?.name && (
-                    <MDBBtn
-                      outline
-                      color="success"
-                      className="me-2"
+                    // rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+                    <btn
+                      className="navbar-button-logout"
                       type="button"
                       onClick={() => {
                         // Delete the authentication cookie
@@ -141,16 +135,16 @@ export default function Navbar() {
                               .then((res) => {
                                 // dispatch({ type: "LOGOUT" });
                                 // dispatch({ type: "CLEAR" });
-                              }),
+                              })
                           )
                           .catch((err) => {
                             console.log(err);
                           });
-                        navigate("/login");
+                        // navigate("");
                       }}
                     >
-                      Log Out
-                    </MDBBtn>
+                      LOG OUT
+                    </btn>
                   )}
                 </Link>
               </MDBNavbarItem>
