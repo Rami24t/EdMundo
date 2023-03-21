@@ -1,0 +1,28 @@
+.navbar {
+  background-color: #FFFFFC !important;
+  box-shadow: none;
+  padding: 9px;
+}
+
+.navbar-container {
+  margin-right: 20rem;
+  margin-left: 20rem;
+}
+
+.navbar-title {
+  color: #333;
+  margin-top: 1rem;
+}
+
+.navbar-title-span {
+  border-radius: 30px;
+  padding: 3px;
+}
+
+.nav-link {
+  color: #333 !important;
+}
+
+.nav-link:hover {
+  color: #762de2 !important;
+}

@@ -17,6 +17,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
+import "./navbar.css";
 
 export default function Navbar() {
   const { mutate } = useSWRConfig();
@@ -28,18 +29,18 @@ export default function Navbar() {
   const school = data?.school.name || "";
 
   const navigate = useNavigate();
-  // const { state, dispatch } = useContext(Context);
 
   const [showNav, setShowNav] = useState(false);
   const location = useLocation();
   const theme = location.pathname;
-  // alert(theme);
 
   return (
-    <MDBNavbar expand="lg" light bgColor="light">
-      <MDBContainer fluid>
+    <MDBNavbar expand="lg" sticky>
+      <MDBContainer fluid className="navbar-container">
         <NavLink to="/">
-          <MDBNavbarBrand>EdMundo</MDBNavbarBrand>
+          <h2 className="navbar-title">
+            <span className="navbar-title-span"> Ed</span>Mundo
+          </h2>
         </NavLink>
         <MDBNavbarToggler
           type="button"
@@ -51,7 +52,7 @@ export default function Navbar() {
         </MDBNavbarToggler>
         <MDBCollapse navbar show={showNav}>
           {theme !== "/login" && (
-            <MDBNavbarNav className="d-flex justify-content-end gap-4 ">
+            <MDBNavbarNav className="d-flex justify-content-end gap-5 ">
               <MDBNavbarItem>
                 <NavLink to="/">
                   {({ isActive }) => (
@@ -134,14 +135,14 @@ export default function Navbar() {
                         document.cookie =
                           "OnlineSchoolUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                         // Reset the SWR cache
-                        mutate(baseUrl + "/api/users/getData", null, false)
+                        mutate(`${baseUrl}/api/users/getData`, null, false)
                           .then(
                             axios
-                              .get(baseUrl + "/api/users/logout")
+                              .get(`${baseUrl}/api/users/logout`)
                               .then((res) => {
                                 // dispatch({ type: "LOGOUT" });
                                 // dispatch({ type: "CLEAR" });
-                              }),
+                              })
                           )
                           .catch((err) => {
                             console.log(err);
