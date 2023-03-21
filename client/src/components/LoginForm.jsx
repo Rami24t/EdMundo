@@ -12,7 +12,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import styles from "./LoginForm.scss";
 import LoginPageImage from "../assets/login-page-image.png";
-import WavyRedLines from "../assets/wavy-red-lines.png";
 import ThreeGreenLines from "../assets/three-green-lines.png";
 
 function LoginForm() {
@@ -51,11 +50,6 @@ function LoginForm() {
     <MDBContainer fluid className="  h-custom login-container">
       <MDBRow className="d-flex  align-items-center login-form-container">
         <MDBCol col="10" className="login-image-container">
-          {/* <img
-            src={WavyRedLines}
-            alt="wavy red lines"
-            className="login-wavy-red-lines"
-          /> */}
           <img
             src={LoginPageImage}
             className="img-fluid login-image"
@@ -65,8 +59,8 @@ function LoginForm() {
 
         <MDBCol className=" login-form" col="4" md="6">
           <header>
-            <h1 className="login-form-header">
-              Please <span className="violet-underline">login</span> here:
+            <h1 className="login-form-header mb-4">
+              Please <span className="login-violet-color">Login</span> here:
             </h1>
           </header>
           <MDBInput
