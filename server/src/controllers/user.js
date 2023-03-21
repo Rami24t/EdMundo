@@ -101,16 +101,13 @@ export const login = async (req, res) => {
 			const days = user.currentClass.schedule.map((day) => day.day);
 			const slots = user.school.periods.map((period) => {
 				return {
-					from: `${(period.startTime / 60).toFixed(2).split(".")[0]}:${
-						period.startTime % 60 === 0 ? "00" : period.startTime % 60
-					}`,
-					to: `${
-						((period.startTime + period.duration) / 60).toFixed(2).split(".")[0]
-					}:${
-						(period.startTime + period.duration) % 60 === 0
+					from: `${(period.startTime / 60).toFixed(2).split(".")[0]}:${period.startTime % 60 === 0 ? "00" : period.startTime % 60
+						}`,
+					to: `${((period.startTime + period.duration) / 60).toFixed(2).split(".")[0]
+						}:${(period.startTime + period.duration) % 60 === 0
 							? "00"
 							: (period.startTime + period.duration) % 60
-					}`,
+						}`,
 				};
 			});
 			displaySchedule = { days, slots } || null;
@@ -252,51 +249,55 @@ export const getUserData = async (req, res) => {
 						{
 							path: "lessons",
 							select: "-__v",
-							// populate: { path: "teacher", select: "-__v" },
+							populate: [
+								{ path: "session", select: "-__v", populate: { path: "teacher", select: "-password -_v" }},
+								{path: "teacher", select: "name" },
+								{path: "attendance", select: "name" },
+							] 
 						},
 					],
 				});
-		if (!user) return res.json({ success: false, errorId: 404 }).status(404);
+if (!user) return res.json({ success: false, errorId: 404 }).status(404);
 
-		const { school, ...newUser } = user.toObject();
+const { school, ...newUser } = user.toObject();
 
-		console.log("getUserData newUser:", newUser.role);
-		if (newUser.role === "student") {
-			const days = newUser.currentClass.schedule.map((day) => day.day);
-			const slots = school.periods.map((period) => {
-				return {
-					from:
-						(period.startTime / 60).toFixed(2).split(".")[0] +
-						":" +
-						(period.startTime % 60 === 0 ? "00" : period.startTime % 60),
-					to:
-						((period.startTime + period.duration) / 60)
-							.toFixed(2)
-							.split(".")[0] +
-						":" +
-						((period.startTime + period.duration) % 60 === 0
-							? "00"
-							: (period.startTime + period.duration) % 60),
-				};
-			});
-			const displaySchedule = { days, slots } || null;
-			res
-				.status(200)
-				.json({ success: true, user: newUser, school, displaySchedule });
-		} else if (newUser.role === "teacher") {
-			const lessons = await Lesson.find({ teacher: newUser._id })
-				.populate({
-					path: "session",
-					select: "-__v",
-					populate: { path: "class", select: "-__v" },
-				})
-				.populate({ path: "attendance", select: "name" });
-			res.status(200).json({ success: true, user: newUser, school, lessons });
-		} else res.status(200).json({ success: true, user: newUser, school });
+console.log("getUserData newUser:", newUser.role);
+if (newUser.role === "student") {
+	const days = newUser.currentClass.schedule.map((day) => day.day);
+	const slots = school.periods.map((period) => {
+		return {
+			from:
+				(period.startTime / 60).toFixed(2).split(".")[0] +
+				":" +
+				(period.startTime % 60 === 0 ? "00" : period.startTime % 60),
+			to:
+				((period.startTime + period.duration) / 60)
+					.toFixed(2)
+					.split(".")[0] +
+				":" +
+				((period.startTime + period.duration) % 60 === 0
+					? "00"
+					: (period.startTime + period.duration) % 60),
+		};
+	});
+	const displaySchedule = { days, slots } || null;
+	res
+		.status(200)
+		.json({ success: true, user: newUser, school, displaySchedule });
+} else if (newUser.role === "teacher") {
+	const lessons = await Lesson.find({ teacher: newUser._id })
+		.populate({
+			path: "session",
+			select: "-__v",
+			populate: { path: "class", select: "-__v" },
+		})
+		.populate({ path: "attendance", select: "name" });
+	res.status(200).json({ success: true, user: newUser, school, lessons });
+} else res.status(200).json({ success: true, user: newUser, school });
 	} catch (error) {
-		console.log("getUser error:", error.message);
-		res.status(500).json({ success: false, error: error.message });
-	}
+	console.log("getUser error:", error.message);
+	res.status(500).json({ success: false, error: error.message });
+}
 };
 
 export const updateProfile = async (req, res) => {
