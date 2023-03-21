@@ -8,30 +8,30 @@ dotenv.config();
 const cloudinary = cloudinaryV2.v2;
 // The cloudinary.config() method is used to configure the cloudinary instance.
 cloudinary.config({
-	cloud_name: process.env.CLOUD_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 // Explanation: This is a multer storage engine for storing files on cloudinary.
 const storage = new CloudinaryStorage({
-	cloudinary: cloudinary,
-	params: {
-		folder: "SocialAppMERN",
-		format: async (req, file) => {
-			//      console.log('The file inside multer: ', file)
-			let extension = "";
-			if (file.mimetype.includes("image")) extension = file.mimetype.slice(6);
-			return extension;
-		},
-		public_id: (req, file) =>
-			`${req.user}-${
-				req.user.profileImage
-					? "profileImage"
-					: req.user.coverImage
-					? "coverImage"
-					: "postImage"
-			}`,
-	},
+  cloudinary: cloudinary,
+  params: {
+    folder: "SocialAppMERN",
+    format: async (req, file) => {
+      //      console.log('The file inside multer: ', file)
+      let extension = "";
+      if (file.mimetype.includes("image")) extension = file.mimetype.slice(6);
+      return extension;
+    },
+    public_id: (req, file) =>
+      `${req.user}-${
+        req.user.profileImage
+          ? "profileImage"
+          : req.user.coverImage
+          ? "coverImage"
+          : "postImage"
+      }`,
+  },
 });
 export default multer({ storage });
 
