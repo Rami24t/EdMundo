@@ -125,54 +125,43 @@ const StudentLessonCard = () => {
               <Input
                 id="objectives"
                 name="objectives"
-                type="text"
+                type="textarea"
                 className="lesson-card-input"
                 defaultValue={lesson.objectives}
                 disabled
               />
             </FormGroup>
-            <FormGroup>
-              <Label for="notes" className=" vertical-center lesson-card-label">
-                Notes
-              </Label>
-              <Badge
-                className="lesson-card-badge"
-                id="notes"
-                name="notes"
-                target="_blank"
-                href={lesson.materials}
-                defaultValue={lesson.materials}
-                disabled
-              />
-            </FormGroup>
             <Row>
-              <Col md={6}>
-                <FormGroup>
-                  <Label
-                    for="classwork"
-                    className="vertical-center lesson-card-label "
-                  >
-                    Classwork
-                  </Label>
-                  {lesson?.classworks.map((classwork) => (
-                    <Badge
-                      className="lesson-card-badge"
-                      id="classwork"
-                      name="classwork"
-                      target="_blank"
-                      href={lesson.classworks}
-                      defaultValue={lesson.classworks}
-                    >
-                      Classwork PDF
-                    </Badge>
-                  ))}
-                </FormGroup>
+              <Col md={2}>
+                <Label
+                  for="classwork"
+                  className="vertical-center lesson-card-label "
+                >
+                  Classwork
+                </Label>
               </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label for="homework" className="lesson-card-label">
-                    Homework
-                  </Label>
+              <Col md={4}>
+                {lesson?.classworks.map((classwork) => (
+                  <Badge
+                    className="lesson-card-badge"
+                    id="classwork"
+                    name="classwork"
+                    target="_blank"
+                    href={lesson.classworks}
+                    defaultValue={lesson.classworks}
+                  >
+                    Classwork PDF
+                  </Badge>
+                ))}
+              </Col>
+
+              <Col md={2}>
+                <Label for="homework" className="lesson-card-label">
+                  Homework
+                </Label>
+              </Col>
+              <Col md={4}>
+                {lesson?.homeworks.map((homework) => (
                   <Badge
                     className="lesson-card-badge"
                     id="homework"
@@ -183,7 +172,7 @@ const StudentLessonCard = () => {
                   >
                     Homework PDF
                   </Badge>
-                </FormGroup>
+                ))}
               </Col>
             </Row>
           </Form>

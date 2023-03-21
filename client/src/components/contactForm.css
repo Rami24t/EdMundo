@@ -1,5 +1,5 @@
 .contact-form-component {
-  background-color: #fadcd2;
+  background-color: #FFD6D6;
   padding-top: 96px;
   padding-bottom: 96px;
   height: fit-content;
@@ -81,8 +81,8 @@
 }
 
 .contact-button:hover {
-  background: green;
   color: #fff;
+  background-color:#762de2 !important;
 }
 
 .contact-image-lines {

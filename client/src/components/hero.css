@@ -2,7 +2,7 @@
   height: fit-content;
   background-color: khaki;
   padding-top: 96px;
-  padding-bottom: 96px;
+  padding-bottom: 60px;
 }
 
 .hero-section {
@@ -32,6 +32,10 @@
   text-align: center;
   box-shadow: none !important;
   margin-top: 1rem;
+}
+
+.hero-demo-button:hover {
+  background-color:#762de2 !important;
 }
 
 .hero-container-image {
