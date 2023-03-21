@@ -12,7 +12,8 @@ const StudentLessonCard = () => {
   data = data?.data;
   // console.log("data", data);
   let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
-  lessons && lessons.map((lesson, idx) => console.log("lesson "+(idx+1) +': ' , lesson));
+  lessons &&
+    lessons.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
 
   const lessonDetails = {
     date: "2023-02-02",
@@ -35,12 +36,12 @@ const StudentLessonCard = () => {
     );
   }
 
-  if(error) {
+  if (error) {
     return (
       <div className="lesson-card">
         <h1>Something went wrong</h1>
       </div>
-    )
+    );
   }
 
   return (
