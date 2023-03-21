@@ -10,6 +10,10 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+import styles from "./LoginForm.scss";
+import LoginPageImage from "../assets/login-page-image.png";
+import WavyRedLines from "../assets/wavy-red-lines.png";
+import ThreeGreenLines from "../assets/three-green-lines.png";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -44,17 +48,27 @@ function LoginForm() {
   };
 
   return (
-    <MDBContainer fluid className="p-3 my-5 h-custom">
-      <MDBRow className="d-flex  align-items-center ">
-        <MDBCol col="10" md="6">
+    <MDBContainer fluid className="  h-custom login-container">
+      <MDBRow className="d-flex  align-items-center login-form-container">
+        <MDBCol col="10" className="login-image-container">
+          {/* <img
+            src={WavyRedLines}
+            alt="wavy red lines"
+            className="login-wavy-red-lines"
+          /> */}
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-            className="img-fluid"
+            src={LoginPageImage}
+            className="img-fluid login-image"
             alt="Sample"
           />
         </MDBCol>
 
-        <MDBCol className="mt-4" col="4" md="6">
+        <MDBCol className=" login-form" col="4" md="6">
+          <header>
+            <h1 className="login-form-header">
+              Please <span className="violet-underline">login</span> here:
+            </h1>
+          </header>
           <MDBInput
             wrapperClass="mb-4"
             label="Email address"
@@ -64,6 +78,7 @@ function LoginForm() {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="login-input"
           />
           <MDBInput
             wrapperClass="mb-4"
@@ -74,19 +89,29 @@ function LoginForm() {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="login-input"
           />
 
           {/* <div className="d-flex justify-content-between mb-4">
             <a href="!#">Forgot password?</a>
           </div> */}
 
-          <div className="text-center text-md-start mt-4 pt-2">
-            <MDBBtn className="mb-0 px-5" size="lg" onClick={handleSubmit}>
+          <div className="text-center text-md-start mt-4 pt-2 login-button-container">
+            <MDBBtn
+              className="mb-0 px-5 login-button"
+              size="lg"
+              onClick={handleSubmit}
+            >
               Login
             </MDBBtn>
             {/* <p className="d-none small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="#!" className="link-danger">Register</a></p> */}
           </div>
         </MDBCol>
+        <img
+          src={ThreeGreenLines}
+          alt="three green lines "
+          className="login-three-green-lines"
+        />
       </MDBRow>
     </MDBContainer>
   );
