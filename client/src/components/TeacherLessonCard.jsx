@@ -22,7 +22,7 @@ const TeacherLessonCard = () => {
   let { data, error, isLoading } = useUser();
   data = data?.data;
   // console.log("data", data);
-  let lessons = data?.user?.lessons || data?.user?.currentClass?.lessons;
+  let lessons = data?.lessons || data?.user?.currentClass?.lessons;
   lessons &&
     lessons.map((lesson, idx) =>
       console.log("lesson " + (idx + 1) + ": ", lesson),
