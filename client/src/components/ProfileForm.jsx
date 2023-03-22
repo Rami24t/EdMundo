@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./profileForm.css";
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
 import useUser from "../hooks/useUser";
+import { Context } from "./Context";
+
 
 const FormData = {
   name: "Your Name",
@@ -14,9 +16,11 @@ const FormData = {
 };
 
 export default function ProfileForm() {
+  const { state } = useContext(Context);
+
   let { data } = useUser();
   data = data?.data;
-  const [profile, setProfile] = useState(FormData);
+  let [profile, setProfile] = useState(FormData);
 
   useEffect(() => {
     setProfile((prevProfile) => ({
@@ -60,7 +64,7 @@ export default function ProfileForm() {
     }
   };
   // if (error) return <div><p>Some error has happened.</p> <p>Please try refreshing your page.</p></div>;
-  if (!data?.user?.name)
+  if (!data?.user?.name && !state.user.name)
     return (
       <div>
         <MDBSpinner grow style={{ width: "3rem", height: "3rem" }}>
@@ -68,6 +72,8 @@ export default function ProfileForm() {
         </MDBSpinner>
       </div>
     );
+    else if(!data?.user?.name && state.user?.name)
+      profile=(state.user);
   return (
     <form className="profileForm">
       <MDBTypography variant="h2" className="header-2 font- ">
