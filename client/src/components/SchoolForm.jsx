@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./profileForm.css";
-import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
-import useUser from "../hooks/useUser";
 
 const FormData = {
   name: "Your Name",
@@ -13,9 +12,7 @@ const FormData = {
   class: "0z-00",
 };
 
-export default function SchoolForm() {
-  let { data } = useUser();
-  data = data?.data;
+export default function SchoolForm({data}) {
   const [profile, setProfile] = useState(data?.school);
 
   useEffect(() => {
@@ -95,16 +92,6 @@ export default function SchoolForm() {
         readonly
         disabled
       />
-      {data?.user?.role === "student" && (
-        <MDBInput
-          wrapperClass="mb-4"
-          type="text"
-          value={profile?.class}
-          label="Class"
-          readonly
-          disabled
-        />
-      )}
       <MDBInput
         wrapperClass="mb-4"
         type="tel"

@@ -1,10 +1,15 @@
 import React from "react";
 import SchoolForm from "../components/SchoolForm";
+import teacher_profile_image from "../images/teacher_profile_image.png";
 import student_profile_image from "../images/student_profile_image.png";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
+import useUser from "../hooks/useUser";
 
 const MySchool = () => {
+  let { data } = useUser();
+  data = data?.data;
+
   return (
     <>
       <MDBContainer fluid className="p-3 my-5 h-custom">
@@ -19,7 +24,7 @@ const MySchool = () => {
           >
             <MDBCol col="10" md="6" className="d-flex justify-content-center">
               <img
-                src={student_profile_image}
+                src={data.user.role==='student' ? teacher_profile_image : student_profile_image}
                 alt="Student Profile Decorative "
                 className="my-5 rounded object-cover"
                 style={{ width: "20rem", height: "20rem" }}
@@ -27,7 +32,7 @@ const MySchool = () => {
             </MDBCol>
             <MDBCol className="mt-4" col="4" md="6">
               <div className="  d-flex align-items-center justify-content-center">
-                <SchoolForm role={"student"} />
+                <SchoolForm data={data} />
               </div>
             </MDBCol>
           </MDBRow>
