@@ -11,7 +11,7 @@ import {
   MDBNavbarItem,
   MDBNavbarLink,
   MDBCollapse,
-  MDBBtn,
+  MDBBtn,MDBNavbarBrand,
   MDBIcon,
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
@@ -43,7 +43,7 @@ export default function Navbar() {
           </h2>
         </NavLink>
         
-        <MDBNavbarBrand>{school}</MDBNavbarBrand>
+        <MDBNavbarBrand className="ms-1">{school}</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"

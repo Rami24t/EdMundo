@@ -4,9 +4,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { useLocation, Navigate } from "react-router-dom";
 import { Context } from "./components/Context";
-// import useUser from "./hooks/useUser";
-// import { MDBSpinner } from "mdb-react-ui-kit";
-// import { useSWRConfig } from "swr";
 
 const App = () => {
   const location = useLocation();
