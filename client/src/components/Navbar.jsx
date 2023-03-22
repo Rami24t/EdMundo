@@ -43,7 +43,7 @@ export default function Navbar() {
           </h2>
         </NavLink>
         
-        <MDBNavbarBrand className="ms-1">{school}</MDBNavbarBrand>
+        <MDBNavbarBrand className="ms-2">{school}</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -66,6 +66,20 @@ export default function Navbar() {
                       aria-current="page"
                     >
                       Home
+                    </MDBNavbarLink>
+                  )}
+                </NavLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem>
+                <NavLink to={`/${data?.user?.role}/school`}>
+                  {({ isActive }) => (
+                    <MDBNavbarLink
+                      className={
+                        (!data?.user?.name || theme === "/login") && " d-none "
+                      }
+                      active={isActive}
+                    >
+                      My School
                     </MDBNavbarLink>
                   )}
                 </NavLink>
