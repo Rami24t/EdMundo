@@ -2,7 +2,9 @@ import React from "react";
 import ScrollToTop from "react-scroll-up";
 import { BsArrowUpCircle } from "react-icons/bs";
 import StudentLessonCard from "../components/StudentLessonCard";
-import { MDBBtn, MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
+import { 
+  // MDBBtn, MDBCol, 
+  MDBContainer, MDBRow } from "mdb-react-ui-kit";
 
 const StudentLessons = () => {
   return (

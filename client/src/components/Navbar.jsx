@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { Context } from "./Context";
+import React, { useState, useContext} from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import axios from "axios";
@@ -17,14 +16,16 @@ import {
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
 import "./navbar.css";
+import { Context } from "./Context";
 
 export default function Navbar() {
+  const { dispatch } = useContext(Context);
   const { mutate } = useSWRConfig();
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   let { data } = useUser();
   data && (data = data?.data);
-  const userName = data?.user.name || "";
+  // const userName = data?.user.name || "";
   const school = data?.school.name || "";
 
   const navigate = useNavigate();
@@ -41,6 +42,8 @@ export default function Navbar() {
             <span className="navbar-title-span"> Ed</span>Mundo
           </h2>
         </NavLink>
+        
+        <MDBNavbarBrand>{school}</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -133,7 +136,7 @@ export default function Navbar() {
                             axios
                               .get(`${baseUrl}/api/users/logout`)
                               .then((res) => {
-                                // dispatch({ type: "LOGOUT" });
+                                dispatch({ type: "LOGOUT" });
                                 // dispatch({ type: "CLEAR" });
                               }),
                           )

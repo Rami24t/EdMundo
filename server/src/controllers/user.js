@@ -49,89 +49,89 @@ export const login = async (req, res) => {
   try {
     let user = await Teacher.findOne({
       email: req.body.email,
-    })
-      .select("-__v")
-      .populate({
-        path: "school",
-        select: "-__v",
-      });
+    }).select("-__v");
+    // .populate({
+    //   path: "school",
+    //   select: "-__v",
+    // });
     if (!user)
       user = await Student.findOne({
         email: req.body.email,
-      })
-        .select("-__v")
-        .populate({ path: "school", select: "-__v" })
-        .populate({
-          path: "currentClass",
-          select: "-__v",
-          populate: [
-            {
-              path: "schedule.sessions",
-              select: "-__v",
-              populate: { path: "teacher", select: "-__v" },
-            },
-            {
-              path: "lessons",
-              select: "-__v",
-            },
-          ],
-        });
+      }).select("-__v");
+    // .populate({ path: "school", select: "-__v" })
+    // .populate({
+    //   path: "currentClass",
+    //   select: "-__v",
+    //   populate: [
+    //     {
+    //       path: "schedule.sessions",
+    //       select: "-__v",
+    //       populate: { path: "teacher", select: "-__v" },
+    //     },
+    //     {
+    //       path: "lessons",
+    //       select: "-__v",
+    //     },
+    //   ],
+    // });
     else if (!user) {
       user = await Admin.findOne({
         email: req.body.email,
-      })
-        .select("-__v")
-        .populate({
-          path: "school",
-          populate: {
-            path: "students teachers classes",
-            select: "-password -__v",
-          },
-        });
+      }).select("-__v");
+      // .populate({
+      //   path: "school",
+      //   populate: {
+      //     path: "students teachers classes",
+      //     select: "-password -__v",
+      //   },
+      // });
     }
     // console.log("logging in user:", user);
     if (!user) return res.send({ success: false, errorId: 404 });
     const passMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passMatch) return res.send({ success: false, errorId: 401 });
 
-    let displaySchedule;
+    // let displaySchedule;
     // if (!user) return res.json({ success: false, errorId: 404 }).status(404);
     console.log("logging in ", user.role);
-    if (user.role === "student") {
-      const days = user.currentClass.schedule.map((day) => day.day);
-      const slots = user.school.periods.map((period) => {
-        return {
-          from: `${(period.startTime / 60).toFixed(2).split(".")[0]}:${
-            period.startTime % 60 === 0 ? "00" : period.startTime % 60
-          }`,
-          to: `${
-            ((period.startTime + period.duration) / 60).toFixed(2).split(".")[0]
-          }:${
-            (period.startTime + period.duration) % 60 === 0
-              ? "00"
-              : (period.startTime + period.duration) % 60
-          }`,
-        };
-      });
-      displaySchedule = { days, slots } || null;
-    }
+    // if (user.role === "student") {
+    // const days = user.currentClass.schedule.map((day) => day.day);
+    // const slots = user.school.periods.map((period) => {
+    //   return {
+    //     from: `${(period.startTime / 60).toFixed(2).split(".")[0]}:${
+    //       period.startTime % 60 === 0 ? "00" : period.startTime % 60
+    //     }`,
+    //     to: `${
+    //       ((period.startTime + period.duration) / 60).toFixed(2).split(".")[0]
+    //     }:${
+    //       (period.startTime + period.duration) % 60 === 0
+    //         ? "00"
+    //         : (period.startTime + period.duration) % 60
+    //     }`,
+    //   };
+    // });
+    // displaySchedule = { days, slots } || null;
+    // }
 
-    const { school, password, ...newUser } = user.toObject();
+    const {
+      // school,
+      password,
+      ...newUser
+    } = user.toObject();
     const cookieData = newUser;
-    console.log("cookieData", cookieData);
     delete cookieData.currentClass;
-    console.log("cookieData", cookieData);
     const token = jwt.sign(cookieData, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
     res.cookie("OnlineSchoolUser", token, { sameSite: "none", secure: true });
-    // res.cookie("OnlineSchoolUser", token, { sameSite: false, secure: true });
-
-    if (user.role === "student")
+    if (user.role)
       res
         .status(200)
-        .json({ success: true, school, user: newUser, displaySchedule });
-    else res.status(200).json({ success: true, school, user: newUser });
+        .json({ success: true, user: newUser})
+    else
+      res
+        .status(500)
+        .json({ success: false, error: "User role is missing" });
   } catch (error) {
     console.log("login error:", error);
     res.send({ success: false, error: error.message });
@@ -150,7 +150,7 @@ export const emailConfirm = async (req, res) => {
     const user = await User.findByIdAndUpdate(
       { _id: decrypted.id },
       { verified: true },
-      { new: true },
+      { new: true }
     );
     console.log("emailConfirm ~ user", user);
     res.send({ success: true });
@@ -194,7 +194,7 @@ export const changePass = async (req, res) => {
     await User.findByIdAndUpdate(
       decrypted.id,
       { password: hashedPass },
-      { new: true },
+      { new: true }
     );
     res.send({ success: true });
   } catch (error) {

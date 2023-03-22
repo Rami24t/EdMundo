@@ -14,23 +14,18 @@ const FormData = {
 };
 
 export default function ProfileForm() {
-  let { isLoading, error, data } = useUser();
+  let { data } = useUser();
   data = data?.data;
   const [profile, setProfile] = useState(FormData);
 
   useEffect(() => {
-    if (data?.user?.role === "student") {
-      setProfile((prevProfile) => ({
-        ...prevProfile,
-        class: data?.user?.currentClass?.name,
-      }));
-    }
     setProfile((prevProfile) => ({
       ...prevProfile,
       name: data?.user?.name,
       email: data?.user?.email,
       phone: data?.user?.phone,
       address: data?.user?.address,
+      class: data?.user?.currentClass?.name,
     }));
   }, [data?.user]);
 
@@ -64,12 +59,7 @@ export default function ProfileForm() {
         });
     }
   };
-  if (error)
-    return (
-      <div>
-        <p>Some error has happened.</p> <p>Please try refreshing your page.</p>
-      </div>
-    );
+  // if (error) return <div><p>Some error has happened.</p> <p>Please try refreshing your page.</p></div>;
   if (!data?.user?.name)
     return (
       <div>
@@ -80,7 +70,7 @@ export default function ProfileForm() {
     );
   return (
     <form className="profileForm">
-      <MDBTypography variant="h2" className="header-2">
+      <MDBTypography variant="h2" className="header-2 font- ">
         Hello{profile.name ? " , " + profile?.name?.split(" ")[0] : ""}! Here
         you can edit your information.
       </MDBTypography>

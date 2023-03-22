@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useSWRConfig } from "swr";
+import {Context} from "../components/Context";
 import {
   MDBContainer,
   MDBCol,
@@ -9,10 +10,8 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import { Context } from "./Context";
 import styles from "./LoginForm.scss";
 import LoginPageImage from "../assets/login-page-image.png";
-import WavyRedLines from "../assets/wavy-red-lines.png";
 import ThreeGreenLines from "../assets/three-green-lines.png";
 
 function LoginForm() {
@@ -21,7 +20,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,14 +34,16 @@ function LoginForm() {
         .then((res) => {
           console.log(res.data);
           if (res.status === 200 && res.data.user.role) {
-            dispatch({ type: "DATA", payload: res.data });
-            navigate(`/${res.data.user.role}/profile`);
+            dispatch({ type: "LOGIN", payload: res.data.user });
+            setTimeout(() => {
+              navigate(`/${res.data.user.role}/profile`)
+            }, 300);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.message);
         });
     });
   };
@@ -51,11 +52,6 @@ function LoginForm() {
     <MDBContainer fluid className="  h-custom login-container">
       <MDBRow className="d-flex  align-items-center login-form-container">
         <MDBCol col="10" className="login-image-container">
-          {/* <img
-            src={WavyRedLines}
-            alt="wavy red lines"
-            className="login-wavy-red-lines"
-          /> */}
           <img
             src={LoginPageImage}
             className="img-fluid login-image"
@@ -65,8 +61,8 @@ function LoginForm() {
 
         <MDBCol className=" login-form" col="4" md="6">
           <header>
-            <h1 className="login-form-header">
-              Please <span className="violet-underline">login</span> here:
+            <h1 className="login-form-header mb-4">
+              Please <span className="login-violet-color">Login</span> here:
             </h1>
           </header>
           <MDBInput
@@ -93,7 +89,6 @@ function LoginForm() {
           />
 
           {/* <div className="d-flex justify-content-between mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
             <a href="!#">Forgot password?</a>
           </div> */}
 
