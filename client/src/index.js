@@ -15,6 +15,7 @@ import StudentSchedulePage from "./pages/StudentSchedulePage";
 import ContextProvider from "./components/Context";
 import App from "./App";
 import { Navigate } from "react-router-dom";
+import MySchool from "./pages/MySchool";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -34,6 +35,8 @@ root.render(
             element=<Navigate to="/student/profile" replace={true} />
           />
           <Route path="/student/profile" element={<StudentProfile />} />
+          <Route path="/student/school" element={<MySchool />} />
+          <Route path="/teacher/school" element={<MySchool />} />
           <Route path="/student/lessons" element={<StudentLessons />} />
           <Route path="/student/schedule" element={<StudentSchedulePage />} />
           <Route path="/login" element={<Login />} />
