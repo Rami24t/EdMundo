@@ -10,23 +10,8 @@ import { MDBSpinner } from "mdb-react-ui-kit";
 const StudentLessonCard = () => {
   let { data, error, isLoading } = useUser();
   data = data?.data;
-  // console.log("data", data);
   let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
-  lessons &&
-    lessons.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
-
-  const lessonDetails = {
-    date: "2023-02-02",
-    slot: "8 - 8.40am",
-    teacherName: "Tina Turner",
-    subject: "Math",
-    topic: "Odd numbers",
-    objectives: "Learn arithmetic with odd numbers.",
-    classwork: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-    homework: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-    notes: "Please review even numbers.",
-    link: "google.com",
-  };
+  lessons?.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
 
   if (isLoading) {
     return (
@@ -46,158 +31,152 @@ const StudentLessonCard = () => {
 
   return (
     <>
-      <div className="lesson-card">
-        <div className="lesson-header">
-          <div className="title-container">
-            <h2>{lessonDetails.subject}</h2>
+      {lessons?.map((lesson) => (
+        <div key={lesson._id} className="lesson-card">
+          <div className="lesson-header">
+            <div className="title-container">
+              <h2>{lesson.session.subjectName}</h2>
+            </div>
           </div>
-        </div>
-        <hr />
+          <hr />
 
-        <Form>
-          <Row>
-            <FormGroup row>
-              <Col for="date" md={1} className="vertical-center">
-                <BsCalendarDate className="lesson-card-icon" />
+          <Form>
+            <Row>
+              <FormGroup row>
+                <Col for="date" md={1} className="vertical-center">
+                  <BsCalendarDate className="lesson-card-icon" />
+                </Col>
+                <Col md={3} className="date-input">
+                  <Input
+                    className="lesson-card-input"
+                    id="date"
+                    name="date"
+                    type="text"
+                    defaultValue={lesson.date.slice(0, 10)}
+                    disabled
+                  />
+                </Col>
+                <Col for="date" md={1} className="vertical-center">
+                  <TfiTime className="lesson-card-icon" />
+                </Col>
+                <Col md={1} className="date-input">
+                  <Input
+                    className="lesson-card-input"
+                    id="slot"
+                    name="slot"
+                    type="text"
+                    defaultValue={lesson.session.periodNumber}
+                    disabled
+                  />
+                </Col>
+                <Col for="date" md={1} className="vertical-center">
+                  <IoMdPeople className="lesson-card-icon" />
+                </Col>
+                <Col md={5} className="date-input">
+                  <Input
+                    className="lesson-card-input"
+                    id="slot"
+                    name="slot"
+                    type="text"
+                    defaultValue={lesson.session.teacher.name}
+                    disabled
+                  />
+                </Col>
+              </FormGroup>
+            </Row>
+
+            <Row>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="topic" className="lesson-card-label">
+                    Topic
+                  </Label>
+                  <Input
+                    className="lesson-card-input"
+                    id="topic"
+                    name="topic"
+                    type="text"
+                    defaultValue={lesson.topic}
+                    disabled
+                  />
+                </FormGroup>
               </Col>
-              <Col md={3} className="date-input">
-                <Input
-                  className="lesson-card-input"
-                  id="date"
-                  name="date"
-                  type="text"
-                  defaultValue={lessonDetails.date}
-                  disabled
-                />
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="link" className="lesson-card-label">
+                    Classroom link
+                  </Label>
+                  <Input
+                    className="lesson-card-input"
+                    id="link"
+                    name="link"
+                    type="url"
+                    defaultValue={lesson.session.class.liveMeetingLink}
+                    disabled
+                  />
+                </FormGroup>
               </Col>
-              <Col for="date" md={1} className="vertical-center">
-                <TfiTime className="lesson-card-icon" />
-              </Col>
-              <Col md={3} className="date-input">
-                <Input
-                  className="lesson-card-input"
-                  id="slot"
-                  name="slot"
-                  type="text"
-                  defaultValue={lessonDetails.slot}
-                  disabled
-                />
-              </Col>
-              <Col for="date" md={1} className="vertical-center">
-                <IoMdPeople className="lesson-card-icon" />
-              </Col>
-              <Col md={3} className="date-input">
-                <Input
-                  className="lesson-card-input"
-                  id="slot"
-                  name="slot"
-                  type="text"
-                  defaultValue={lessonDetails.teacherName}
-                  disabled
-                />
-              </Col>
+            </Row>
+            <FormGroup>
+              <Label for="objectives" className="lesson-card-label">
+                Objectives
+              </Label>
+              <Input
+                id="objectives"
+                name="objectives"
+                type="textarea"
+                className="lesson-card-input"
+                defaultValue={lesson.objectives}
+                disabled
+              />
             </FormGroup>
-          </Row>
-
-          <Row>
-            <Col md={6}>
-              <FormGroup>
-                <Label for="topic" className="lesson-card-label">
-                  Topic
-                </Label>
-                <Input
-                  className="lesson-card-input"
-                  id="topic"
-                  name="topic"
-                  type="text"
-                  defaultValue={lessonDetails.topic}
-                  disabled
-                />
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
-                <Label for="link" className="lesson-card-label">
-                  Classroom link
-                </Label>
-                <Input
-                  className="lesson-card-input"
-                  id="link"
-                  name="link"
-                  type="url"
-                  defaultValue={lessonDetails.link}
-                  disabled
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <FormGroup>
-            <Label for="objectives" className="lesson-card-label">
-              Objectives
-            </Label>
-            <Input
-              id="objectives"
-              name="objectives"
-              type="text"
-              className="lesson-card-input"
-              defaultValue={lessonDetails.objectives}
-              disabled
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="notes" className="lesson-card-label">
-              Notes
-            </Label>
-            <Input
-              id="notes"
-              name="notes"
-              type="text"
-              className="lesson-card-input"
-              defaultValue={lessonDetails.notes}
-              disabled
-            />
-          </FormGroup>
-          <Row>
-            <Col md={6}>
-              <FormGroup>
+            <Row>
+              <Col md={2}>
                 <Label
                   for="classwork"
                   className="vertical-center lesson-card-label "
                 >
                   Classwork
                 </Label>
-                <Badge
-                  className="lesson-card-badge"
-                  id="classwork"
-                  name="classwork"
-                  target="_blank"
-                  href={lessonDetails.classwork}
-                  defaultValue={lessonDetails.classwork}
-                >
-                  Classwork PDF
-                </Badge>
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
+              </Col>
+              <Col md={4}>
+                {lesson?.classworks.map((classwork) => (
+                  <Badge
+                    className="lesson-card-badge"
+                    id="classwork"
+                    name="classwork"
+                    target="_blank"
+                    href={lesson.classworks}
+                    defaultValue={lesson.classworks}
+                  >
+                    Classwork PDF
+                  </Badge>
+                ))}
+              </Col>
+
+              <Col md={2}>
                 <Label for="homework" className="lesson-card-label">
                   Homework
                 </Label>
-                <Badge
-                  className="lesson-card-badge"
-                  id="homework"
-                  name="homework"
-                  target="_blank"
-                  href={lessonDetails.homework}
-                  defaultValue={lessonDetails.homework}
-                >
-                  Homework PDF
-                </Badge>
-              </FormGroup>
-            </Col>
-          </Row>
-        </Form>
-      </div>
+              </Col>
+              <Col md={4}>
+                {lesson?.homeworks.map((homework) => (
+                  <Badge
+                    className="lesson-card-badge"
+                    id="homework"
+                    name="homework"
+                    target="_blank"
+                    href={lessons.homeworks}
+                    defaultValue={lessons.homeworks}
+                  >
+                    Homework PDF
+                  </Badge>
+                ))}
+              </Col>
+            </Row>
+          </Form>
+        </div>
+      ))}
     </>
   );
 };

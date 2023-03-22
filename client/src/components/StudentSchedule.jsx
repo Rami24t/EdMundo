@@ -50,7 +50,12 @@ const Schedule = () => {
   data && (data = data?.data);
   const { days, slots } = data?.displaySchedule || { days: DAYS, slots: SLOTS };
 
-  if (error) return <div><p>Some error has happened.</p> <p>Please try refreshing your page.</p></div>;
+  if (error)
+    return (
+      <div>
+        <p>Some error has happened.</p> <p>Please try refreshing your page.</p>
+      </div>
+    );
   return (
     <div className={styles.schedulePage}>
       <div className={styles.scheduleContainer}>
