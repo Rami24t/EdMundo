@@ -5,13 +5,13 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import {
   MDBContainer,
-  MDBNavbar,
+  MDBNavbar,MDBNavbarBrand,
   MDBNavbarToggler,
   MDBNavbarNav,
   MDBNavbarItem,
   MDBNavbarLink,
   MDBCollapse,
-  MDBBtn,MDBNavbarBrand,
+  // MDBBtn,
   MDBIcon,
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
@@ -120,9 +120,7 @@ export default function Navbar() {
                     <btn className="navbar-button-login">LOGIN</btn>
                   )}
                 </Link>
-                <Link to="/" className={theme === "/login" && "d-none"}>
                   {data?.user?.name && (
-                    // rome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                     <btn
                       className="navbar-button-logout"
                       type="button"
@@ -143,13 +141,12 @@ export default function Navbar() {
                           .catch((err) => {
                             console.log(err);
                           });
-                        // navigate("");
+                        navigate("/");
                       }}
                     >
                       LOG OUT
                     </btn>
                   )}
-                </Link>
               </MDBNavbarItem>
             </MDBNavbarNav>
           )}
