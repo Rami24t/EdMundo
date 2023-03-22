@@ -6,3 +6,8 @@ server/.env
 client/.env
 server/.env
 ../.env
+<<<<<<< HEAD
+=======
+/.husky
+.husky
+>>>>>>> 3cbc31f949d14dcb084da8855891f22cda037f3a

@@ -21,26 +21,13 @@ import useUser from "../hooks/useUser";
 const TeacherLessonCard = () => {
   let { data, error, isLoading } = useUser();
   data = data?.data;
-  // console.log("data", data);
+  console.log("data", data);
   let lessons = data?.user?.lessons || data?.user?.currentClass?.lessons;
   lessons?.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-
-  const [lessonDetails, setLessonDetails] = useState({
-    date: "2023-02-02",
-    slot: "8 - 8.40am",
-    class: "1 A",
-    subject: "Math",
-    topic: "Odd numbers",
-    objectives: "Learn arithmetic with odd numbers.",
-    classwork: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-    homework: "http://www.primaryresources.co.uk/maths/pdfs/LH_oddandeven.pdf",
-    notes: "Please review even numbers.",
-    link: "google.com",
-  });
 
   const handleEdit = () => {
     setShowEditModal(true);
@@ -188,7 +175,7 @@ const TeacherLessonCard = () => {
                       id="link"
                       name="link"
                       type="url"
-                      defaultValue={lesson.link}
+                      defaultValue={lesson.session.class.liveMeetingLink}
                       disabled
                     />
                   </FormGroup>

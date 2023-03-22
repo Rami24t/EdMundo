@@ -111,7 +111,7 @@ const StudentLessonCard = () => {
                     id="link"
                     name="link"
                     type="url"
-                    defaultValue={lesson.link}
+                    defaultValue={lesson.session.class.liveMeetingLink}
                     disabled
                   />
                 </FormGroup>
