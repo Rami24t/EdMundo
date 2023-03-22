@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "./profileForm.css";
-import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
-import useUser from "../hooks/useUser";
-import { Context } from "./Context";
-
 
 const FormData = {
   name: "Your Name",
@@ -15,23 +12,14 @@ const FormData = {
   class: "0z-00",
 };
 
-export default function ProfileForm() {
-  const { state } = useContext(Context);
-
-  let { data } = useUser();
-  data = data?.data;
-  let [profile, setProfile] = useState(FormData);
+export default function SchoolForm({data}) {
+  const [profile, setProfile] = useState(data?.school);
 
   useEffect(() => {
     setProfile((prevProfile) => ({
-      ...prevProfile,
-      name: data?.user?.name,
-      email: data?.user?.email,
-      phone: data?.user?.phone,
-      address: data?.user?.address,
-      class: data?.user?.currentClass?.name,
+      ...prevProfile, ...data.school
     }));
-  }, [data?.user]);
+  }, [data?.school]);
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -64,7 +52,7 @@ export default function ProfileForm() {
     }
   };
   // if (error) return <div><p>Some error has happened.</p> <p>Please try refreshing your page.</p></div>;
-  if (!data?.user?.name && !state.user.name)
+  if (!data?.user?.name)
     return (
       <div>
         <MDBSpinner grow style={{ width: "3rem", height: "3rem" }}>
@@ -72,40 +60,35 @@ export default function ProfileForm() {
         </MDBSpinner>
       </div>
     );
-    else if(!data?.user?.name && state.user?.name)
-      profile=(state.user);
   return (
     <form className="profileForm">
       <MDBTypography variant="h2" className="header-2 font- ">
-        Hello{profile.name ? " , " + profile?.name?.split(" ")[0] : ""}! Here
-        you can edit your information.
+        {profile.name}'s Contact Information
       </MDBTypography>
-      <MDBRow className="mb-4">
+      {/* <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
-            label={profile?.name || "Name"}
-            placeholder={profile?.name}
+            value={profile?.name}
             type="text"
+            label="School"
+            name="name"
             readOnly
-            disabled
           />
         </MDBCol>
-      </MDBRow>
-      {data?.user?.role === "student" && (
-        <MDBInput
-          wrapperClass="mb-4"
-          type="text"
-          value={profile?.class}
-          label="Class"
-          readonly
-          disabled
-        />
-      )}
+      </MDBRow> */}
       <MDBInput
         wrapperClass="mb-4"
-        type="email"
-        value={profile?.email}
-        label="Email"
+        name="address"
+        label="Address"
+        readOnly
+        value={profile?.address}
+        onChange={handleChange}
+      />
+      <MDBInput
+        wrapperClass="mb-4"
+        type="state"
+        value={profile?.state}
+        label="State"
         readonly
         disabled
       />
@@ -115,18 +98,21 @@ export default function ProfileForm() {
         name="phone"
         value={profile?.phone}
         onChange={handleChange}
+        readonly
+        disabled
         label="Phone"
       />
       <MDBInput
         wrapperClass="mb-4"
-        name="address"
-        label="Address"
-        value={profile?.address}
-        onChange={handleChange}
+        type="email"
+        value={profile?.email}
+        label="Email"
+        readonly
+        disabled
       />
-      <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
+      {data.user.role ==='admin' && <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
         Save
-      </MDBBtn>
+      </MDBBtn>}
     </form>
   );
 }

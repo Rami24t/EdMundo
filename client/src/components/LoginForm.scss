@@ -1,0 +1,61 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1460px;
+}
+.login-form-container {
+  width: 100%;
+  margin: 0;
+}
+.login-form {
+  padding: 1rem;
+}
+
+.login-form-header {
+  padding: 2rem 0;
+  text-align: center;
+}
+.login-violet-color {
+  color: #8c50e7;
+}
+
+.login-image {
+  width: 15rem;
+}
+
+.login-three-green-lines {
+  width: 12rem;
+  align-self: flex-start;
+}
+.login-button-container {
+  display: flex;
+  justify-content: center;
+}
+.login-button {
+  font-weight: bold;
+  background-color: #8e59dd;
+  border-radius: 20px;
+}
+.login-button:hover {
+  background-color: #6825cc;
+}
+/* Medium devices ( 768 px and down) */
+@media (max-width: 798px) {
+  .login-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-three-green-lines {
+    display: none;
+  }
+}
+
+/* Small devices ( 480 px and down) */
+@media (max-width: 480px) {
+  .login-image {
+    width: 8rem;
+  }
+}

@@ -9,7 +9,7 @@ import {
 
 export default function Footer() {
   return (
-    <MDBFooter bgColor="light" className="text-center text-lg-start text-muted">
+    <MDBFooter className="text-center text-lg-start text-muted footer">
       <section className="p-1">
         <MDBContainer className="text-center text-md-start mt-4 ">
           <MDBRow className="mt-3">
@@ -33,10 +33,7 @@ export default function Footer() {
         <MDBContainer className="text-center text-md-start mt-5">
           <MDBRow className="mt-3">
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">
-                <MDBIcon icon="gem" className="me-3" />
-                About us
-              </h6>
+              <h6 className="text-uppercase fw-bold mb-4">About us</h6>
               <p>
                 We are a group of students pursuing a Full-Stack Web Development
                 course at DCI Digital Career Institute. This is our final

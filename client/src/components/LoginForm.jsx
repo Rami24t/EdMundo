@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useSWRConfig } from "swr";
+import {Context} from "../components/Context";
 import {
   MDBContainer,
   MDBCol,
@@ -9,7 +10,9 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
-import { Context } from "./Context";
+import styles from "./LoginForm.scss";
+import LoginPageImage from "../assets/login-page-image.png";
+import ThreeGreenLines from "../assets/three-green-lines.png";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -17,7 +20,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,30 +34,37 @@ function LoginForm() {
         .then((res) => {
           console.log(res.data);
           if (res.status === 200 && res.data.user.role) {
-            dispatch({ type: "DATA", payload: res.data });
-            navigate(`/${res.data.user.role}/profile`);
+            dispatch({ type: "LOGIN", payload: res.data.user });
+            setTimeout(() => {
+              navigate(`/${res.data.user.role}/profile`)
+            }, 300);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.message);
         });
     });
   };
 
   return (
-    <MDBContainer fluid className="p-3 my-5 h-custom">
-      <MDBRow className="d-flex  align-items-center ">
-        <MDBCol col="10" md="6">
+    <MDBContainer fluid className="  h-custom login-container">
+      <MDBRow className="d-flex  align-items-center login-form-container">
+        <MDBCol col="10" className="login-image-container">
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-            className="img-fluid"
+            src={LoginPageImage}
+            className="img-fluid login-image"
             alt="Sample"
           />
         </MDBCol>
 
-        <MDBCol className="mt-4" col="4" md="6">
+        <MDBCol className=" login-form" col="4" md="6">
+          <header>
+            <h1 className="login-form-header mb-4">
+              Please <span className="login-violet-color">Login</span> here:
+            </h1>
+          </header>
           <MDBInput
             wrapperClass="mb-4"
             label="Email address"
@@ -64,6 +74,7 @@ function LoginForm() {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="login-input"
           />
           <MDBInput
             wrapperClass="mb-4"
@@ -74,20 +85,29 @@ function LoginForm() {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="login-input"
           />
 
           {/* <div className="d-flex justify-content-between mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
             <a href="!#">Forgot password?</a>
           </div> */}
 
-          <div className="text-center text-md-start mt-4 pt-2">
-            <MDBBtn className="mb-0 px-5" size="lg" onClick={handleSubmit}>
+          <div className="text-center text-md-start mt-4 pt-2 login-button-container">
+            <MDBBtn
+              className="mb-0 px-5 login-button"
+              size="lg"
+              onClick={handleSubmit}
+            >
               Login
             </MDBBtn>
             {/* <p className="d-none small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="#!" className="link-danger">Register</a></p> */}
           </div>
         </MDBCol>
+        <img
+          src={ThreeGreenLines}
+          alt="three green lines "
+          className="login-three-green-lines"
+        />
       </MDBRow>
     </MDBContainer>
   );
