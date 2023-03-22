@@ -123,9 +123,9 @@ export default function SchoolForm() {
         readonly
         disabled
       />
-      <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
+      {data.user.role ==='admin' && <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
         Save
-      </MDBBtn>
+      </MDBBtn>}
     </form>
   );
 }
