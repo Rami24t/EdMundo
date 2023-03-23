@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #fffffc !important;
+  background-color: #fffcff;
   box-shadow: none;
   border-bottom: #762de2 2px solid;
   padding: 9px;
@@ -15,14 +15,30 @@
 }
 
 .navbar-title-span {
-  border-radius: 30px;
-  padding: 3px;
+  border-radius: 50%;
+  padding: 8px;
+  background-color: #3b71ca;
+  color: #fff;
+  animation: logoAnimation 1s 1s alternate-reverse ease-in-out infinite;
 }
+.school-logo{
+  color: #656 !important;
+  font-family: "Nunito", sans-serif !important;
+}
+@keyframes logoAnimation {
+  to {
+    padding: 0;
+    background-color: #fff;
+    color:#3b71ca;
+  }
+}
+
 
 .nav-link {
   color: #333 !important;
   font-weight: 500;
   font-family: "Nunito", sans-serif !important;
+  font-size: 1.1rem;
 }
 
 .nav-link:hover {
@@ -37,23 +53,31 @@
   font-weight: 800;
   font-family: "Nunito", sans-serif;
   box-shadow: none;
-  margin-top: 2rem !important;
 }
 
 .navbar-button-login {
   border-color: #a876f5 !important;
-  color: #a876f5 !important;
+  /* color: #a876f5 !important; */
 }
 
 .navbar-button-logout {
   background-color: #C2D9FF;
   border-color: #C2D9FF;
-  color: #333;
+  color: #444;
   margin:auto !important;
 }
 
-.navbar-button-logout:focus {
-  background-color: none !important;
-  border-color: #ffd6d6 !important;
-  color: #333 !important;
+.navbar-button-logout:hover {
+  background-color: #555;
+  border-color: #555;
+  color: #C2D9FF;
 }
+
+.navbar .active {
+  color: #3b71ca !important;
+}
+
+.navbar .active:hover {
+  color: #3b71ca !important;
+}
+
