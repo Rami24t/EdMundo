@@ -11,7 +11,7 @@ import {
   MDBNavbarItem,
   MDBNavbarLink,
   MDBCollapse,
-  // MDBBtn,
+  MDBBtn,
   MDBIcon,
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
@@ -43,7 +43,13 @@ export default function Navbar() {
           </h2>
         </NavLink>
         
-        <MDBNavbarBrand className="ms-2">{school}</MDBNavbarBrand>
+        <NavLink to={data?.user.role+'/school'}>
+        {({ isActive }) => (
+        <MDBNavbarLink 
+         className="ms-4 school-logo navbar-title h3">{school}
+        </MDBNavbarLink>)}
+         </NavLink>
+        
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -131,11 +137,11 @@ export default function Navbar() {
               <MDBNavbarItem>
                 <Link to="/login" className={theme === "/login" && "d-none"}>
                   {!data?.user?.name && (
-                    <btn className="navbar-button-login">LOGIN</btn>
+                    <MDBBtn className="navbar-button-login">LOGIN</MDBBtn>
                   )}
                 </Link>
                   {data?.user?.name && (
-                    <btn
+                    <MDBBtn
                       className="navbar-button-logout"
                       type="button"
                       onClick={() => {
@@ -159,7 +165,7 @@ export default function Navbar() {
                       }}
                     >
                       LOG OUT
-                    </btn>
+                    </MDBBtn>
                   )}
               </MDBNavbarItem>
             </MDBNavbarNav>
