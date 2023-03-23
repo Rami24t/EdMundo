@@ -13,12 +13,12 @@ export default function Footer() {
       <section className="p-1">
         <MDBContainer className="text-center text-md-start mt-4 ">
           <MDBRow className="mt-3">
-            <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-2 ">
-              <span>Check out our project repository</span>
-              <a
+            <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-2 "><a
                 href="https://github.com/Rami24t/EdMundo"
                 className="m-3 text-reset"
               >
+              <span>Check out our github repository  </span>
+              
                 <MDBIcon fab icon="github" />
               </a>
             </MDBCol>
@@ -37,14 +37,26 @@ export default function Footer() {
               <p>
                 We are a group of students pursuing a Full-Stack Web Development
                 course at DCI Digital Career Institute. This is our final
-                project build using MERN stack.
+                project that we built using the MERN stack.
               </p>
             </MDBCol>
 
-            <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
+            <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4 w-50 text-center d-flex flex-column align-content-around">
+              <h6 className="text-uppercase fw-bold mb-4">Credits</h6>
               <p>
-                Alina Cuznetov
+                Mr. Rami Al-Saadi
+                <a href="https://github.com/Rami24t" className="m-3 text-reset">
+                  <MDBIcon fab icon="github" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/rami-al-saadi-16a14223a"
+                  className="me-3 text-reset"
+                >
+                  <MDBIcon fab icon="linkedin" />
+                </a>
+              </p>
+              <p>
+                Ms. Alina Cuznetov
                 <a
                   href="https://github.com/alinaincodeland"
                   className="m-3 text-reset"
@@ -59,25 +71,12 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                Julia Kobzar
+                Mrs. Julia Kobzar
                 <a href="https://github.com/ju8ko" className="m-3 text-reset">
                   <MDBIcon fab icon="github" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/julia-kobzar-497bb5164"
-                  className="me-3 text-reset"
-                >
-                  <MDBIcon fab icon="linkedin" />
-                </a>
-              </p>
-
-              <p>
-                Rami Al-Saadi
-                <a href="https://github.com/Rami24t" className="m-3 text-reset">
-                  <MDBIcon fab icon="github" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/rami-al-saadi-16a14223a"
                   className="me-3 text-reset"
                 >
                   <MDBIcon fab icon="linkedin" />
@@ -98,7 +97,7 @@ export default function Footer() {
       <hr className="w-75 position-relative start-50 translate-middle" />
 
       <div className="text-center pt-2 pb-4">
-        © {new Date().getFullYear()} EdMundo
+        &copy; {new Date().getFullYear()}
       </div>
     </MDBFooter>
   );
