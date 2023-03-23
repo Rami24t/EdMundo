@@ -18,7 +18,7 @@
   /* font-weight: 500; */
   line-height: 1.2;
   margin-bottom: 2rem;
-  color: #a876f5;
+  color: #746bf6;
   text-decoration-line: underline;
   text-decoration-style: wavy;
   font-size: 56px !important;
@@ -49,7 +49,7 @@
 .contact-input {
   border: none;
   outline: none;
-  border-bottom: 2px solid #a876f5;
+  border-bottom: 2px solid #3b71ca;;
   margin-bottom: 15px;
   transition: all 0.3s;
   font-size: 14px;
@@ -58,13 +58,13 @@
 }
 
 .contact-input:focus {
-  border-bottom: 2px solid #762de2;
+  border-bottom: 2px solid #3b71ca;
 }
 
 .contact-button {
   border-radius: 30px;
   padding: 20px 30px;
-  background-color: #a876f5 !important;
+  background-color: #7678f5 !important;
   color: #fff;
   text-align: center;
   box-shadow: none !important;
@@ -78,11 +78,15 @@
   width: fit-content;
   margin: auto;
   margin-top: 0.5rem;
+  font-size: 0.7rem;
+  transition: all 0.8s;
 }
 
 .contact-button:hover {
-  color: #fff;
-  background-color:#762de2 !important;
+  font-weight: 900;
+  color: #7678f5;
+  background-color:#fff !important;
+  outline: 1px solid #3b72ca15;
 }
 
 .contact-image-lines {
