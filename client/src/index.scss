@@ -114,4 +114,21 @@ a {
 
 .footer {
   background-color: #FFFFFC !important;
+  color:#2e4568 !important;
+  font-weight: bold;
+}
+
+.footer a:hover:not(div>a){
+  color: #fffffc !important;
+  background-color: #5f579d !important;
+  border-radius: 20%;
+  text-decoration: underline;
+}
+.footer div>a:hover{
+  text-decoration: underline;
+}
+
+.footer i{
+  font-size: 1.3rem;
+  transition: all 0.3s ease-in-out;
 }
