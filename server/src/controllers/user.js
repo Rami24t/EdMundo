@@ -64,24 +64,23 @@ export const login = async (req, res) => {
 
     console.log("logging in ", user.role);
 
-    const {
-      password,
-      ...newUser
-    } = user.toObject();
+    const { password, ...newUser } = user.toObject();
     const cookieData = newUser;
     delete cookieData.currentClass;
     const token = jwt.sign(cookieData, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.cookie("OnlineSchoolUser", token, { sameSite: "none", secure: true });
-    if (user.role)
-      res
-        .status(200)
-        .json({ success: true, user: newUser})
+    res.cookie("OnlineSchoolUser", token, {
+      sameSite: "none",
+      secure: true,
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "https://ed-mundo.vercel.app"
+          : "http://localhost:3000",
+    });
+    if (user.role) res.status(200).json({ success: true, user: newUser });
     else
-      res
-        .status(500)
-        .json({ success: false, error: "User role is missing" });
+      res.status(500).json({ success: false, error: "User role is missing" });
   } catch (error) {
     console.log("login error:", error);
     res.send({ success: false, error: error.message });
