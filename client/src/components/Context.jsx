@@ -1,7 +1,6 @@
 import React from "react";
 import { createContext, useReducer } from "react";
 // import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 export const Context = createContext();
 
@@ -14,7 +13,6 @@ export default function ContextProvider({ children }) {
           user: action.payload,
         };
       case "LOGOUT":
-        axios.get("/api/users/logout");
         return {
           ...state,
           user: null,
