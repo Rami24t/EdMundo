@@ -27,7 +27,6 @@ export default function Footer() {
           </MDBRow>
         </MDBContainer>
       </section>
-      <hr />
 
       <section className="footer-body">
         <MDBContainer className="text-center text-md-start mt-5">
@@ -94,7 +93,6 @@ export default function Footer() {
           </MDBRow>
         </MDBContainer>
       </section>
-      <hr className="w-75 position-relative start-50 translate-middle" />
 
       <div className="text-center pt-2 pb-4">
         &copy; {new Date().getFullYear()}
