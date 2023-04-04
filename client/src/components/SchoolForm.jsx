@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./profileForm.css";
 import { MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
@@ -17,7 +16,7 @@ export default function SchoolForm({data}) {
 
   useEffect(() => {
     setProfile((prevProfile) => ({
-      ...prevProfile, ...data.school
+      ...prevProfile, ...data?.school
     }));
   }, [data?.school]);
 
@@ -62,8 +61,8 @@ export default function SchoolForm({data}) {
     );
   return (
     <form className="profileForm">
-      <MDBTypography variant="h2" className="header-2 font- ">
-        {profile.name}'s Contact Information
+      <MDBTypography className="fs-6 mb-3">
+        Contact Information
       </MDBTypography>
       {/* <MDBRow className="mb-4">
         <MDBCol>
@@ -81,6 +80,7 @@ export default function SchoolForm({data}) {
         name="address"
         label="Address"
         readOnly
+        disabled
         value={profile?.address}
         onChange={handleChange}
       />
@@ -110,7 +110,7 @@ export default function SchoolForm({data}) {
         readonly
         disabled
       />
-      {data.user.role ==='admin' && <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
+      {data?.user?.role ==='admin' && <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
         Save
       </MDBBtn>}
     </form>

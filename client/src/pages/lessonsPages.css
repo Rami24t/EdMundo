@@ -4,6 +4,7 @@
  height: fit-content;
  padding-top: 45px;
  padding-bottom: 45px;
+ min-height: 70vh;
 }
 
 .teacher-lessons-header,
@@ -13,9 +14,10 @@ align-items: center !important;
 
 .create-new-lesson {
     border-radius: 30px;
-    padding: 20px 30px;
-    background-color: #a876f5;
+    padding: 15px 20px;
+    background-color: #8576f5;
     color: #fff;
+    font-weight: bold;
     text-align: center;
     box-shadow: none !important;
     margin-top: 1rem;

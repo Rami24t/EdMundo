@@ -39,12 +39,37 @@ export const getLessons = async (req, res) => {
   if (req.user.role !== "student")
     return res.status(401).json({ success: false, error: "Unauthorized" });
   try {
-    const currentClass = req.body.currentClass;
-    const lessons = await Lesson.find({ class: currentClass })
-      .populate("lesson", "name")
-      .select("-__v");
-    if (!lessons) return res.send({ success: false, errorId: 404 });
-    res.send({ success: true, lessons });
+    const { currentClass } = await Student.findById(
+      mongoose.Types.ObjectId(req.user._id)
+    )
+      .select("currentClass")
+      .populate({
+        path: "currentClass",
+        select: "-__v",
+        populate: [
+          // {
+          //   path: "schedule.sessions",
+          //   select: "-__v",
+          //   populate: { path: "teacher", select: "-__v" },
+          // },
+          {
+            path: "lessons",
+            select: "-__v",
+            populate: [
+              {
+                path: "session",
+                select: "-__v",
+                populate: { path: "teacher", select: "name email" },
+              },
+              { path: "teacher", select: "name" },
+              // { path: "attendance", select: "name" },
+            ],
+          },
+        ],
+      });
+    const lessons = currentClass.lessons;
+    if (!lessons) return res.status(404).json({ success: false});
+    res.status(200).json({ success: true, lessons });
   } catch (error) {
     console.log("getLessons error:", error.message);
     res.send({ success: false, error: error.message });

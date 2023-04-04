@@ -1,27 +1,29 @@
-import React, { useState, useContext} from "react";
+import React, { useState} from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import {
   MDBContainer,
-  MDBNavbar,MDBNavbarBrand,
+  MDBNavbar,
   MDBNavbarToggler,
+  MDBNavbarBrand,
   MDBNavbarNav,
   MDBNavbarItem,
   MDBNavbarLink,
   MDBCollapse,
-  // MDBBtn,
+  MDBBtn,
   MDBIcon,
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
 import "./navbar.css";
-import { Context } from "./Context";
+import { useCookies } from "react-cookie";
+
 
 export default function Navbar() {
-  const { dispatch } = useContext(Context);
   const { mutate } = useSWRConfig();
   const baseUrl = process.env.REACT_APP_BASE_URL;
+  const [cookie, removeCookie] = useCookies(["OnlineSchoolUser"]);
 
   let { data } = useUser();
   data && (data = data?.data);
@@ -37,13 +39,22 @@ export default function Navbar() {
   return (
     <MDBNavbar expand="lg" sticky>
       <MDBContainer fluid className="navbar-container">
-        <NavLink to="/">
+
+       <MDBNavbarBrand>
+ <Link to="/">
           <h2 className="navbar-title">
             <span className="navbar-title-span"> Ed</span>Mundo
           </h2>
-        </NavLink>
-        
-        <MDBNavbarBrand className="ms-2">{school}</MDBNavbarBrand>
+        </Link>
+        </MDBNavbarBrand>
+        <MDBNavbarBrand>
+        <NavLink to={data?.user.role+'/school'}>
+        {({ isActive }) => (
+        <MDBNavbarLink 
+         className="ms-4 school-logo navbar-title h3">{school}
+        </MDBNavbarLink>)}
+         </NavLink>
+         </MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -131,35 +142,37 @@ export default function Navbar() {
               <MDBNavbarItem>
                 <Link to="/login" className={theme === "/login" && "d-none"}>
                   {!data?.user?.name && (
-                    <btn className="navbar-button-login">LOGIN</btn>
+                    <MDBBtn className="navbar-button-login">LOGIN</MDBBtn>
                   )}
                 </Link>
                   {data?.user?.name && (
-                    <btn
+                    <MDBBtn
                       className="navbar-button-logout"
                       type="button"
                       onClick={() => {
                         // Delete the authentication cookie
-                        document.cookie =
-                          "OnlineSchoolUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        // document.cookie =
+                        //   "OnlineSchoolUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        // cookie && removeCookie("OnlineSchoolUser");
                         // Reset the SWR cache
                         mutate(`${baseUrl}/api/users/getData`, null, false)
                           .then(
                             axios
                               .get(`${baseUrl}/api/users/logout`)
                               .then((res) => {
-                                dispatch({ type: "LOGOUT" });
-                                // dispatch({ type: "CLEAR" });
+                                cookie.OnlineSchoolUser && removeCookie("OnlineSchoolUser");
+                                if(res.data.success){
+                                  navigate("/");
+                                }
                               }),
                           )
                           .catch((err) => {
                             console.log(err);
                           });
-                        navigate("/");
                       }}
                     >
                       LOG OUT
-                    </btn>
+                    </MDBBtn>
                   )}
               </MDBNavbarItem>
             </MDBNavbarNav>

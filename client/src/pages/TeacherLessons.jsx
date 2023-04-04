@@ -1,12 +1,25 @@
 import React, { useState } from "react";
-import TeacherLessonCard from "../components/TeacherLessonCard";
 import { MDBBtn, MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import CreateLessonModal from "../components/CreateLessonModal";
 import ScrollToTop from "react-scroll-up";
 import { BsArrowUpCircle } from "react-icons/bs";
 import "./lessonsPages.css";
+import LessonCard from "../components/LessonCard";
+import useUser from "../hooks/useUser";
 
 const TeacherLessons = () => {
+
+  let { data, error, isLoading } = useUser();
+  data = data?.data;
+  // console.log("data", data);
+  let lessons = data?.lessons || data?.user?.currentClass?.lessons;
+  lessons &&
+    lessons.map((lesson, idx) =>
+      console.log("lesson " + (idx + 1) + ": ", lesson),
+    );
+
+
+
   const [optModal, setOptModal] = useState(false);
   const toggleShow = () => setOptModal(!optModal);
 
@@ -26,8 +39,8 @@ const TeacherLessons = () => {
             <h1 className="teacher-lessons-title"> My Lessons</h1>
           </MDBCol>
           <MDBCol md={6}>
-            <MDBBtn className="create-new-lesson" onClick={toggleShow}>
-              Create new lesson
+            <MDBBtn className="fs-2 fw-bold py-0 rounded-pill" title="Add New Lesson" onClick={toggleShow}>
+              +
             </MDBBtn>
           </MDBCol>
         </MDBRow>
@@ -39,15 +52,20 @@ const TeacherLessons = () => {
           handleCreateLessonConfirm={handleCreateLessonConfirm}
         />
 
-        <TeacherLessonCard />
+<MDBRow className='row-cols-1 row-cols-md-3 g-4'>
+  {lessons &&
+    lessons.map((lesson, idx) => <>
+        <LessonCard key={lesson._id} lesson={lesson} />
+      </>)}
+</MDBRow>
 
         <ScrollToTop showUnder={160}>
           <span>
             <BsArrowUpCircle
               style={{
-                width: "2.5rem",
-                height: "2.5rem",
-                color: "#a876f5",
+                width: "2rem",
+                height: "2rem",
+                color: "#4b81ca",
               }}
             />
           </span>

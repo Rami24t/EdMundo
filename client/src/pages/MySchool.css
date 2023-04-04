@@ -1,0 +1,12 @@
+.my-school{
+    min-height: 70vh;
+    font-family: "Nunito", sans-serif;
+    background-color: #C2D9FF;
+}
+
+.my-school input{
+    background-color: #ffffff75 !important;
+  }
+  .my-school input:not(input[disabled]){
+    background-color: aliceblue !important;
+  }
