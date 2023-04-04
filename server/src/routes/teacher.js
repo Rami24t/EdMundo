@@ -13,7 +13,7 @@ import {
 import auth from "../middleware/auth.js";
 import multerMiddleware from "../config/multer-cloudinary.js";
 const router = express.Router();
-import { check } from "express-validator";
+// import { check } from "express-validator";
 
 router.put(
   "/lesson",
