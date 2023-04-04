@@ -58,11 +58,10 @@ function LoginForm() {
             alt="Sample"
           />
         </MDBCol>
-
         <MDBCol className=" login-form" col="4" md="6">
           <header>
             <h1 className="login-form-header mb-4">
-              Please <span className="login-violet-color">Login</span> here:
+              Log<span className="login-violet-color">in</span>
             </h1>
           </header>
           <MDBInput

@@ -34,7 +34,7 @@ router.post("/emailconfirm", emailConfirm);
 router.post(
   "/login",
   [
-    // check('*').notEmpty().trim().escape()
+    check('*').notEmpty().trim().escape()
   ],
   login,
 );
@@ -47,6 +47,5 @@ router.post("/forgotpass", forgotPass);
 router.post("/changepassword", changePass);
 
 router.put("/update", auth, multerMiddleware.single("image"), updateProfile);
-// router.put('/cover', auth, multerMiddleware.single('image'), updateCover)
 
 export default router;

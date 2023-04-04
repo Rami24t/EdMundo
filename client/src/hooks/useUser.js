@@ -1,20 +1,22 @@
 import useSWR from "swr";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 // function getCookie(name) {
-//   var cookies = `; ${document.cookie}`;
-//   var splitCookie = cookies.split(`; ${name}=`);
-//   if (splitCookie.length === 2)
-//     // return splitCookie.pop();
-//     return true;
-//   //return null;
-//   else return false;
-// }
-
-export default function useUser() {
+  //   var cookies = `; ${document.cookie}`;
+  //   var splitCookie = cookies.split(`; ${name}=`);
+  //   if (splitCookie.length === 2)
+  //     // return splitCookie.pop();
+  //     return true;
+  //   //return null;
+  //   else return false;
+  // }
+  
+  export default function useUser() {
+  const [cookie] = useCookies(["OnlineSchoolUser"]);
   const { data, error, isLoading } = useSWR(
-    // getCookie("OnlineSchoolUser") &&
+    cookie.OnlineSchoolUser &&
     `${baseUrl}/api/users/getData`,
     () =>
       axios
@@ -26,8 +28,5 @@ export default function useUser() {
           return res;
         }),
   );
-  // console.log();
-  // console.log("useUser", getCookie("OnlineSchoolUser") && baseUrl + "/api/users/getData");
-  // console.log("useUser", { data, error, isLoading });
   return { data, error, isLoading };
 }

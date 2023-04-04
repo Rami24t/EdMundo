@@ -66,14 +66,18 @@ export const getLessons = async (req, res) => {
   if (req.user.role !== "teacher")
     return res.status(401).json({ success: false, error: "Unauthorized" });
   try {
-    const lessons = await Lesson.find({ teacher: req.user._id })
-      .populate("session", "name")
-      .select("-__v");
+    const lessons = await Lesson.find({ teacher: newUser._id })
+    .populate({
+      path: "session",
+      select: "-__v",
+      populate: { path: "class", select: "-__v" },
+    })
+    .populate({ path: "attendance", select: "name" });
     if (!lessons) return res.send({ success: false, errorId: 404 });
-    res.send({ success: true, lessons });
+    res.status(200).json({ success: true, lessons });
   } catch (error) {
     console.log("getLessons error:", error.message);
-    res.send({ success: false, error: error.message });
+    res.json({ success: false, error: error.message });
   }
 };
 

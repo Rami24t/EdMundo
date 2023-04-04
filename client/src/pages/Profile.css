@@ -1,0 +1,16 @@
+.profile{
+    font-family: "Nunito", sans-serif !important;
+    min-height: 70vh;
+    background-color: #C2D9FF;
+}
+.profile-form {
+    font-family: "Nunito", sans-serif !important;
+  }
+
+  .profile-form input{
+    background-color: #ffffff55 !important;
+    
+  }
+  .profile-form input:not(input[disabled]){
+    background-color: #ffffffdd !important;
+  }

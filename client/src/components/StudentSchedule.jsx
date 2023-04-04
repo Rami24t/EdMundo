@@ -1,19 +1,18 @@
 import React from "react";
-import styles from "./StudentSchedule.module.scss";
+import styles from "../pages/StudentSchedulePage.module.scss";
 import useUser from "../hooks/useUser";
 import { MDBSpinner } from "mdb-react-ui-kit";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
   { from: "8:00", to: "8:40" },
-  { from: "8:40", to: "9:20" },
+  { from: "8:50", to: "9:30" },
   { from: "9:40", to: "10:20" },
-  { from: "10:20", to: "11:00" },
+  { from: "10:40", to: "11:20" },
   { from: "11:30", to: "12:10" },
-  { from: "12:10", to: "12:50" },
-  { from: "12:50", to: "13:30" },
+  { from: "12:40", to: "13:20" },
+  { from: "13:30", to: "14:10" },
 ];
-const SCHEDULE_GRID = Array(DAYS.length).fill(Array(SLOTS.length).fill(null));
 
 const SUBJECT_TO_COLOR = {
   Math: "#FDFFB6",
@@ -49,6 +48,7 @@ const Schedule = () => {
   let { data, error } = useUser();
   data && (data = data?.data);
   const { days, slots } = data?.displaySchedule || { days: DAYS, slots: SLOTS };
+  const grid = Array(days.length).fill(Array(slots.length).fill(null));
 
   if (error)
     return (
@@ -71,7 +71,7 @@ const Schedule = () => {
           ))}
         </div>
 
-        {SCHEDULE_GRID.map((col, dayIndex) => (
+        {grid.map((col, dayIndex) => (
           <div key={`day-${dayIndex}`} className={styles.dayColumn}>
             <div
               key={days[dayIndex]}
