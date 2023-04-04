@@ -75,8 +75,8 @@ export const login = async (req, res) => {
       secure: true,
       domain:
         process.env.NODE_ENV === "production"
-          ? "https://ed-mundo.vercel.app"
-          : "http://localhost:3000",
+          ? ".vercel.app"
+          : "localhost:3000",
     });
     if (user.role) res.status(200).json({ success: true, user: newUser });
     else
