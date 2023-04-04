@@ -16,7 +16,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
   export default function useUser() {
   const [cookie] = useCookies(["OnlineSchoolUser"]);
   const { data, error, isLoading } = useSWR(
-    cookie.OnlineSchoolUser &&
+    // cookie.OnlineSchoolUser &&
     `${baseUrl}/api/users/getData`,
     () =>
       axios
@@ -28,5 +28,6 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
           return res;
         }),
   );
+  console.log(cookie);
   return { data, error, isLoading };
 }
