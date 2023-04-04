@@ -1,8 +1,8 @@
 .description {
   height: fit-content;
-  background-color: #C2D9FF;
-  padding-top: 96px;
-  padding-bottom: 96px;
+  background-color: #bdeeff;
+  padding-top: 66px;
+  min-height: 100vh;
 }
 
 .description-section {
@@ -13,7 +13,7 @@
   font-size: 44px !important;
   width: 650px;
   margin: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 12px;
   text-align: center;
 }
 
@@ -23,9 +23,10 @@
   margin-left: 2rem;
   margin-top: 3rem;
   text-align: center;
-  background-color: khaki;
+  background-color: #fff385;
   padding: 40px 30px;
   border-radius: 1rem;
+  box-shadow: 1px 1px 12px #fff385;
 }
 
 .description-image {
@@ -38,14 +39,6 @@
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
-
-.description-stripy-image {
-  position: absolute;
-  width: 300px;
-  display: block;
-  transform: rotate(-135deg);
-}
-
 
 @media only screen and (max-width: 600px) {
   .description {

@@ -19,17 +19,32 @@
   padding: 8px;
   background-color: #3b71ca;
   color: #fff;
-  animation: logoAnimation 1s 1s alternate-reverse ease-in-out infinite;
+  animation: logoAnimation 1.6s 1s alternate-reverse ease-in-out infinite;
 }
 .school-logo{
   color: #656 !important;
   font-family: "Nunito", sans-serif !important;
 }
 @keyframes logoAnimation {
-  to {
+  0% {
     padding: 0;
     background-color: #fff;
     color:#3b71ca;
+  }
+  40% {
+    padding: 0;
+    background-color: #fff;
+    color:#3b71ca;
+  }
+  90% {
+    padding: 8px;
+    background-color: #3b71ca;
+    color: #fff;
+  }
+  100% {
+    padding: 8px;
+    background-color: #3b71ca;
+    color: #fff;
   }
 }
 
@@ -81,3 +96,8 @@
   color: #3b71ca !important;
 }
 
+@media only screen and (max-width: 440px) {
+  .navbar h2 {
+    display: none;
+  }
+}
