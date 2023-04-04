@@ -33,7 +33,6 @@ export const register = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    // sendEmail(token);
     res.send({ success: true });
   } catch (error) {
     console.log("registration error:", error.message);
@@ -50,71 +49,22 @@ export const login = async (req, res) => {
     let user = await Teacher.findOne({
       email: req.body.email,
     }).select("-__v");
-    // .populate({
-    //   path: "school",
-    //   select: "-__v",
-    // });
     if (!user)
       user = await Student.findOne({
         email: req.body.email,
       }).select("-__v");
-    // .populate({ path: "school", select: "-__v" })
-    // .populate({
-    //   path: "currentClass",
-    //   select: "-__v",
-    //   populate: [
-    //     {
-    //       path: "schedule.sessions",
-    //       select: "-__v",
-    //       populate: { path: "teacher", select: "-__v" },
-    //     },
-    //     {
-    //       path: "lessons",
-    //       select: "-__v",
-    //     },
-    //   ],
-    // });
     else if (!user) {
       user = await Admin.findOne({
         email: req.body.email,
       }).select("-__v");
-      // .populate({
-      //   path: "school",
-      //   populate: {
-      //     path: "students teachers classes",
-      //     select: "-password -__v",
-      //   },
-      // });
     }
-    // console.log("logging in user:", user);
     if (!user) return res.send({ success: false, errorId: 404 });
     const passMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passMatch) return res.send({ success: false, errorId: 401 });
 
-    // let displaySchedule;
-    // if (!user) return res.json({ success: false, errorId: 404 }).status(404);
     console.log("logging in ", user.role);
-    // if (user.role === "student") {
-    // const days = user.currentClass.schedule.map((day) => day.day);
-    // const slots = user.school.periods.map((period) => {
-    //   return {
-    //     from: `${(period.startTime / 60).toFixed(2).split(".")[0]}:${
-    //       period.startTime % 60 === 0 ? "00" : period.startTime % 60
-    //     }`,
-    //     to: `${
-    //       ((period.startTime + period.duration) / 60).toFixed(2).split(".")[0]
-    //     }:${
-    //       (period.startTime + period.duration) % 60 === 0
-    //         ? "00"
-    //         : (period.startTime + period.duration) % 60
-    //     }`,
-    //   };
-    // });
-    // displaySchedule = { days, slots } || null;
-    // }
 
     const {
-      // school,
       password,
       ...newUser
     } = user.toObject();
@@ -329,21 +279,3 @@ export const updateProfile = async (req, res) => {
     res.status(500).send({ success: false, error: error.message });
   }
 };
-
-// export const updateCover = async(req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//         return res.status(400).json({ errors: errors.array() });
-//     }
-//     try {
-//         if (req.file) req.body.coverImage = req.file.path;
-//         const user = await User.findByIdAndUpdate(req.user, req.body, {
-//             new: true,
-//         }).select("-password -__v");
-//         if (!user) return res.send({ success: false, errorId: 404 });
-//         res.json({ success: true, coverImage: user.coverImage }).status(200);
-//     } catch (error) {
-//         console.log("updateProfile error:", error.message);
-//         res.send({ success: false, error: error.message });
-//     }
-// };

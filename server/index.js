@@ -8,11 +8,6 @@ import dbConnect from "./src/config/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { body } from "express-validator";
-// import School from "./src/models/School.js";
-// import Teacher from "./src/models/Teacher.js";
-// import Student from "./src/models/Student.js";
-// import Admin from "./src/models/Admin.js";
-// import Session from "./src/models/Session.js";
 
 dotenv.config();
 const app = express();
@@ -28,10 +23,8 @@ app.use(
         : "http://localhost:3000",
     credentials: true,
     preflightContinue: true,
-    // "methods": "GET,HEAD,PUT,PATCH,POST,DELETE, OPTIONS"
   }),
 );
-// app.options(cors());
 app.use(express.json());
 app.use(cookieParser());
 

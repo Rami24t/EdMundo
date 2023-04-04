@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import "./profileForm.css";
+import React, { useState, useEffect } from "react";
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
-import useUser from "../hooks/useUser";
-import { Context } from "./Context";
 
 
 const FormData = {
@@ -15,11 +12,9 @@ const FormData = {
   class: "0z-00",
 };
 
-export default function ProfileForm() {
-  const { state } = useContext(Context);
+export default function ProfileForm({data, state}) {
 
-  let { data } = useUser();
-  data = data?.data;
+ 
   let [profile, setProfile] = useState(FormData);
 
   useEffect(() => {
@@ -64,7 +59,7 @@ export default function ProfileForm() {
     }
   };
   // if (error) return <div><p>Some error has happened.</p> <p>Please try refreshing your page.</p></div>;
-  if (!data?.user?.name && !state.user.name)
+  if (!data?.user?.name && !state?.user?.name)
     return (
       <div>
         <MDBSpinner grow style={{ width: "3rem", height: "3rem" }}>
@@ -72,11 +67,11 @@ export default function ProfileForm() {
         </MDBSpinner>
       </div>
     );
-    else if(!data?.user?.name && state.user?.name)
-      profile=(state.user);
+    else if(!data?.user?.name && state?.user?.name)
+      profile=(state?.user);
   return (
-    <form className="profileForm">
-      <MDBTypography variant="h2" className="header-2 font- ">
+    <form className="profile-form">
+      <MDBTypography className="fs-6 mb-3">
         Hello{profile.name ? " , " + profile?.name?.split(" ")[0] : ""}! Here
         you can edit your information.
       </MDBTypography>
@@ -124,7 +119,7 @@ export default function ProfileForm() {
         value={profile?.address}
         onChange={handleChange}
       />
-      <MDBBtn onClick={handleSave} className="mb-4" type="submit" block>
+      <MDBBtn className="fs-6 fw-bold rounded-pill mb-4" onClick={handleSave} type="submit" block>
         Save
       </MDBBtn>
     </form>
