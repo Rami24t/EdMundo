@@ -47,7 +47,7 @@ const Spinner = () => {
 const Schedule = () => {
   let { data, error } = useUser();
   data && (data = data?.data);
-  const { days, slots } = data?.displaySchedule || { days: DAYS, slots: SLOTS };
+  const { days, slots } = JSON.parse(sessionStorage.getItem('scheduleSettings')) || { days: DAYS, slots: SLOTS };
   const grid = Array(days.length).fill(Array(slots.length).fill(null));
 
   if (error)
