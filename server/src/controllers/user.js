@@ -76,9 +76,10 @@ export const login = async (req, res) => {
     res.cookie("OnlineSchoolUser", token, {
       sameSite: "none",
       secure: true,
+      path: "/",
       domain:
         process.env.NODE_ENV === "production"
-          ? "ed-mundo.vercel.app"
+          ? ".ed-mundo.vercel.app"
           : "localhost",
     });
     if(user.role === "student") {
@@ -180,7 +181,7 @@ export const changePass = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("OnlineSchoolUser", { sameSite: "none", secure: true });
+    res.clearCookie("OnlineSchoolUser", { sameSite: "none", secure: true, path: "/", domain: process.env.NODE_ENV === "production" ? ".ed-mundo.vercel.app" : "localhost" });
     console.log("logged out");
     res.json({ success: true }).status(200);
   } catch (error) {
