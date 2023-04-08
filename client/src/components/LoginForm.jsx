@@ -33,6 +33,9 @@ function LoginForm() {
         )
         .then((res) => {
           console.log(res.data);
+          if(res.data.scheduleSettings) {
+            sessionStorage.setItem("scheduleSettings", JSON.stringify(res.data.scheduleSettings));
+          }
           if (res.status === 200 && res.data.user.role) {
             dispatch({ type: "LOGIN", payload: res.data.user });
             setTimeout(() => {
