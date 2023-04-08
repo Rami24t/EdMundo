@@ -177,7 +177,10 @@ export const logout = async (req, res) => {
   try {
     res.clearCookie("OnlineSchoolUser", {
       sameSite: "none",
-      secure: true    });
+      secure: true,
+      path: "/",
+      domain: process.env.NODE_ENV === "production" ? "ed-mundo-server.vercel.app" : "",   
+        });
     console.log("logged out");
     res.json({ success: true }).status(200);
   } catch (error) {
