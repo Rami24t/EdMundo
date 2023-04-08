@@ -158,7 +158,7 @@ export default function Navbar() {
                         mutate(`${baseUrl}/api/users/getData`, null, false)
                           .then(
                             axios
-                              .get(`${baseUrl}/api/users/logout`)
+                              .get(`${baseUrl}/api/users/logout`, { withCredentials: true })
                               .then((res) => {
                                 cookie.OnlineSchoolUser && removeCookie("OnlineSchoolUser");
                                 if(res.data.success){
