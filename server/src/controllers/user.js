@@ -75,7 +75,12 @@ export const login = async (req, res) => {
     });
     res.cookie("OnlineSchoolUser", token, {
       sameSite: "none",
-      secure: true    });
+      secure: true,
+      domain:
+        process.env.NODE_ENV === "development"
+          ? "localhost"
+          : "ed-mundo.vercel.app",
+    });
     if (user.role === "student") {
       const school = await School.findById(user.school);
       const currentClass = await Class.findById(user.currentClass);
@@ -178,8 +183,12 @@ export const logout = async (req, res) => {
     res.clearCookie("OnlineSchoolUser", {
       sameSite: "none",
       secure: true,
-      path: "/"      
-        });
+      path: "/",
+      domain:
+        process.env.NODE_ENV === "development"
+          ? "localhost"
+          : "ed-mundo.vercel.app",
+    });
     console.log("logged out");
     res.json({ success: true }).status(200);
   } catch (error) {
