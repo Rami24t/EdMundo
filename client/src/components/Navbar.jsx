@@ -151,9 +151,9 @@ export default function Navbar() {
                       type="button"
                       onClick={() => {
                         // Delete the authentication cookie
-                        // document.cookie =
-                        //   "OnlineSchoolUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                        // cookie && removeCookie("OnlineSchoolUser");
+                        document.cookie =
+                          "OnlineSchoolUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        cookie && removeCookie("OnlineSchoolUser");
                         // Reset the SWR cache
                         mutate(`${baseUrl}/api/users/getData`, null, false)
                           .then(
