@@ -1,5 +1,5 @@
-import { useLocalStorage } from "react-use";
+import { useSessionStorage } from "react-use";
 
 export default function useStoredUser() {
-    return useLocalStorage("user", null);
+    return useSessionStorage("user", null);
 }

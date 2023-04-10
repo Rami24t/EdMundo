@@ -1,8 +1,8 @@
 import {useState} from "react";
-import { useLocalStorage } from "react-use";
+import { useSessionStorage } from "react-use";
 
 export const useStoredToken = () => {
-  const [value, setValue, remove] = useLocalStorage("token");
+  const [value, setValue, remove] = useSessionStorage("token");
   const [token, setToken] = useState(value);
 
   const setStoredToken = (val) => {
