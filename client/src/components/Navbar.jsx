@@ -179,7 +179,6 @@ export default function Navbar() {
                               .then((res) => {
                                 cookie.OnlineSchoolUser && removeCookie("OnlineSchoolUser");
                                 if(res.data.success){
-                                  console.log(removeToken());
                                   removeToken();
                                   removeUser();
                                   sessionStorage.removeItem("school");

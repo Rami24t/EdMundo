@@ -39,6 +39,7 @@ function LoginForm() {
             sessionStorage.setItem("scheduleSettings", JSON.stringify(res.data.scheduleSettings));
           }
           if (res.status === 200 && res.data.user.role) {
+            // console.log(" token from login form", res.data.token);
             setToken(res.data.token);
             setUser(res.data.user);
             // console.log(res.data?.school);

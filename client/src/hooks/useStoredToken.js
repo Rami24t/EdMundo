@@ -1,19 +1,31 @@
-import {useState} from "react";
+import {useState, useMemo} from "react";
 import { useSessionStorage } from "react-use";
 
 export const useStoredToken = () => {
-  const [value, setValue, remove] = useSessionStorage("token");
-  const [token, setToken] = useState(value);
+  const [value, setValue, remove] = useSessionStorage("token", null);
+  let [token, setToken] = useState(value);
 
   const setStoredToken = (val) => {
-    setValue(val);
+    token=val;
     setToken(val);
+    setValue(val);
   };
 
   const removeStoredToken = () => {
-    remove();
+    // remove();
+    setValue(null);
+    sessionStorage.removeItem("token");
     setToken(null);
   };
 
-  return {token, setToken: setStoredToken, removeToken: removeStoredToken};
+  const tokenContext = useMemo(
+    () => ({
+      token,
+      setToken: setStoredToken,
+      removeToken: removeStoredToken,
+    }),
+    [token]
+  );
+
+  return tokenContext;
 };

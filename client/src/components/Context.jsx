@@ -13,8 +13,10 @@ export default function ContextProvider({ children }) {
   };
 
   const removeUser = () => {
+    // removeStoredUser();
+    setStoredUser(null);
+    sessionStorage.removeItem("user");
     setUser(null);
-    removeStoredUser();
   };
 
   const value = useMemo(
