@@ -3,17 +3,8 @@ import { MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
 
-const FormData = {
-  name: "Your Name",
-  email: "youremail@domain.com",
-  phone: "1256783746",
-  address: "Berlin, Berliner Plz., 1",
-  class: "0z-00",
-};
-
 export default function SchoolForm({data}) {
-  const [profile, setProfile] = useState(data?.school);
-
+  const [profile, setProfile] = useState(data?.school || sessionStorage.getItem("school"));
   useEffect(() => {
     setProfile((prevProfile) => ({
       ...prevProfile, ...data?.school
@@ -29,20 +20,19 @@ export default function SchoolForm({data}) {
 
   const handleSave = (e) => {
     e.preventDefault();
-
-    if (data?.user?.role) {
+    if (data?.user?.role === "admin") {
       axios
         .put(
-          `${baseUrl}/api/${data?.user?.role}/update`,
-          { phone: profile.phone, address: profile.address },
+          `${baseUrl}/api/${data?.user?.role}/updateSchool`,
+          { phone: profile.phone, email: profile.email },
           { withCredentials: true },
         )
         .then((res) => {
           console.log("Save response:", res.data.user);
           if (res.status === 200) {
-            alert("Profile updated successfully!");
+            alert("Updated successfully!");
           } else if (res.status !== 200) {
-            alert("Profile update failed!");
+            alert("Update failed!");
           }
         })
         .catch((err) => {
@@ -62,7 +52,7 @@ export default function SchoolForm({data}) {
   return (
     <form className="profileForm">
       <MDBTypography className="fs-6 mb-3">
-        Contact Information
+        {profile?.name}
       </MDBTypography>
       {/* <MDBRow className="mb-4">
         <MDBCol>
@@ -81,8 +71,7 @@ export default function SchoolForm({data}) {
         label="Address"
         readOnly
         disabled
-        value={profile?.address}
-        onChange={handleChange}
+        value={`${profile?.zip} ${profile?.city}, ${profile?.address}`}
       />
       <MDBInput
         wrapperClass="mb-4"
