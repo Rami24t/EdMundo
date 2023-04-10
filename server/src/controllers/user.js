@@ -76,10 +76,11 @@ export const login = async (req, res) => {
     res.cookie("OnlineSchoolUser", token, {
       sameSite: "none",
       secure: true,
-      domain:
-        process.env.NODE_ENV === "development"
-          ? "localhost"
-          : "ed-mundo.vercel.app",
+      // path: "/",
+      // domain:
+      //   process.env.NODE_ENV === "development"
+      //     ? "localhost"
+      //     : ".vercel.app",
     });
     if (user.role === "student") {
       const school = await School.findById(user.school);
@@ -102,9 +103,9 @@ export const login = async (req, res) => {
         };
       });
       const scheduleSettings = { days, slots } || null;
-      res.status(200).json({ success: true, user: newUser, scheduleSettings });
+      res.status(200).json({ success: true, user: newUser, scheduleSettings, token });
     } else if (user.role)
-      res.status(200).json({ success: true, user: newUser });
+      res.status(200).json({ success: true, user: newUser, token });
     else
       res.status(500).json({ success: false, error: "User role is missing" });
   } catch (error) {
@@ -180,14 +181,15 @@ export const changePass = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
+    if(req.cookies["OnlineSchoolUser"])
     res.clearCookie("OnlineSchoolUser", {
       sameSite: "none",
       secure: true,
-      path: "/",
-      domain:
-        process.env.NODE_ENV === "development"
-          ? "localhost"
-          : "ed-mundo.vercel.app",
+      // path: "/",
+      // domain:
+      //   process.env.NODE_ENV === "development"
+      //     ? "localhost"
+      //     : ".vercel.app",
     });
     console.log("logged out");
     res.json({ success: true }).status(200);
