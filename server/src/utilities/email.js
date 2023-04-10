@@ -14,7 +14,7 @@ function getSubject(template) {
 
 export default async function main(token, template) {
   const data = {
-    from: '"Social App MERN" <a.l.s.a.a.d.i.r.a.m.i.2.4@gmail.com>', // sender address
+    from: '"Online School App MERN" <a.l.s.a.a.d.i.r.a.m.i.2.4@gmail.com>', // sender address
     to: "a.l.s.a.a.d.i.r.a.m.i.2.4@gmail.com", // list of receivers
     subject: getSubject(template),
     //    text: "plain text body",
