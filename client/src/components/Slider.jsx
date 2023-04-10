@@ -16,46 +16,46 @@ const Slider = () => {
         </MDBRow>
 
         <MDBRow className="slide-track">
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo1} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo3} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo1} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo3} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
-          <divMDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo1} height="130" alt="school-logo" />
-          </divMDBCol>
-          <MDBCol md="6" className="slide">
+          </MDBCol>
+          <MDBCol md="2" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo3} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo1} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo2} height="130" alt="school-logo" />
           </MDBCol>
-          <MDBCol md="6" className="slide">
+          <MDBCol md="2" className="slide">
             <img src={Logo1} height="130" alt="school-logo" />
           </MDBCol>
         </MDBRow>
