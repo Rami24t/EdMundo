@@ -16,27 +16,26 @@ import RedLines from "../assets/red-rays.png";
 
 const ContactForm = () => {
   const [showModal, setShowModal] = useState(false);
-  const [value, setValue] = useState("");
 
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
     setShowModal(!showModal);
-
+console.log(process.env.REACT_APP_EMAILJS_SERVICE_ID);
     emailjs
       .sendForm(
-        "service_p8q9go7",
-        "template_kypxmgi",
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
         form.current,
-        "MvJyvDm2jLNqAJw6u",
+        process.env.REACT_APP_EMAILJS_KEY,
       )
       .then(
         (result) => {
-          console.log(result.text);
+          console.log(result);
         },
         (error) => {
-          console.log(error.text);
+          console.log(error);
         },
       );
     e.target.reset();
@@ -51,29 +50,28 @@ const ContactForm = () => {
               <h1 className="contact-form-title-text">Get in touch </h1>
             </div>
             <form className="contact-form" ref={form} onSubmit={sendEmail}>
-              <label className="contact-label">Name</label>
+              <label className="contact-label">Full Name</label>
               <input
                 className="contact-input"
                 type="text"
-                name="user_name"
-                defaultValue={value}
-                placeholder="Write your name here.."
+                name="contact_name"
+                placeholder="Write your full name here.."
                 required
               />
 
-              <label className="contact-label">School name</label>
+              <label className="contact-label">Company/School</label>
               <input
                 className="contact-input"
                 type="text"
                 name="school_name"
-                placeholder="And the school name here.."
+                placeholder="And the name of you company/school.."
                 required
               />
-              <label className="contact-label">Email</label>
+              <label className="contact-label">Email address</label>
               <input
                 className="contact-input"
                 type="email"
-                name="user_email"
+                name="reply_to"
                 placeholder="Let us know how to contact you back.."
                 required
               />
