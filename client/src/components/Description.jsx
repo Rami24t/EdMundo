@@ -7,24 +7,23 @@ import SpeechBubble from "../assets/speech-bubble.png";
 
 const Description = () => {
   return (
-    <div className="description">
-      <MDBContainer className="description-section">
+      <MDBContainer className="description">
         {/* <MDBRow>
           {" "}
           <img src={StripyBeige} alt="" className="description-stripy-image" />
         </MDBRow> */}
 
-        <MDBRow className="description-text">
-          <h1 className="description-section-title">
+        <MDBRow>
+          <h3 className="description-title">
             Built for schools looking to stay ahead of the curve in a rapidly
             changing world.
-          </h1>
+          </h3>
         </MDBRow>
 
-        <MDBRow>
-          <MDBCol md={4} className="description-container-image">
+        <MDBRow className="description-sections">
+          <MDBCol md={4} className="description-section">
             <img src={Hat} alt="red-lines" className="description-image" />
-            <h5 className="description-title">Convenient</h5>
+            <h5 className="description-section-title">Convenient</h5>
             <p className="description-subtitle">
               Say goodbye to the hassle of commuting to school or carrying heavy
               textbooks. Attend classes from the comfort of your own home,
@@ -32,13 +31,13 @@ const Description = () => {
               course materials are easily accessible online.
             </p>
           </MDBCol>
-          <MDBCol md={4} className="description-container-image">
+          <MDBCol md={4} className="description-section">
             <img
               src={SpeechBubble}
               alt="red-lines"
               className="description-image"
             />
-            <h5 className="description-title">Interactive</h5>
+            <h5 className="description-section-title">Interactive</h5>
             <p className="description-subtitle">
               Explore a variety of interactive features, such as live video
               conferencing, screen sharing, whiteboard tools, and breakout
@@ -46,13 +45,13 @@ const Description = () => {
               that mimics the experience of an in-person classroom.
             </p>
           </MDBCol>
-          <MDBCol md={4} className="description-container-image">
+          <MDBCol md={4} className="description-section">
             <img
               src={SmilingFace}
               alt="red-lines"
               className="description-image"
             />
-            <h5 className="description-title">Flexible</h5>
+            <h5 className="description-section-title">Flexible</h5>
             <p className="description-subtitle">
               Our platform allows you to learn at your own pace and on your own
               schedule. Whether students prefer to attend live classes or watch
@@ -62,7 +61,6 @@ const Description = () => {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-    </div>
   );
 };
 
