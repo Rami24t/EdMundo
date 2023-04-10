@@ -84,7 +84,7 @@ const Schedule = () => {
             </div>
 
             {col.map((_, slotIndex) =>
-              !data?.user?.currentClass.schedule ? (
+              !data?.user?.currentClass?.schedule ? (
                 <Spinner key={`${slotIndex}-${dayIndex}`} />
               ) : (
                 <div
