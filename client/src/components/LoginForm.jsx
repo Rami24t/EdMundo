@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import axios from "axios";
 import {Context} from "../components/Context";
-import { useStoredToken } from "../hooks/useStoredToken";
 import {
   MDBContainer,
   MDBCol,
@@ -22,7 +21,6 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
   const { setUser } = useContext(Context);
-  const { setToken } = useStoredToken();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,9 +38,9 @@ function LoginForm() {
           }
           if (res.status === 200 && res.data.user.role) {
             // console.log(" token from login form", res.data.token);
-            setToken(res.data.token);
             setUser(res.data.user);
             // console.log(res.data?.school);
+            sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("school", JSON.stringify(res.data?.school));
             navigate(`/${res.data.user.role}/profile`);
           } else if (res.status !== 200 || !res.data.user.role) {

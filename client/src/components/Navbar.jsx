@@ -19,7 +19,7 @@ import useUser from "../hooks/useUser";
 import "./navbar.css";
 import { useCookies } from "react-cookie";
 import { Context } from "../components/Context";
-import { useStoredToken } from "../hooks/useStoredToken";
+// import { useStoredToken } from "../hooks/useStoredToken";
 
 export default function Navbar() {
   const { mutate } = useSWRConfig();
@@ -39,7 +39,7 @@ export default function Navbar() {
   const location = useLocation();
   const theme = location.pathname;
 
-  const {token, removeToken} = useStoredToken();
+  // const {token, removeToken} = useStoredToken();
 
   // const handleLogout = () => {
   //   removeToken();
@@ -166,7 +166,7 @@ export default function Navbar() {
                     <MDBBtn className="navbar-button-login">LOGIN</MDBBtn>
                   )}
                 </Link>
-                  {(data?.user?.name || token) && (
+                  {(data?.user?.name || sessionStorage.getItem("token")) && (
                     <MDBBtn
                       className="navbar-button-logout"
                       type="button"
@@ -179,10 +179,10 @@ export default function Navbar() {
                               .then((res) => {
                                 cookie.OnlineSchoolUser && removeCookie("OnlineSchoolUser");
                                 if(res.data.success){
-                                  removeToken();
                                   removeUser();
                                   sessionStorage.removeItem("school");
                                   sessionStorage.removeItem("scheduleSettings");
+                                  sessionStorage.removeItem("token");
                                   navigate("/");
                                 }
                               }),
