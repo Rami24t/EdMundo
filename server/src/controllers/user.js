@@ -82,11 +82,13 @@ export const login = async (req, res) => {
       //     ? "localhost"
       //     : ".vercel.app",
     });
+    const school = await School.findById(user.school).select("-__v");
+    const {periods, teachers, students, admins, classes, ...newSchool} = school.toObject();
     if (user.role === "student") {
-      const school = await School.findById(user.school);
       const currentClass = await Class.findById(user.currentClass);
       const days = currentClass.schedule.map((day) => day.day);
-      const slots = school.periods.map((period) => {
+      // console.log("login ~ newSchool", newSchool, school);
+      const slots = periods.map((period) => {
         return {
           from:
             (period.startTime / 60).toFixed(2).split(".")[0] +
@@ -103,9 +105,9 @@ export const login = async (req, res) => {
         };
       });
       const scheduleSettings = { days, slots } || null;
-      res.status(200).json({ success: true, user: newUser, scheduleSettings, token });
+      res.status(200).json({ success: true, school: newSchool, user: newUser, scheduleSettings, token });
     } else if (user.role)
-      res.status(200).json({ success: true, user: newUser, token });
+      res.status(200).json({ success: true, school:newSchool, user: newUser, token });
     else
       res.status(500).json({ success: false, error: "User role is missing" });
   } catch (error) {
@@ -205,24 +207,27 @@ export const getUserData = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   try {
-    let user = await Admin.findById(req.user._id)
+    let user;
+    if (req.user.role === "admin")
+      user = await Admin.findById(req.user._id)
       .select("-password -__v")
       .populate({
         path: "school",
         populate: {
           path: "students teachers classes",
-          select: "-password -__v",
+          select: "-__v",
         },
       });
 
-    if (!user)
+    if (req.user.role === "teacher")
       user = await Teacher.findById(req.user._id)
         .select("-password -__v")
         .populate({
           path: "school",
           select: "-__v",
         });
-    if (!user)
+    
+    if (req.user.role === "student")
       user = await Student.findById(req.user._id)
         .select("-password -__v")
         .populate({ path: "school", select: "-__v" })
