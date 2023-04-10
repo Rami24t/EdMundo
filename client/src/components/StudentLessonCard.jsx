@@ -13,7 +13,7 @@ const StudentLessonCard = () => {
   const { user } = useContext(Context);
   let { data, error, isLoading } = useUser(user?._id);
   data = data?.data;
-  let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
+  let lessons = data?.user?.lessons || data?.user?.currentClass?.lessons;
   lessons?.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
 
   if (isLoading) {
