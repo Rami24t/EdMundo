@@ -46,7 +46,7 @@ export default function ProfileForm({data, user}) {
           { withCredentials: true },
         )
         .then((res) => {
-          console.log("Save response:", res.data.user);
+          // console.log("Save response:", res.data.user);
           if (res.status === 200) {
             alert("Profile updated successfully!");
           } else if (res.status !== 200) {

@@ -26,7 +26,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
           withCredentials: true,
         })
         .then((res) => {
-          console.log(" res: ", res);
+          // console.log(" res: ", res);
           return res;
         }),
   );

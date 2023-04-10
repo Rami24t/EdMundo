@@ -28,7 +28,7 @@ export default function SchoolForm({data}) {
           { withCredentials: true },
         )
         .then((res) => {
-          console.log("Save response:", res.data.user);
+          // console.log("Save response:", res.data.user);
           if (res.status === 200) {
             alert("Updated successfully!");
           } else if (res.status !== 200) {
