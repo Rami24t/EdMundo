@@ -12,7 +12,7 @@ const FormData = {
   class: "0z-00",
 };
 
-export default function ProfileForm({data, state}) {
+export default function ProfileForm({data, user}) {
 
  
   let [profile, setProfile] = useState(FormData);
@@ -59,7 +59,7 @@ export default function ProfileForm({data, state}) {
     }
   };
   // if (error) return <div><p>Some error has happened.</p> <p>Please try refreshing your page.</p></div>;
-  if (!data?.user?.name && !state?.user?.name)
+  if (!data?.user?.name && !user?.name)
     return (
       <div>
         <MDBSpinner grow style={{ width: "3rem", height: "3rem" }}>
@@ -67,8 +67,8 @@ export default function ProfileForm({data, state}) {
         </MDBSpinner>
       </div>
     );
-    else if(!data?.user?.name && state?.user?.name)
-      profile=(state?.user);
+    else if(!data?.user?.name && user?.name)
+      profile=(user);
   return (
     <form className="profile-form">
       <MDBTypography className="fs-6 mb-3">
