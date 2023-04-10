@@ -22,8 +22,8 @@ const ContactForm = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     setShowModal(!showModal);
-console.log(process.env.REACT_APP_EMAILJS_SERVICE_ID);
-    emailjs
+    
+     emailjs
       .sendForm(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
         process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
@@ -108,7 +108,7 @@ console.log(process.env.REACT_APP_EMAILJS_SERVICE_ID);
               </MDBModalDialog>
             </MDBModal>
           </MDBCol>
-          <MDBCol md="5" className="col-sm contact-form-images">
+          <MDBCol md="5" className="col-sm contact-form-images clearfix clear">
             <img
               src={RedLines}
               alt="red-lines"
