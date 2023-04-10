@@ -14,6 +14,6 @@ export const useStoredToken = () => {
     remove();
     setToken(null);
   };
-  console.log("Token inside storedToken: " + token);
-  return {token, setToken: setStoredToken, removeToken: removeStoredToken, getToken: () => {return token}};
+
+  return {token, setToken: setStoredToken, removeToken: removeStoredToken};
 };
