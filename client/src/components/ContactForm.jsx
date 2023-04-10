@@ -20,9 +20,7 @@ const ContactForm = () => {
   const form = useRef();
 
   const sendEmail = (e) => {
-    e.preventDefault();
-    setShowModal(!showModal);
-    
+    e.preventDefault();    
      emailjs
       .sendForm(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
@@ -32,10 +30,11 @@ const ContactForm = () => {
       )
       .then(
         (result) => {
-          console.log(result);
+          // console.log(result);
+          setShowModal(true);
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         },
       );
     e.target.reset();
