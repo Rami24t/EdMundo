@@ -16,7 +16,8 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
   export default function useUser(isLoggedIn) {
   // const [cookie] = useCookies(["OnlineSchoolUser"]);
   const { data, error, isLoading } = useSWR(
-    // cookie.OnlineSchoolUser &&
+    // localStorage.getItem("user") &&
+    // localStorage.getItem("token") &&
     isLoggedIn &&
     `${baseUrl}/api/users/getData`,
     () =>
