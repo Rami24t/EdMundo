@@ -31,7 +31,7 @@ export default function Navbar() {
   let { data } = useUser(user?._id);
   data && (data = data?.data);
   // const userName = data?.user.name || "";
-  const school = data?.school?.name || JSON.parse(sessionStorage.getItem("school")).name || "";
+  const school = data?.school?.name || JSON.parse(sessionStorage.getItem("school"))?.name || "";
 
   const navigate = useNavigate();
 
@@ -182,6 +182,8 @@ export default function Navbar() {
                                   console.log(removeToken());
                                   removeToken();
                                   removeUser();
+                                  sessionStorage.removeItem("school");
+                                  sessionStorage.removeItem("scheduleSettings");
                                   navigate("/");
                                 }
                               }),
