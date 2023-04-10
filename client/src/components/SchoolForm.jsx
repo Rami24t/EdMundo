@@ -4,10 +4,10 @@ import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
 
 export default function SchoolForm({data}) {
-  const [profile, setProfile] = useState(data?.school || sessionStorage.getItem("school"));
+  const [school, setschool] = useState(data?.school || JSON.parse(sessionStorage.getItem("school")));
   useEffect(() => {
-    setProfile((prevProfile) => ({
-      ...prevProfile, ...data?.school
+    setschool((prevschool) => ({
+      ...prevschool, ...data?.school || sessionStorage.getItem("school")
     }));
   }, [data?.school]);
 
@@ -15,7 +15,7 @@ export default function SchoolForm({data}) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile((prevProfile) => ({ ...prevProfile, [name]: value }));
+    setschool((prevschool) => ({ ...prevschool, [name]: value }));
   };
 
   const handleSave = (e) => {
@@ -24,7 +24,7 @@ export default function SchoolForm({data}) {
       axios
         .put(
           `${baseUrl}/api/${data?.user?.role}/updateSchool`,
-          { phone: profile.phone, email: profile.email },
+          { phone: school.phone, email: school.email },
           { withCredentials: true },
         )
         .then((res) => {
@@ -50,14 +50,14 @@ export default function SchoolForm({data}) {
       </div>
     );
   return (
-    <form className="profileForm">
+    <form className="schoolForm">
       <MDBTypography className="fs-6 mb-3">
-        {profile?.name}
+        {school?.name}
       </MDBTypography>
       {/* <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
-            value={profile?.name}
+            value={school?.name}
             type="text"
             label="School"
             name="name"
@@ -71,12 +71,12 @@ export default function SchoolForm({data}) {
         label="Address"
         readOnly
         disabled
-        value={`${profile?.zip} ${profile?.city}, ${profile?.address}`}
+        value={`${school?.zip} ${school?.city}, ${school?.address}`}
       />
       <MDBInput
         wrapperClass="mb-4"
         type="state"
-        value={profile?.state}
+        value={school?.state}
         label="State"
         readonly
         disabled
@@ -85,7 +85,7 @@ export default function SchoolForm({data}) {
         wrapperClass="mb-4"
         type="tel"
         name="phone"
-        value={profile?.phone}
+        value={school?.phone}
         onChange={handleChange}
         readonly
         disabled
@@ -94,7 +94,7 @@ export default function SchoolForm({data}) {
       <MDBInput
         wrapperClass="mb-4"
         type="email"
-        value={profile?.email}
+        value={school?.email}
         label="Email"
         readonly
         disabled

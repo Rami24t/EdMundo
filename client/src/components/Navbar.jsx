@@ -31,7 +31,7 @@ export default function Navbar() {
   let { data } = useUser(user?._id);
   data && (data = data?.data);
   // const userName = data?.user.name || "";
-  const school = data?.school.name || "";
+  const school = data?.school?.name || JSON.parse(sessionStorage.getItem("school")).name || "";
 
   const navigate = useNavigate();
 

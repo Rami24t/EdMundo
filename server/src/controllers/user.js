@@ -83,7 +83,8 @@ export const login = async (req, res) => {
       //     : ".vercel.app",
     });
     const school = await School.findById(user.school).select("-__v");
-    const {periods, teachers, students, admins, classes, ...newSchool} = school.toObject();
+    const { periods, teachers, students, admins, classes, ...newSchool } =
+      school.toObject();
     if (user.role === "student") {
       const currentClass = await Class.findById(user.currentClass);
       const days = currentClass.schedule.map((day) => day.day);
@@ -105,9 +106,19 @@ export const login = async (req, res) => {
         };
       });
       const scheduleSettings = { days, slots } || null;
-      res.status(200).json({ success: true, school: newSchool, user: newUser, scheduleSettings, token });
+      res
+        .status(200)
+        .json({
+          success: true,
+          school: newSchool,
+          user: newUser,
+          scheduleSettings,
+          token,
+        });
     } else if (user.role)
-      res.status(200).json({ success: true, school:newSchool, user: newUser, token });
+      res
+        .status(200)
+        .json({ success: true, school: newSchool, user: newUser, token });
     else
       res.status(500).json({ success: false, error: "User role is missing" });
   } catch (error) {
@@ -183,16 +194,16 @@ export const changePass = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    if(req.cookies["OnlineSchoolUser"])
-    res.clearCookie("OnlineSchoolUser", {
-      sameSite: "none",
-      secure: true,
-      // path: "/",
-      // domain:
-      //   process.env.NODE_ENV === "development"
-      //     ? "localhost"
-      //     : ".vercel.app",
-    });
+    if (req.cookies["OnlineSchoolUser"])
+      res.clearCookie("OnlineSchoolUser", {
+        sameSite: "none",
+        secure: true,
+        // path: "/",
+        // domain:
+        //   process.env.NODE_ENV === "development"
+        //     ? "localhost"
+        //     : ".vercel.app",
+      });
     console.log("logged out");
     res.json({ success: true }).status(200);
   } catch (error) {
@@ -210,14 +221,14 @@ export const getUserData = async (req, res) => {
     let user;
     if (req.user.role === "admin")
       user = await Admin.findById(req.user._id)
-      .select("-password -__v")
-      .populate({
-        path: "school",
-        populate: {
-          path: "students teachers classes",
-          select: "-__v",
-        },
-      });
+        .select("-password -__v")
+        .populate({
+          path: "school",
+          populate: {
+            path: "students teachers classes",
+            select: "-__v",
+          },
+        });
 
     if (req.user.role === "teacher")
       user = await Teacher.findById(req.user._id)
@@ -226,7 +237,7 @@ export const getUserData = async (req, res) => {
           path: "school",
           select: "-__v",
         });
-    
+
     if (req.user.role === "student")
       user = await Student.findById(req.user._id)
         .select("-password -__v")
@@ -261,7 +272,11 @@ export const getUserData = async (req, res) => {
 
     console.log("getUserData newUser:", newUser.role);
     if (newUser.role === "student") {
-      res.status(200).json({ success: true, user: newUser, school });
+      res.status(200).json({
+        success: true,
+        user: newUser,
+        //  ,school
+      });
     } else if (newUser.role === "teacher") {
       const lessons = await Lesson.find({ teacher: newUser._id })
         .populate({
@@ -270,7 +285,12 @@ export const getUserData = async (req, res) => {
           populate: { path: "class", select: "-__v" },
         })
         .populate({ path: "attendance", select: "name" });
-      res.status(200).json({ success: true, user: newUser, school, lessons });
+      res.status(200).json({
+        success: true,
+        user: newUser,
+        // , school
+        lessons,
+      });
     } else if (newUser.role === "admin")
       res.status(200).json({ success: true, user: newUser, school });
   } catch (error) {

@@ -41,7 +41,8 @@ function LoginForm() {
           if (res.status === 200 && res.data.user.role) {
             setToken(res.data.token);
             setUser(res.data.user);
-            sessionStorage.setItem("school", JSON.stringify(res.data.school));
+            // console.log(res.data?.school);
+            sessionStorage.setItem("school", JSON.stringify(res.data?.school));
             navigate(`/${res.data.user.role}/profile`);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
