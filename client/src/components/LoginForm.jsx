@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
+import axios from "axios";
 import {Context} from "../components/Context";
+import { useStoredToken } from "../hooks/useStoredToken";
 import {
   MDBContainer,
   MDBCol,
@@ -9,7 +11,6 @@ import {
   MDBBtn,
   MDBInput,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
 import styles from "./LoginForm.scss";
 import LoginPageImage from "../assets/login-page-image.png";
 import ThreeGreenLines from "../assets/three-green-lines.png";
@@ -20,7 +21,8 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
-  const { dispatch } = useContext(Context);
+  const { setUser } = useContext(Context);
+  const { setToken } = useStoredToken();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,10 +39,10 @@ function LoginForm() {
             sessionStorage.setItem("scheduleSettings", JSON.stringify(res.data.scheduleSettings));
           }
           if (res.status === 200 && res.data.user.role) {
-            dispatch({ type: "LOGIN", payload: res.data.user });
-            setTimeout(() => {
-              navigate(`/${res.data.user.role}/profile`)
-            }, 300);
+            setToken(res.data.token);
+            setUser(res.data.user);
+            sessionStorage.setItem("school", JSON.stringify(res.data.school));
+            navigate(`/${res.data.user.role}/profile`);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
           }
