@@ -49,6 +49,11 @@ function LoginForm() {
         })
         .catch((err) => {
           console.log(err.message);
+          if(err.message === "Network Error") {
+            setTimeout(() => {
+              handleSubmit(e)
+            }, 1000);
+          }
         });
     });
   };
