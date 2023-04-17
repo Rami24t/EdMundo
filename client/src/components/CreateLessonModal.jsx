@@ -33,7 +33,7 @@ export default function CreateLessonModal({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("lesson details saved", lessonDetails);
+    // console.log("lesson details saved", lessonDetails);
     // save changes to database
     setLessonDetails({
       date: "",

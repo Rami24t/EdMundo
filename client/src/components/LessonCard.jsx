@@ -12,7 +12,7 @@ import {
 } from 'mdb-react-ui-kit';
 
 export default function LessonCard({lesson}) {
-    console.log("lesson: ", lesson);
+    // console.log("lesson: ", lesson);
   return (
     <>
       <MDBCol>

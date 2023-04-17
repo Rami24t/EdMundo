@@ -32,7 +32,7 @@ function LoginForm() {
           { withCredentials: true },
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if(res.data.scheduleSettings) {
             sessionStorage.setItem("scheduleSettings", JSON.stringify(res.data.scheduleSettings));
           }

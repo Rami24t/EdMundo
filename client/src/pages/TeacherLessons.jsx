@@ -16,7 +16,7 @@ const TeacherLessons = () => {
   let lessons = data?.lessons || data?.user?.currentClass?.lessons;
   lessons &&
     lessons.map((lesson, idx) =>
-      console.log("lesson " + (idx + 1) + ": ", lesson),
+      // console.log("lesson " + (idx + 1) + ": ", lesson),
     );
 
 
