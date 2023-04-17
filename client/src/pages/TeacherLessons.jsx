@@ -14,11 +14,10 @@ const TeacherLessons = () => {
   data = data?.data;
   // console.log("data", data);
   let lessons = data?.lessons || data?.user?.currentClass?.lessons;
-  lessons &&
-    lessons.map((lesson, idx) =>
-      // console.log("lesson " + (idx + 1) + ": ", lesson),
-    );
-
+  // lessons &&
+  //   lessons.map((lesson, idx) =>
+  //     // console.log("lesson " + (idx + 1) + ": ", lesson),
+  //   );
 
 
   const [optModal, setOptModal] = useState(false);
