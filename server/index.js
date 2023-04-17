@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import userRoutes from "./src/routes/user.js";
-import adminRoutes from "./src/routes/admin.js";
+// import adminRoutes from "./src/routes/admin.js";
 import teacherRoutes from "./src/routes/teacher.js";
 import studentRoutes from "./src/routes/student.js";
 import dbConnect from "./src/config/db.js";
