@@ -195,6 +195,16 @@ export const changePass = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     if (req.cookies["OnlineSchoolUser"])
+    {
+      res.cookie("OnlineSchoolUser", null, {
+        sameSite: "none",
+        secure: true,
+        // path: "/",
+        // domain:
+        //   process.env.NODE_ENV === "development"
+        //     ? "localhost"
+        //     : ".vercel.app",
+      });
       res.clearCookie("OnlineSchoolUser", {
         sameSite: "none",
         secure: true,
@@ -204,6 +214,7 @@ export const logout = async (req, res) => {
         //     ? "localhost"
         //     : ".vercel.app",
       });
+    }  
     console.log("logged out");
     res.json({ success: true }).status(200);
   } catch (error) {
