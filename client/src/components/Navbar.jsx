@@ -196,7 +196,7 @@ export default function Navbar() {
                                 cookie.OnlineSchoolUser &&
                                   removeCookie("OnlineSchoolUser");
                               if (res.data.success)
-                                navigate("/") && window.location.reload();
+                                navigate("/");
                             })
                             .catch((err) => {
                               console.log(err);
