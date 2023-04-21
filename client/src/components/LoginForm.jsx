@@ -24,6 +24,7 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.target.disabled = true;
     mutate("/api/users/login", () => {
       axios
         .post(
@@ -53,6 +54,9 @@ function LoginForm() {
             setTimeout(() => {
               handleSubmit(e)
             }, 1000);
+          }
+          else {
+            e.target.disabled = false;
           }
         });
     });
