@@ -2,6 +2,8 @@ import Teacher from "../models/Teacher.js";
 import Student from "../models/Student.js";
 import Lesson from "../models/Lesson.js";
 import Admin from "../models/Admin.js";
+import Class from "../models/Class.js";
+import School from "../models/School.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendEmail from "../utilities/email.js";
@@ -41,6 +43,7 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+  let response;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -64,24 +67,60 @@ export const login = async (req, res) => {
 
     console.log("logging in ", user.role);
 
-    const {
-      password,
-      ...newUser
-    } = user.toObject();
+    const { password, ...newUser } = user.toObject();
     const cookieData = newUser;
     delete cookieData.currentClass;
     const token = jwt.sign(cookieData, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.cookie("OnlineSchoolUser", token, { sameSite: "none", secure: true });
-    if (user.role)
+    res.cookie("OnlineSchoolUser", token, {
+      sameSite: "none",
+      secure: true,
+      // path: "/",
+      // domain:
+      //   process.env.NODE_ENV === "development"
+      //     ? "localhost"
+      //     : ".vercel.app",
+    });
+    const school = await School.findById(user.school).select("-__v");
+    const { periods, teachers, students, admins, classes, ...newSchool } =
+      school.toObject();
+    if (user.role === "student") {
+      const currentClass = await Class.findById(user.currentClass);
+      const days = currentClass.schedule.map((day) => day.day);
+      // console.log("login ~ newSchool", newSchool, school);
+      const slots = periods.map((period) => {
+        return {
+          from:
+            (period.startTime / 60).toFixed(2).split(".")[0] +
+            ":" +
+            (period.startTime % 60 === 0 ? "00" : period.startTime % 60),
+          to:
+            ((period.startTime + period.duration) / 60)
+              .toFixed(2)
+              .split(".")[0] +
+            ":" +
+            ((period.startTime + period.duration) % 60 === 0
+              ? "00"
+              : (period.startTime + period.duration) % 60),
+        };
+      });
+      const scheduleSettings = { days, slots } || null;
       res
         .status(200)
-        .json({ success: true, user: newUser})
-    else
+        .json({
+          success: true,
+          school: newSchool,
+          user: newUser,
+          scheduleSettings,
+          token,
+        });
+    } else if (user.role)
       res
-        .status(500)
-        .json({ success: false, error: "User role is missing" });
+        .status(200)
+        .json({ success: true, school: newSchool, user: newUser, token });
+    else
+      res.status(500).json({ success: false, error: "User role is missing" });
   } catch (error) {
     console.log("login error:", error);
     res.send({ success: false, error: error.message });
@@ -155,7 +194,27 @@ export const changePass = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("OnlineSchoolUser", { sameSite: "none", secure: true });
+    if (req.cookies["OnlineSchoolUser"])
+    {
+      res.cookie("OnlineSchoolUser", null, {
+        sameSite: "none",
+        secure: true,
+        // path: "/",
+        // domain:
+        //   process.env.NODE_ENV === "development"
+        //     ? "localhost"
+        //     : ".vercel.app",
+      });
+      res.clearCookie("OnlineSchoolUser", {
+        sameSite: "none",
+        secure: true,
+        // path: "/",
+        // domain:
+        //   process.env.NODE_ENV === "development"
+        //     ? "localhost"
+        //     : ".vercel.app",
+      });
+    }  
     console.log("logged out");
     res.json({ success: true }).status(200);
   } catch (error) {
@@ -170,24 +229,27 @@ export const getUserData = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   try {
-    let user = await Admin.findById(req.user._id)
-      .select("-password -__v")
-      .populate({
-        path: "school",
-        populate: {
-          path: "students teachers classes",
-          select: "-password -__v",
-        },
-      });
+    let user;
+    if (req.user.role === "admin")
+      user = await Admin.findById(req.user._id)
+        .select("-password -__v")
+        .populate({
+          path: "school",
+          populate: {
+            path: "students teachers classes",
+            select: "-__v",
+          },
+        });
 
-    if (!user)
+    if (req.user.role === "teacher")
       user = await Teacher.findById(req.user._id)
         .select("-password -__v")
         .populate({
           path: "school",
           select: "-__v",
         });
-    if (!user)
+
+    if (req.user.role === "student")
       user = await Student.findById(req.user._id)
         .select("-password -__v")
         .populate({ path: "school", select: "-__v" })
@@ -221,27 +283,11 @@ export const getUserData = async (req, res) => {
 
     console.log("getUserData newUser:", newUser.role);
     if (newUser.role === "student") {
-      const days = newUser.currentClass.schedule.map((day) => day.day);
-      const slots = school.periods.map((period) => {
-        return {
-          from:
-            (period.startTime / 60).toFixed(2).split(".")[0] +
-            ":" +
-            (period.startTime % 60 === 0 ? "00" : period.startTime % 60),
-          to:
-            ((period.startTime + period.duration) / 60)
-              .toFixed(2)
-              .split(".")[0] +
-            ":" +
-            ((period.startTime + period.duration) % 60 === 0
-              ? "00"
-              : (period.startTime + period.duration) % 60),
-        };
+      res.status(200).json({
+        success: true,
+        user: newUser,
+        //  ,school
       });
-      const displaySchedule = { days, slots } || null;
-      res
-        .status(200)
-        .json({ success: true, user: newUser, school, displaySchedule });
     } else if (newUser.role === "teacher") {
       const lessons = await Lesson.find({ teacher: newUser._id })
         .populate({
@@ -250,8 +296,14 @@ export const getUserData = async (req, res) => {
           populate: { path: "class", select: "-__v" },
         })
         .populate({ path: "attendance", select: "name" });
-      res.status(200).json({ success: true, user: newUser, school, lessons });
-    } else res.status(200).json({ success: true, user: newUser, school });
+      res.status(200).json({
+        success: true,
+        user: newUser,
+        // , school
+        lessons,
+      });
+    } else if (newUser.role === "admin")
+      res.status(200).json({ success: true, user: newUser, school });
   } catch (error) {
     console.log("getUser error:", error.message);
     res.status(500).json({ success: false, error: error.message });

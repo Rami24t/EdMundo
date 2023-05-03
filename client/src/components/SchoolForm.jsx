@@ -3,20 +3,11 @@ import { MDBInput, MDBBtn, MDBSpinner } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
 import axios from "axios";
 
-const FormData = {
-  name: "Your Name",
-  email: "youremail@domain.com",
-  phone: "1256783746",
-  address: "Berlin, Berliner Plz., 1",
-  class: "0z-00",
-};
-
 export default function SchoolForm({data}) {
-  const [profile, setProfile] = useState(data?.school);
-
+  const [school, setschool] = useState(data?.school || JSON.parse(sessionStorage.getItem("school")));
   useEffect(() => {
-    setProfile((prevProfile) => ({
-      ...prevProfile, ...data?.school
+    setschool((prevschool) => ({
+      ...prevschool, ...data?.school || sessionStorage.getItem("school")
     }));
   }, [data?.school]);
 
@@ -24,25 +15,24 @@ export default function SchoolForm({data}) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile((prevProfile) => ({ ...prevProfile, [name]: value }));
+    setschool((prevschool) => ({ ...prevschool, [name]: value }));
   };
 
   const handleSave = (e) => {
     e.preventDefault();
-
-    if (data?.user?.role) {
+    if (data?.user?.role === "admin") {
       axios
         .put(
-          `${baseUrl}/api/${data?.user?.role}/update`,
-          { phone: profile.phone, address: profile.address },
+          `${baseUrl}/api/${data?.user?.role}/updateSchool`,
+          { phone: school.phone, email: school.email },
           { withCredentials: true },
         )
         .then((res) => {
-          console.log("Save response:", res.data.user);
+          // console.log("Save response:", res.data.user);
           if (res.status === 200) {
-            alert("Profile updated successfully!");
+            alert("Updated successfully!");
           } else if (res.status !== 200) {
-            alert("Profile update failed!");
+            alert("Update failed!");
           }
         })
         .catch((err) => {
@@ -60,14 +50,14 @@ export default function SchoolForm({data}) {
       </div>
     );
   return (
-    <form className="profileForm">
+    <form className="schoolForm">
       <MDBTypography className="fs-6 mb-3">
-        Contact Information
+        {school?.name}
       </MDBTypography>
       {/* <MDBRow className="mb-4">
         <MDBCol>
           <MDBInput
-            value={profile?.name}
+            value={school?.name}
             type="text"
             label="School"
             name="name"
@@ -81,13 +71,12 @@ export default function SchoolForm({data}) {
         label="Address"
         readOnly
         disabled
-        value={profile?.address}
-        onChange={handleChange}
+        value={`${school?.zip} ${school?.city}, ${school?.address}`}
       />
       <MDBInput
         wrapperClass="mb-4"
         type="state"
-        value={profile?.state}
+        value={school?.state}
         label="State"
         readonly
         disabled
@@ -96,7 +85,7 @@ export default function SchoolForm({data}) {
         wrapperClass="mb-4"
         type="tel"
         name="phone"
-        value={profile?.phone}
+        value={school?.phone}
         onChange={handleChange}
         readonly
         disabled
@@ -105,7 +94,7 @@ export default function SchoolForm({data}) {
       <MDBInput
         wrapperClass="mb-4"
         type="email"
-        value={profile?.email}
+        value={school?.email}
         label="Email"
         readonly
         disabled

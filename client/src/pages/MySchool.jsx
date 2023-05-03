@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import SchoolForm from "../components/SchoolForm";
 import teacher_profile_image from "../images/teacher_profile_image.png";
 import student_profile_image from "../images/student_profile_image.png";
@@ -7,9 +7,11 @@ import { MDBTypography } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
 import { MDBSpinner } from "mdb-react-ui-kit";
 import "./MySchool.css";
+import { Context } from "../components/Context";
 
 const MySchool = () => {
-  let { data } = useUser();
+  const { user } = useContext(Context); 
+  let { data } = useUser(user?._id);
   data = data?.data;
 
   return (

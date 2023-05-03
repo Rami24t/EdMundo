@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../pages/StudentSchedulePage.module.scss";
 import useUser from "../hooks/useUser";
 import { MDBSpinner } from "mdb-react-ui-kit";
+import { Context } from "../components/Context";
+
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const SLOTS = [
@@ -45,9 +47,10 @@ const Spinner = () => {
 };
 
 const Schedule = () => {
-  let { data, error } = useUser();
+  const { user } = useContext(Context);
+  let { data, error } = useUser(user?._id);
   data && (data = data?.data);
-  const { days, slots } = data?.displaySchedule || { days: DAYS, slots: SLOTS };
+  const { days, slots } = JSON.parse(sessionStorage.getItem('scheduleSettings')) || { days: DAYS, slots: SLOTS };
   const grid = Array(days.length).fill(Array(slots.length).fill(null));
 
   if (error)
@@ -81,7 +84,7 @@ const Schedule = () => {
             </div>
 
             {col.map((_, slotIndex) =>
-              !data?.user?.currentClass.schedule ? (
+              !data?.user?.currentClass?.schedule ? (
                 <Spinner key={`${slotIndex}-${dayIndex}`} />
               ) : (
                 <div

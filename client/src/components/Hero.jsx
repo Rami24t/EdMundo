@@ -13,7 +13,8 @@ const Hero = () => {
         <MDBRow>
           <MDBCol md={7} className="hero-text">
             <h1 className="hero-title">
-              Bringing the classroom to you - <br />
+              {`Bringing the classroom to you -
+    \n`}
               <span className="hero-title-span"> anytime, anywhere!</span>
             </h1>
             <p className="hero-subtitle">

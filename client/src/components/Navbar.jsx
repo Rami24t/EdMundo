@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import axios from "axios";
@@ -18,17 +18,23 @@ import {
 import useUser from "../hooks/useUser";
 import "./navbar.css";
 import { useCookies } from "react-cookie";
-
+import { Context } from "../components/Context";
+// import { useStoredToken } from "../hooks/useStoredToken";
 
 export default function Navbar() {
   const { mutate } = useSWRConfig();
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const [cookie, removeCookie] = useCookies(["OnlineSchoolUser"]);
 
-  let { data } = useUser();
+  const { user, removeUser } = useContext(Context);
+
+  let { data } = useUser(user?._id);
   data && (data = data?.data);
   // const userName = data?.user.name || "";
-  const school = data?.school.name || "";
+  const school =
+    data?.school?.name ||
+    JSON.parse(sessionStorage.getItem("school"))?.name ||
+    "";
 
   const navigate = useNavigate();
 
@@ -36,25 +42,42 @@ export default function Navbar() {
   const location = useLocation();
   const theme = location.pathname;
 
+  // const {token, removeToken} = useStoredToken();
+
+  // const handleLogout = () => {
+  //   removeToken();
+  //   removeUser();
+  //   removeCookie("OnlineSchoolUser");
+  //   axios
+  //     .post(`${baseUrl}/logout`)
+  //     .then(() => {
+  //       mutate("user", null, false);
+  //       navigate("/login");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
   return (
     <MDBNavbar expand="lg" sticky>
       <MDBContainer fluid className="navbar-container">
-
-       <MDBNavbarBrand>
- <Link to="/">
-          <h2 className="navbar-title">
-            <span className="navbar-title-span"> Ed</span>Mundo
-          </h2>
-        </Link>
+        <MDBNavbarBrand>
+          <Link to="/">
+            <h2 className="navbar-title">
+              <span className="navbar-title-span"> Ed</span>Mundo
+            </h2>
+          </Link>
         </MDBNavbarBrand>
         <MDBNavbarBrand>
-        <NavLink to={data?.user.role+'/school'}>
-        {({ isActive }) => (
-        <MDBNavbarLink 
-         className="ms-4 school-logo navbar-title h3">{school}
-        </MDBNavbarLink>)}
-         </NavLink>
-         </MDBNavbarBrand>
+          <NavLink to={`${data?.user.role || user?.role}/school`}>
+            {({ isActive }) => (
+              <MDBNavbarLink className="ms-4 school-logo navbar-title h3">
+                {school}
+              </MDBNavbarLink>
+            )}
+          </NavLink>
+        </MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -71,7 +94,10 @@ export default function Navbar() {
                   {({ isActive }) => (
                     <MDBNavbarLink
                       className={
-                        theme === "/" && !data?.user?.name && " d-none "
+                        theme === "/" &&
+                        !data?.user?.name &&
+                        !user &&
+                        " d-none "
                       }
                       active={isActive}
                       aria-current="page"
@@ -86,7 +112,9 @@ export default function Navbar() {
                   {({ isActive }) => (
                     <MDBNavbarLink
                       className={
-                        (!data?.user?.name || theme === "/login") && " d-none "
+                        (!data?.user?.name || theme === "/login") &&
+                        !user &&
+                        " d-none "
                       }
                       active={isActive}
                     >
@@ -96,11 +124,13 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <NavLink to={`/${data?.user?.role}/profile`}>
+                <NavLink to={`/${data?.user?.role || user?.role}/profile`}>
                   {({ isActive }) => (
                     <MDBNavbarLink
                       className={
-                        (!data?.user?.name || theme === "/login") && " d-none "
+                        (!data?.user?.name || theme === "/login") &&
+                        !user &&
+                        " d-none "
                       }
                       active={isActive}
                     >
@@ -110,12 +140,14 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <NavLink to={`/${data?.user?.role}/lessons`}>
+                <NavLink to={`/${data?.user?.role || user?.role}/lessons`}>
                   {({ isActive }) => (
                     <MDBNavbarLink
                       href="#"
                       className={
-                        (!data?.user?.name || theme === "/login") && " d-none "
+                        (!data?.user?.name || theme === "/login") &&
+                        !user &&
+                        " d-none "
                       }
                       active={isActive}
                     >
@@ -127,6 +159,7 @@ export default function Navbar() {
               <MDBNavbarItem
                 className={
                   (!data?.user?.name ||
+                    !user ||
                     theme === "/login" ||
                     theme.startsWith("/teacher") ||
                     data?.user?.role === "teacher") &&
@@ -140,40 +173,41 @@ export default function Navbar() {
                 </NavLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <Link to="/login" className={theme === "/login" && "d-none"}>
-                  {!data?.user?.name && (
+                {!data?.user?.name && !sessionStorage.getItem("token") ? (
+                  <Link to="/login" className={theme === "/login" && "d-none"}>
                     <MDBBtn className="navbar-button-login">LOGIN</MDBBtn>
-                  )}
-                </Link>
-                  {data?.user?.name && (
-                    <MDBBtn
-                      className="navbar-button-logout"
-                      type="button"
-                      onClick={() => {
-                        // Delete the authentication cookie
-                        // document.cookie =
-                        //   "OnlineSchoolUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                        // cookie && removeCookie("OnlineSchoolUser");
-                        // Reset the SWR cache
-                        mutate(`${baseUrl}/api/users/getData`, null, false)
-                          .then(
-                            axios
-                              .get(`${baseUrl}/api/users/logout`)
-                              .then((res) => {
-                                cookie.OnlineSchoolUser && removeCookie("OnlineSchoolUser");
-                                if(res.data.success){
-                                  navigate("/");
-                                }
-                              }),
-                          )
-                          .catch((err) => {
-                            console.log(err);
-                          });
-                      }}
-                    >
-                      LOG OUT
-                    </MDBBtn>
-                  )}
+                  </Link>
+                ) : (
+                  <MDBBtn
+                    className="navbar-button-logout"
+                    type="button"
+                    onClick={() => {
+                      removeUser();
+                      sessionStorage.removeItem("school");
+                      sessionStorage.removeItem("scheduleSettings");
+                      sessionStorage.removeItem("token");
+                      mutate(`${baseUrl}/api/users/getData`, null, false).then(
+                        () => {
+                          axios
+                            .get(`${baseUrl}/api/users/logout`, {
+                              withCredentials: true,
+                            })
+                            .then((res) => {
+                                cookie.OnlineSchoolUser &&
+                                  removeCookie("OnlineSchoolUser");
+                              if (res.data.success)
+                                navigate("/");
+                            })
+                            .catch((err) => {
+                              console.log(err);
+                            });
+                        }
+                      );
+                    }}
+                  >
+                    LOG OUT
+                  </MDBBtn>
+                )}
               </MDBNavbarItem>
             </MDBNavbarNav>
           )}

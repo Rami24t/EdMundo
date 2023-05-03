@@ -40,6 +40,10 @@
 .login-button:hover {
   background-color: #6825cc;
 }
+.login-button:disabled {
+  transition: color 0.4s ease;
+  background-color: #8e59dd8c !important;
+}
 /* Medium devices ( 768 px and down) */
 @media (max-width: 798px) {
   .login-image-container {

@@ -9,8 +9,8 @@ import { Context } from "../components/Context";
 import './Profile.css'
 
 const TeacherProfile = () => {
-  const { state } = useContext(Context);
-  let { data } = useUser();
+  const { user } = useContext(Context);
+  let { data } = useUser(user?._id);
   data = data?.data;
 
   return (
@@ -26,7 +26,7 @@ const TeacherProfile = () => {
           >
             <MDBCol col="10" md="6" className="d-flex justify-content-center">
               <img
-                src={(state?.user?.role==="teacher" || data?.user?.role==="teacher") ? teacher_profile_image : student_profile_image}
+                src={(user?.role==="teacher" || data?.user?.role==="teacher") ? teacher_profile_image : student_profile_image}
                 alt="Teacher Profile Decorative "
                 className="my-5 rounded object-cover"
                 style={{ width: "20rem", height: "20rem" }}
@@ -34,7 +34,7 @@ const TeacherProfile = () => {
             </MDBCol>
             <MDBCol className="mt-4" col="4" md="6">
               <div className="  d-flex align-items-center justify-content-center">
-                <ProfileForm role={data?.user?.role || state?.user?.role} data={data} state={state}/>
+                <ProfileForm role={data?.user?.role || user?.role} data={data} user={user}/>
               </div>
             </MDBCol>
           </MDBRow>

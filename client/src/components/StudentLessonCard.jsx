@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useContext} from "react";
 import { BsCalendarDate } from "react-icons/bs";
 import { TfiTime } from "react-icons/tfi";
 import { IoMdPeople } from "react-icons/io";
@@ -6,11 +6,14 @@ import "./lessonCard.css";
 import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
 import useUser from "../hooks/useUser";
 import { MDBSpinner } from "mdb-react-ui-kit";
+import { Context } from "../components/Context";
+
 
 const StudentLessonCard = () => {
-  let { data, error, isLoading } = useUser();
+  const { user } = useContext(Context);
+  let { data, error, isLoading } = useUser(user?._id);
   data = data?.data;
-  let lessons = data?.user?.lessons || data?.user?.currentClass.lessons;
+  let lessons = data?.user?.lessons || data?.user?.currentClass?.lessons;
   lessons?.map((lesson, idx) => console.log(`lesson ${idx + 1}: `, lesson));
 
   if (isLoading) {

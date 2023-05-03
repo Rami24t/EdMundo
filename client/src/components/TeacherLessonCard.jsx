@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import { BsCalendarDate } from "react-icons/bs";
 import { TfiTime } from "react-icons/tfi";
@@ -17,9 +17,11 @@ import {
 } from "mdb-react-ui-kit";
 import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
 import useUser from "../hooks/useUser";
+import { Context } from "../components/Context";
 
 const TeacherLessonCard = () => {
-  let { data, error, isLoading } = useUser();
+  const { user } = useContext(Context);
+  let { data, error, isLoading } = useUser(user?._id);
   data = data?.data;
   // console.log("data", data);
   let lessons = data?.lessons || data?.user?.currentClass?.lessons;

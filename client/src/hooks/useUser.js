@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import axios from "axios";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 // function getCookie(name) {
@@ -13,10 +13,12 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
   //   else return false;
   // }
   
-  export default function useUser() {
-  const [cookie] = useCookies(["OnlineSchoolUser"]);
+  export default function useUser(isLoggedIn) {
+  // const [cookie] = useCookies(["OnlineSchoolUser"]);
   const { data, error, isLoading } = useSWR(
-    cookie.OnlineSchoolUser &&
+    // localStorage.getItem("user") &&
+    // localStorage.getItem("token") &&
+    isLoggedIn &&
     `${baseUrl}/api/users/getData`,
     () =>
       axios
@@ -24,9 +26,10 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
           withCredentials: true,
         })
         .then((res) => {
-          console.log(" res: ", res);
+          // console.log(" res: ", res);
           return res;
         }),
   );
+  
   return { data, error, isLoading };
 }

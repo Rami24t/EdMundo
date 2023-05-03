@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
+import axios from "axios";
 import {Context} from "../components/Context";
 import {
   MDBContainer,
@@ -9,7 +10,6 @@ import {
   MDBBtn,
   MDBInput,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
 import styles from "./LoginForm.scss";
 import LoginPageImage from "../assets/login-page-image.png";
 import ThreeGreenLines from "../assets/three-green-lines.png";
@@ -20,10 +20,11 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { mutate } = useSWRConfig();
-  const { dispatch } = useContext(Context);
+  const { setUser } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.target.disabled = true;
     mutate("/api/users/login", () => {
       axios
         .post(
@@ -32,18 +33,31 @@ function LoginForm() {
           { withCredentials: true },
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
+          if(res.data.scheduleSettings) {
+            sessionStorage.setItem("scheduleSettings", JSON.stringify(res.data.scheduleSettings));
+          }
           if (res.status === 200 && res.data.user.role) {
-            dispatch({ type: "LOGIN", payload: res.data.user });
-            setTimeout(() => {
-              navigate(`/${res.data.user.role}/profile`)
-            }, 300);
+            // console.log(" token from login form", res.data.token);
+            setUser(res.data.user);
+            // console.log(res.data?.school);
+            sessionStorage.setItem("token", res.data.token);
+            sessionStorage.setItem("school", JSON.stringify(res.data?.school));
+            navigate(`/${res.data.user.role}/profile`);
           } else if (res.status !== 200 || !res.data.user.role) {
             navigate("/login");
           }
         })
         .catch((err) => {
           console.log(err.message);
+          if(err.message === "Network Error") {
+            setTimeout(() => {
+              handleSubmit(e)
+            }, 1000);
+          }
+          else {
+            e.target.disabled = false;
+          }
         });
     });
   };

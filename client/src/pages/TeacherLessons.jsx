@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MDBBtn, MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import CreateLessonModal from "../components/CreateLessonModal";
 import ScrollToTop from "react-scroll-up";
@@ -6,18 +6,18 @@ import { BsArrowUpCircle } from "react-icons/bs";
 import "./lessonsPages.css";
 import LessonCard from "../components/LessonCard";
 import useUser from "../hooks/useUser";
+import { Context } from "../components/Context";
 
 const TeacherLessons = () => {
-
-  let { data, error, isLoading } = useUser();
+  const { user } = useContext(Context);
+  let { data } = useUser(user?._id);
   data = data?.data;
   // console.log("data", data);
   let lessons = data?.lessons || data?.user?.currentClass?.lessons;
-  lessons &&
-    lessons.map((lesson, idx) =>
-      console.log("lesson " + (idx + 1) + ": ", lesson),
-    );
-
+  // lessons &&
+  //   lessons.map((lesson, idx) =>
+  //     // console.log("lesson " + (idx + 1) + ": ", lesson),
+  //   );
 
 
   const [optModal, setOptModal] = useState(false);
