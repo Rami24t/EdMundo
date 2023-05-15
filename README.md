@@ -10,7 +10,14 @@ https://ed-mundo.vercel.app/
 
 EdMundo is a digital schooling platform for educational institutions that require a sudden transition to online learning in instances such as pandemics, unsafe weather conditions, or natural disasters.
 
---> Video of the project
+---
+
+</br>
+
+## Snapshot
+
+![EdMundo](https://github.com/Rami24t/EdMundo/assets/103028944/5821e307-4576-4fdd-9e16-05712ce413da)
+
 
 ---
 
