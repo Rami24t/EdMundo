@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import NavbarItemNavLink from "./NavbarItemNavLink";
 import { useSWRConfig } from "swr";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -9,16 +10,15 @@ import {
   MDBNavbarToggler,
   MDBNavbarBrand,
   MDBNavbarNav,
-  MDBNavbarItem,
   MDBNavbarLink,
   MDBCollapse,
-  MDBBtn,
   MDBIcon,
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
 import "./navbar.css";
 import { useCookies } from "react-cookie";
 import { Context } from "../components/Context";
+import NavbarItemButton from "./NavbarItemButton";
 // import { useStoredToken } from "../hooks/useStoredToken";
 
 export default function Navbar() {
@@ -43,7 +43,6 @@ export default function Navbar() {
   const theme = location.pathname;
 
   // const {token, removeToken} = useStoredToken();
-
   // const handleLogout = () => {
   //   removeToken();
   //   removeUser();
@@ -58,6 +57,28 @@ export default function Navbar() {
   //       console.log(err);
   //     });
   // };
+  const handleLogout = () => {
+      removeUser();
+      sessionStorage.removeItem("school");
+      sessionStorage.removeItem("scheduleSettings");
+      sessionStorage.removeItem("token");
+      mutate(`${baseUrl}/api/users/getData`, null, false).then(
+        () => {
+          axios
+            .get(`${baseUrl}/api/users/logout`, {
+              withCredentials: true,
+            })
+            .then((res) => {
+              cookie.OnlineSchoolUser &&
+                removeCookie("OnlineSchoolUser");
+              if (res.data.success) navigate("/");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      );
+    };
 
   return (
     <MDBNavbar expand="lg" sticky>
@@ -88,75 +109,43 @@ export default function Navbar() {
         </MDBNavbarToggler>
         <MDBCollapse navbar show={showNav}>
           {theme !== "/login" && (
-            <MDBNavbarNav className="d-flex justify-content-end gap-4 ">
-              <MDBNavbarItem>
-                <NavLink to="/">
-                  {({ isActive }) => (
-                    <MDBNavbarLink
-                      className={
-                        theme === "/" &&
-                        !data?.user?.name &&
-                        !user &&
-                        " d-none "
-                      }
-                      active={isActive}
-                      aria-current="page"
-                    >
-                      Home
-                    </MDBNavbarLink>
-                  )}
-                </NavLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <NavLink to={`/${data?.user?.role}/school`}>
-                  {({ isActive }) => (
-                    <MDBNavbarLink
-                      className={
-                        (!data?.user?.name || theme === "/login") &&
-                        !user &&
-                        " d-none "
-                      }
-                      active={isActive}
-                    >
-                      My School
-                    </MDBNavbarLink>
-                  )}
-                </NavLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <NavLink to={`/${data?.user?.role || user?.role}/profile`}>
-                  {({ isActive }) => (
-                    <MDBNavbarLink
-                      className={
-                        (!data?.user?.name || theme === "/login") &&
-                        !user &&
-                        " d-none "
-                      }
-                      active={isActive}
-                    >
-                      Profile
-                    </MDBNavbarLink>
-                  )}
-                </NavLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <NavLink to={`/${data?.user?.role || user?.role}/lessons`}>
-                  {({ isActive }) => (
-                    <MDBNavbarLink
-                      href="#"
-                      className={
-                        (!data?.user?.name || theme === "/login") &&
-                        !user &&
-                        " d-none "
-                      }
-                      active={isActive}
-                    >
-                      Lessons
-                    </MDBNavbarLink>
-                  )}
-                </NavLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem
+            <MDBNavbarNav className={"d-flex justify-content-end gap-4 mt-3 py-2 text-center"}>
+              <NavbarItemNavLink
+                to="/"
+                className={
+                  theme === "/" && !data?.user?.name && !user && " d-none "
+                }
+                children="Home"
+              />
+              <NavbarItemNavLink
+                to={`/${data?.user?.role}/school`}
+                className={
+                  (!data?.user?.name || theme === "/login") &&
+                  !user &&
+                  " d-none "
+                }
+                children="My School"
+              />
+              <NavbarItemNavLink
+                to={`/${data?.user?.role || user?.role}/profile`}
+                className={
+                  (!data?.user?.name || theme === "/login") &&
+                  !user &&
+                  " d-none "
+                }
+                children="Profile"
+              />
+              <NavbarItemNavLink
+                to={`/${data?.user?.rolle || user?.role}/lessons`}
+                className={
+                  (!data?.user?.name || theme === "/login") &&
+                  !user &&
+                  " d-none "
+                }
+                children={"Lessons"}
+              />
+              <NavbarItemNavLink
+               to={`/${data?.user?.role || user?.role}/schedule`}
                 className={
                   (!data?.user?.name ||
                     !user ||
@@ -165,50 +154,13 @@ export default function Navbar() {
                     data?.user?.role === "teacher") &&
                   " d-none "
                 }
-              >
-                <NavLink to="/student/schedule">
-                  {({ isActive }) => (
-                    <MDBNavbarLink href="#">Schedule</MDBNavbarLink>
-                  )}
-                </NavLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                {!data?.user?.name && !sessionStorage.getItem("token") ? (
-                  <Link to="/login" className={theme === "/login" && "d-none"}>
-                    <MDBBtn className="navbar-button-login">LOGIN</MDBBtn>
-                  </Link>
-                ) : (
-                  <MDBBtn
-                    className="navbar-button-logout"
-                    type="button"
-                    onClick={() => {
-                      removeUser();
-                      sessionStorage.removeItem("school");
-                      sessionStorage.removeItem("scheduleSettings");
-                      sessionStorage.removeItem("token");
-                      mutate(`${baseUrl}/api/users/getData`, null, false).then(
-                        () => {
-                          axios
-                            .get(`${baseUrl}/api/users/logout`, {
-                              withCredentials: true,
-                            })
-                            .then((res) => {
-                                cookie.OnlineSchoolUser &&
-                                  removeCookie("OnlineSchoolUser");
-                              if (res.data.success)
-                                navigate("/");
-                            })
-                            .catch((err) => {
-                              console.log(err);
-                            });
-                        }
-                      );
-                    }}
-                  >
-                    LOG OUT
-                  </MDBBtn>
-                )}
-              </MDBNavbarItem>
+                children={"Schedule"}
+              />
+              <NavbarItemButton
+              loggedIn={data?.user?.name || sessionStorage.getItem("token")}
+              theme={theme}
+              handleLogout = {handleLogout}
+               />
             </MDBNavbarNav>
           )}
         </MDBCollapse>
