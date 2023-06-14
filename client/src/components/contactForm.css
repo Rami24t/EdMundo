@@ -93,6 +93,7 @@
   .contact-form-section .message-sent-modal {
     margin-left: 1rem;
     margin-right: 1rem;
+    /* margin: auto; */
     max-width: 330px;
   }
 
