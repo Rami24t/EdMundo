@@ -15,11 +15,11 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import useUser from "../hooks/useUser";
-import "./navbar.css";
 import { useCookies } from "react-cookie";
 import { Context } from "../components/Context";
 import NavbarItemButton from "./NavbarItemButton";
 // import { useStoredToken } from "../hooks/useStoredToken";
+import "./navbar.css";
 
 export default function Navbar() {
   const { mutate } = useSWRConfig();
@@ -31,6 +31,9 @@ export default function Navbar() {
   let { data } = useUser(user?._id);
   data && (data = data?.data);
   // const userName = data?.user.name || "";
+  const dataUserName = data?.user?.name;
+  const dataUserRole = data?.user?.role;
+
   const school =
     data?.school?.name ||
     JSON.parse(sessionStorage.getItem("school"))?.name ||
@@ -58,6 +61,7 @@ export default function Navbar() {
   //     });
   // };
   const handleLogout = () => {
+    setShowNav(!showNav)
       removeUser();
       sessionStorage.removeItem("school");
       sessionStorage.removeItem("scheduleSettings");
@@ -90,15 +94,17 @@ export default function Navbar() {
             </h2>
           </Link>
         </MDBNavbarBrand>
+        {(dataUserRole || user?.role) && 
         <MDBNavbarBrand>
-          <NavLink to={`${data?.user.role || user?.role}/school`}>
+          <NavLink to={`${dataUserRole || user?.role}/school`}>
             {({ isActive }) => (
               <MDBNavbarLink className="ms-4 school-logo navbar-title h3">
                 {school}
               </MDBNavbarLink>
             )}
           </NavLink>
-        </MDBNavbarBrand>
+        </MDBNavbarBrand>}
+        {theme !=="/login" && dataUserName &&
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -106,64 +112,66 @@ export default function Navbar() {
           onClick={() => setShowNav(!showNav)}
         >
           <MDBIcon icon="bars" fas />
-        </MDBNavbarToggler>
+        </MDBNavbarToggler>}
+        {/* { dataUserName && */}
         <MDBCollapse navbar show={showNav}>
           {theme !== "/login" && (
             <MDBNavbarNav className={"d-flex justify-content-end gap-4 mt-3 py-2 text-center"}>
+
               <NavbarItemNavLink
                 to="/"
-                className={
-                  theme === "/" && !data?.user?.name && !user && " d-none "
+                hidden={
+                  theme === "/" && !dataUserName && !user
                 }
                 children="Home"
               />
               <NavbarItemNavLink
-                to={`/${data?.user?.role}/school`}
-                className={
-                  (!data?.user?.name || theme === "/login") &&
-                  !user &&
-                  " d-none "
+                to={`/${dataUserRole}/school`}
+                hidden={
+                  (!dataUserName || theme === "/login") &&
+                  !user
                 }
                 children="My School"
               />
               <NavbarItemNavLink
-                to={`/${data?.user?.role || user?.role}/profile`}
-                className={
-                  (!data?.user?.name || theme === "/login") &&
-                  !user &&
-                  " d-none "
+                to={`/${dataUserRole || user?.role}/profile`}
+                hidden={
+                  (!dataUserName || theme === "/login") &&
+                  !user
                 }
                 children="Profile"
               />
               <NavbarItemNavLink
                 to={`/${data?.user?.rolle || user?.role}/lessons`}
-                className={
-                  (!data?.user?.name || theme === "/login") &&
-                  !user &&
-                  " d-none "
+                hidden={
+                  (!dataUserName || theme === "/login") &&
+                  !user
                 }
                 children={"Lessons"}
               />
               <NavbarItemNavLink
-               to={`/${data?.user?.role || user?.role}/schedule`}
-                className={
-                  (!data?.user?.name ||
+               to={`/${dataUserRole || user?.role}/schedule`}
+                hidden={
+                  (!dataUserName ||
                     !user ||
                     theme === "/login" ||
                     theme.startsWith("/teacher") ||
-                    data?.user?.role === "teacher") &&
-                  " d-none "
+                    dataUserRole === "teacher")
                 }
                 children={"Schedule"}
               />
-              <NavbarItemButton
-              loggedIn={data?.user?.name || sessionStorage.getItem("token")}
+              {dataUserName && <NavbarItemButton
+              loggedIn={sessionStorage.getItem("token")}
               theme={theme}
               handleLogout = {handleLogout}
-               />
+               />}
             </MDBNavbarNav>
           )}
         </MDBCollapse>
+        {!dataUserName && <div className=" position-absolute end-0 me-3 " ><NavbarItemButton
+              loggedIn={sessionStorage.getItem("token")}
+              theme={theme}
+               /></div>}
       </MDBContainer>
     </MDBNavbar>
   );

@@ -11,6 +11,7 @@ export default function NavbarItemButton({ loggedIn, theme, handleLogout }) {
             <MDBBtn className="navbar-button-login">LOGIN</MDBBtn>
           </Link>
         ) : (
+          loggedIn &&
           <MDBBtn
             className="navbar-button-logout"
             type="button"
