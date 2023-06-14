@@ -56,8 +56,7 @@
 
 @media only screen and (max-width: 600px) {
   .hero-section {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin: auto;
     max-width: 330px;
     text-align: center;
   }
