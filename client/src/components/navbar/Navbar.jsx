@@ -14,9 +14,9 @@ import {
   MDBCollapse,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import useUser from "../hooks/useUser";
+import useUser from "../../hooks/useUser";
 import { useCookies } from "react-cookie";
-import { Context } from "../components/Context";
+import { Context } from "../Context";
 import NavbarItemButton from "./NavbarItemButton";
 // import { useStoredToken } from "../hooks/useStoredToken";
 import "./navbar.css";

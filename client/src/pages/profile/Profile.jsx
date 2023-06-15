@@ -1,11 +1,11 @@
 import React, {useContext} from "react";
-import ProfileForm from "../components/ProfileForm";
-import teacher_profile_image from "../images/teacher_profile_image.png";
-import student_profile_image from "../images/student_profile_image.png";
+import ProfileForm from "../../components/ProfileForm";
+import teacher_profile_image from "../../assets/illustrations/teacher_profile_image.png";
+import student_profile_image from "../../assets/illustrations/student_profile_image.png";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
-import useUser from "../hooks/useUser";
-import { Context } from "../components/Context";
+import useUser from "../../hooks/useUser";
+import { Context } from "../../components/Context";
 import './Profile.css'
 
 const TeacherProfile = () => {

@@ -1,9 +1,9 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./description.css";
-import SmilingFace from "../assets/smiling-face.png";
-import Hat from "../assets/hat.png";
-import SpeechBubble from "../assets/speech-bubble.png";
+import SmilingFace from "../../assets/illustrations/smiling-face.png";
+import Hat from "../../assets/illustrations/hat.png";
+import SpeechBubble from "../../assets/illustrations/speech-bubble.png";
 
 const Description = () => {
   return (

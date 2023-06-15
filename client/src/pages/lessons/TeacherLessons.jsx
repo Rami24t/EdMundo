@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import { MDBBtn, MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
-import CreateLessonModal from "../components/CreateLessonModal";
+import CreateLessonModal from "../../components/lessons/CreateLessonModal";
 import ScrollToTop from "react-scroll-up";
 import { BsArrowUpCircle } from "react-icons/bs";
 import "./lessonsPages.css";
-import LessonCard from "../components/LessonCard";
-import useUser from "../hooks/useUser";
-import { Context } from "../components/Context";
+import LessonCard from "../../components/lessons/LessonCard";
+import useUser from "../../hooks/useUser";
+import { Context } from "../../components/Context";
 
 const TeacherLessons = () => {
   const { user } = useContext(Context);

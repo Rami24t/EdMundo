@@ -11,8 +11,8 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import ReceivingMail from "../assets/receiving-mail.png";
-import RedLines from "../assets/red-rays.png";
+import ReceivingMail from "../../assets/illustrations/receiving-mail.png";
+import RedLines from "../../assets/illustrations/red-rays.png";
 
 const ContactForm = () => {
   const [showModal, setShowModal] = useState(false);

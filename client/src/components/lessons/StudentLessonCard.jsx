@@ -4,9 +4,9 @@ import { TfiTime } from "react-icons/tfi";
 import { IoMdPeople } from "react-icons/io";
 import "./lessonCard.css";
 import { Form, Col, Row, FormGroup, Label, Input, Badge } from "reactstrap";
-import useUser from "../hooks/useUser";
+import useUser from "../../hooks/useUser";
 import { MDBSpinner } from "mdb-react-ui-kit";
-import { Context } from "../components/Context";
+import { Context } from "../../components/Context";
 
 
 const StudentLessonCard = () => {

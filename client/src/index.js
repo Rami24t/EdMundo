@@ -4,16 +4,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./index.scss";
-import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Profile from "./pages/Profile.jsx";
-import TeacherLessons from "./pages/TeacherLessons.jsx";
-import StudentLessons from "./pages/StudentLessons";
-import StudentSchedulePage from "./pages/StudentSchedulePage";
+import Login from "./pages/login/Login.jsx";
+import Home from "./pages/home/Home.jsx";
+import Profile from "./pages/profile/Profile.jsx";
+import MySchool from "./pages/school/MySchool.jsx";
+import TeacherLessons from "./pages/lessons/TeacherLessons.jsx";
+import StudentLessons from "./pages/lessons/StudentLessons.jsx";
+import StudentSchedulePage from "./pages/schedule/StudentSchedulePage.jsx";
 import ContextProvider from "./components/Context";
 import App from "./App";
 import { Navigate } from "react-router-dom";
-import MySchool from "./pages/MySchool";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

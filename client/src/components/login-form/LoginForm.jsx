@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import axios from "axios";
-import {Context} from "../components/Context";
+import {Context} from "../../components/Context";
 import {
   MDBContainer,
   MDBCol,
@@ -10,9 +10,9 @@ import {
   MDBBtn,
   MDBInput,
 } from "mdb-react-ui-kit";
-import styles from "./LoginForm.scss";
-import LoginPageImage from "../assets/login-page-image.png";
-import ThreeGreenLines from "../assets/three-green-lines.png";
+import "./LoginForm.scss";
+import LoginPageImage from "../../assets/illustrations/login-page-image.png";
+import ThreeGreenLines from "../../assets/illustrations/three-green-lines.png";
 
 function LoginForm() {
   const navigate = useNavigate();

@@ -2,9 +2,9 @@ import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 import "./hero.css";
 // import ReceivingMail from "../assets/receiving-mail.png";
-import RedLines from "../assets/red-rays.png";
-import { HashLink } from "react-router-hash-link";
-import StripyMan from "../assets/stripy-man.png";
+import { HashLink } from "react-router-hash-link"; // explanation: When you click on a link created with react-router-hash-link it will scroll to the element on the page with the id that matches the #hash-fragment in the link. This will also work for elements that are created after an asynchronous data load. Note that you must use React Router's BrowserRouter for this to work.
+import RedLines from "../../assets/illustrations/red-rays.png";
+import StripyMan from "../../assets/illustrations/stripy-man.png";
 
 const Hero = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styles from "../pages/StudentSchedulePage.module.scss";
+import styles from "../pages/schedule/StudentSchedulePage.module.scss";
 import useUser from "../hooks/useUser";
 import { MDBSpinner } from "mdb-react-ui-kit";
 import { Context } from "../components/Context";

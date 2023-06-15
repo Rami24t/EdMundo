@@ -1,7 +1,7 @@
 import React from "react";
 import ScrollToTop from "react-scroll-up";
 import { BsArrowUpCircle } from "react-icons/bs";
-import StudentLessonCard from "../components/StudentLessonCard";
+import StudentLessonCard from "../../components/lessons/StudentLessonCard";
 import { 
   // MDBBtn, MDBCol, 
   MDBContainer, MDBRow } from "mdb-react-ui-kit";

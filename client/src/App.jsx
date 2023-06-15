@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer";
 import { useLocation, Navigate } from "react-router-dom";
 import { Context } from "./components/Context";

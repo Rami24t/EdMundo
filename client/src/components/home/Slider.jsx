@@ -1,9 +1,9 @@
 import React from "react";
 import "./slider.scss";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
-import Logo1 from "../assets/logo1.png";
-import Logo2 from "../assets/logo2.png";
-import Logo3 from "../assets/logo3.png";
+import Logo1 from "../../assets/logos/logo1.png";
+import Logo2 from "../../assets/logos/logo2.png";
+import Logo3 from "../../assets/logos/logo3.png";
 
 const Slider = () => {
   return (

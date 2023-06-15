@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import SchoolForm from "../components/SchoolForm";
-import teacher_profile_image from "../images/teacher_profile_image.png";
-import student_profile_image from "../images/student_profile_image.png";
+import SchoolForm from "../../components/SchoolForm";
+import teacher_profile_image from "../../assets/illustrations/teacher_profile_image.png";
+import student_profile_image from "../../assets/illustrations/student_profile_image.png";
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { MDBTypography } from "mdb-react-ui-kit";
-import useUser from "../hooks/useUser";
+import useUser from "../../hooks/useUser";
 import { MDBSpinner } from "mdb-react-ui-kit";
 import "./MySchool.css";
-import { Context } from "../components/Context";
+import { Context } from "../../components/Context";
 
 const MySchool = () => {
   const { user } = useContext(Context); 

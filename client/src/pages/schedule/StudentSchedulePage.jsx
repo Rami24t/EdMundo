@@ -1,7 +1,7 @@
 import React from "react";
-import StudentSchedule from "../components/StudentSchedule.jsx";
+import StudentSchedule from "../../components/StudentSchedule";
 import styles from "./StudentSchedulePage.module.scss";
-import StudentScheduleImage from "../assets/student-schedule-image.png";
+import StudentScheduleImage from "../../assets/illustrations/student-schedule-image.png";
 
 const Schedule = () => {
   return (
