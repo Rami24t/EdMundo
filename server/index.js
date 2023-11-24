@@ -19,11 +19,11 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "https://ed-mundo.vercel.app"
-        : "http://localhost:3000",
+        ? ["https://ed-mundo.vercel.app", process.env.FRONTEND_URL2]
+        : ["http://localhost:3000"],
     credentials: true,
     preflightContinue: true,
-  }),
+  })
 );
 app.use(express.json());
 app.use(cookieParser());
