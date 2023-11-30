@@ -1,6 +1,10 @@
 # EdMundo
 
-<img src="./client/src/assets/EdMundo.png" alt="Edmundo image">
+![edmundo3](https://github.com/Rami24t/EdMundo/assets/103028944/6893f616-a604-415e-9ee6-b91e5a331cc1)
+
+
+![edmundo1](https://github.com/Rami24t/EdMundo/assets/103028944/d8a03496-cb65-4022-827c-b5243fa243c1)
+
 
 ## Live Demo
 
