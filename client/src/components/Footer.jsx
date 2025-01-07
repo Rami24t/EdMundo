@@ -36,7 +36,7 @@ export default function Footer() {
               <p>
                 We are a group of students who have completed a Full-Stack Web/Software Development
                 course at Digital Career Institute in 2023. This was our final
-                project that we built using the MERN stack.
+                project that we have built using the MERN stack.
               </p>
             </MDBCol>
 
