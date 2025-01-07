@@ -34,7 +34,7 @@ export default function Footer() {
             <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">About us</h6>
               <p>
-                We are a group of students who completed a Full-Stack Web/Software Development
+                We are a group of students who have completed a Full-Stack Web/Software Development
                 course at Digital Career Institute in 2023. This was our final
                 project that we built using the MERN stack.
               </p>
