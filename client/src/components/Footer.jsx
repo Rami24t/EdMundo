@@ -95,7 +95,7 @@ export default function Footer() {
       </section>
 
       <div className="text-center pt-2 pb-4">
-        &copy; {new Date().getFullYear()}
+        2023 - {new Date().getFullYear()} &copy;
       </div>
     </MDBFooter>
   );
