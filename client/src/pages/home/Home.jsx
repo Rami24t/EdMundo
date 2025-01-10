@@ -3,6 +3,7 @@ import ContactForm from "../../components/contact-form/ContactForm";
 import Description from "../../components/home/Description";
 import Hero from "../../components/home/Hero";
 import Slider from "../../components/home/Slider";
+import './home.css';
 
 const Home = () => {
   return (

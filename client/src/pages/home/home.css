@@ -1,0 +1,10 @@
+img,
+svg,
+i {
+    transition: all 1s;
+}
+
+img:hover:not(.hero-image-lines, .contact-image-lines),
+i:hover {
+    transform: rotateZ(-4deg) scale(1.05);
+}
